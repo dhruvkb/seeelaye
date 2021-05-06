@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   'stories': [
     '../src/stories/*.stories.mdx',
@@ -12,4 +14,8 @@ module.exports = {
 
     'storybook-addon-themes',
   ],
+  webpackFinal: config => {
+    config.resolve.alias['@'] = path.resolve(__dirname, '..', 'src')
+    return config
+  },
 }
