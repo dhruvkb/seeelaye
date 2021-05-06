@@ -54,5 +54,13 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
       },
     },
+    {
+      files: [
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
+      },
+    },
   ],
 }
