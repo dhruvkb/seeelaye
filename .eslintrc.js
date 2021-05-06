@@ -9,6 +9,7 @@ module.exports = {
     '@vue/typescript/recommended',
   ],
   parserOptions: {
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
   },
   rules: {
@@ -48,6 +49,9 @@ module.exports = {
       rules: {
         semi: ['warn', 'never'],
         'arrow-parens': ['warn', 'as-needed', { requireForBlockBody: true }],
+        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
       },
     },
   ],
