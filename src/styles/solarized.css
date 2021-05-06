@@ -1,0 +1,53 @@
+.solarized {
+  --color-normal-black:   #073642; /* base 02 */
+  --color-normal-red:     #dc322f;
+  --color-normal-green:   #859900;
+  --color-normal-yellow:  #b58900;
+  --color-normal-blue:    #268bd2;
+  --color-normal-magenta: #d33682;
+  --color-normal-cyan:    #2aa198;
+  --color-normal-white:   #eee8d5; /* base 2 */
+
+  --color-bright-black:   #002b36; /* base 03 */
+  --color-bright-red:     #cb4b16; /* orange */
+  --color-bright-green:   #586e75; /* base 01 */
+  --color-bright-yellow:  #657b83; /* base 00 */
+  --color-bright-blue:    #839496; /* base 0 */
+  --color-bright-magenta: #6c71c4; /* violet */
+  --color-bright-cyan:    #93a1a1; /* base 1 */
+  --color-bright-white:   #fdf6e3; /* base 3 */
+
+  --color-base-03:        var(--color-bright-black);
+  --color-base-02:        var(--color-normal-black);
+  --color-base-01:        var(--color-bright-green);
+  --color-base-00:        var(--color-bright-yellow);
+  --color-base-0:         var(--color-bright-blue);
+  --color-base-1:         var(--color-bright-cyan);
+  --color-base-2:         var(--color-normal-white);
+  --color-base-3:         var(--color-bright-white);
+
+  --color-accent-m:       #d33682; /* magenta */
+  --color-accent-r:       #dc322f; /* red */
+  --color-accent-o:       #cb4b16; /* orange */
+  --color-accent-y:       #b58900; /* yellow */
+  --color-accent-g:       #859900; /* green */
+  --color-accent-c:       #2aa198; /* cyan */
+  --color-accent-b:       #268bd2; /* blue */
+  --color-bright-v:       #6c71c4; /* violet */
+}
+
+.solarized.dark {
+  --color-normal-bg:      var(--color-base-03);
+  --color-highlight-bg:   var(--color-base-02);
+  --color-normal-fg:      var(--color-base-0);
+  --color-highlight-fg:   var(--color-base-1);
+  --color-secondary-fg:   var(--color-base-01);
+}
+
+.solarized.light {
+  --color-normal-bg:      var(--color-base-3);
+  --color-highlight-bg:   var(--color-base-2);
+  --color-normal-fg:      var(--color-base-00);
+  --color-highlight-fg:   var(--color-base-01);
+  --color-secondary-fg:   var(--color-base-1);
+}
