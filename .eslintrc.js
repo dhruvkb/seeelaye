@@ -6,10 +6,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/airbnb',
-    '@vue/typescript/recommended',
   ],
   parserOptions: {
-    parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
   },
   rules: {
@@ -18,6 +16,16 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
   overrides: [
+    {
+      files: ['*.vue', '*.ts'],
+      extends: [
+        '@vue/typescript/recommended',
+      ],
+      rules: {
+        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
+        'no-underscore-dangle': 'off',
+      },
+    },
     {
       files: ['*.html'],
       rules: {
@@ -32,26 +40,18 @@ module.exports = {
       },
     },
     {
-      files: ['*.js', '*.ts'],
-      rules: {
-        'no-param-reassign': [
-          'error',
-          {
-            props: true,
-            ignorePropertyModificationsFor: ['state'],
-          },
-        ],
-        'import/prefer-default-export': 'off',
-      },
-    },
-    {
       files: ['*.vue', '*.js', '*.ts'],
       rules: {
         semi: ['warn', 'never'],
-        'arrow-parens': ['warn', 'as-needed', { requireForBlockBody: true }],
-        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
-        'no-shadow': 'off',
+        'import/prefer-default-export': 'off',
+        'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
+      },
+    },
+    {
+      files: ['*.stories.ts'],
+      rules: {
+        'import/no-extraneous-dependencies': 'off',
       },
     },
     {
