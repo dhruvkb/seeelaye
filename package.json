@@ -7,8 +7,8 @@
     "build": "vue-cli-service build",
     "unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006 --ci",
-    "build-storybook": "build-storybook -o ./docs"
+    "storybook": "start-storybook -p 6006 -s ./src/assets --ci",
+    "build-storybook": "build-storybook -o ./docs -s ./src/assets"
   },
   "dependencies": {
     "core-js": "^3.6.5",
