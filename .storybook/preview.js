@@ -1,5 +1,11 @@
+import { app } from '@storybook/vue3'
+
+import store from '@/store'
+
 import '@/styles/solarized.css'
 import './css/preview.css'
+
+app.use(store)
 
 export const parameters = {
   actions: {
