@@ -1,4 +1,6 @@
-# Seeelaye
+<h1 align="center">
+  <image height="128px" src="src/assets/seeelaye.svg"/>
+</h1>
 
-Seeelaye, pronounced _/see-el-aye/_ as in CLI, is a terminal-inspired
-user-interface, written in Vue.
+see·el·aye, _as in CLI_, is a terminal-emulator-emulator for the browser,
+written in [Vue](https://v3.vuejs.org).
