@@ -15,7 +15,7 @@ module.exports = {
         toolbars: false,
       }
     },
-    'storybook-addon-themes',
+    '@dhruvkb/storybook-addon-themes',
   ],
   webpackFinal: config => {
     config.resolve.alias['@'] = path.resolve(__dirname, '..', 'src')
