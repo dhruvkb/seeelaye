@@ -7,11 +7,14 @@ module.exports = {
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-controls',
-    '@storybook/addon-docs',
-    '@storybook/addon-viewport',
-
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false,
+        viewport: false,
+        toolbars: false,
+      }
+    },
     'storybook-addon-themes',
   ],
   webpackFinal: config => {
