@@ -44,6 +44,7 @@ module.exports = {
       rules: {
         semi: ['warn', 'never'],
         'import/prefer-default-export': 'off',
+        'no-multi-spaces': ['warn', { ignoreEOLComments: true }],
         'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
       },

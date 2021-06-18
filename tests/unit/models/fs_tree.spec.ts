@@ -1,4 +1,9 @@
-import { FsNode, FsNodeType, nameExtensionSplit } from '@/models/fs_tree'
+import {
+  FsNodeType,
+  FsNode,
+  FsNodeInterface,
+  nameExtensionSplit,
+} from '@/models/fs_tree'
 
 describe('nameExtensionSplit', () => {
   it('handles node names without extension', () => {
@@ -93,6 +98,84 @@ describe('FsNode', () => {
       const node = new FsNode(FsNodeType.FOLDER, 'name')
       expect(node.isType(FsNodeType.FILE)).toBe(false)
       expect(node.isType(FsNodeType.FOLDER)).toBe(true)
+    })
+  })
+
+  describe('traverse', () => {
+    let a: FsNode   // a
+    let ab: FsNode  // ├── ab
+    let abd: FsNode // │   └── abd
+    let ac: FsNode  // └── ac
+
+    beforeEach(() => {
+      a = new FsNode(FsNodeType.FOLDER, 'a')
+      ab = new FsNode(FsNodeType.FOLDER, 'ab')
+      ab.parent = a
+      a.children.push(ab)
+      abd = new FsNode(FsNodeType.FOLDER, 'abd')
+      abd.parent = ab
+      ab.children.push(abd)
+      ac = new FsNode(FsNodeType.FOLDER, 'ac')
+      ac.parent = a
+      a.children.push(ac)
+    })
+
+    it('covers all nodes depth wise', () => {
+      const callback = jest.fn((node: FsNode) => node !== null)
+      a.traverse(callback)
+      expect(callback.mock.calls.length).toEqual(4)
+      expect(callback.mock.calls.map((call) => call[0])).toEqual([a, ab, abd, ac])
+    })
+
+    it('stops when the callback returns false', () => {
+      const callback = jest.fn((node: FsNode) => node !== ab)
+      a.traverse(callback)
+      expect(callback.mock.calls.length).toEqual(2)
+      expect(callback.mock.calls.map((call) => call[0])).toEqual([a, ab])
+    })
+  })
+
+  describe('parse', () => {
+    let fs: FsNodeInterface
+
+    beforeEach(() => {
+      fs = {
+        name: 'parent',
+        children: [
+          {
+            name: 'child',
+            aliases: ['offspring'],
+          },
+        ],
+      }
+    })
+
+    it('converts the POJO into class instances', () => {
+      const node = FsNode.parse(fs)
+      expect(node).toBeInstanceOf(FsNode)
+      expect(node.children[0]).toBeInstanceOf(FsNode)
+    })
+
+    it('maps parent-child relationships', () => {
+      const node = FsNode.parse(fs)
+      expect(node.children.length).toEqual(1)
+      expect(node.children[0].parent).toEqual(node)
+    })
+
+    it('sets node type based on presence of children', () => {
+      const node = FsNode.parse(fs)
+      expect(node.isFolder).toBe(true)
+      expect(node.children[0].isFile).toBe(true)
+    })
+
+    it('records node aliases', () => {
+      const node = FsNode.parse(fs)
+      expect(node.children[0].aliases).toContain('offspring')
+    })
+
+    it('sets top-level node as root', () => {
+      const node = FsNode.parse(fs)
+      expect(node.isRoot).toBe(true)
     })
   })
 })
