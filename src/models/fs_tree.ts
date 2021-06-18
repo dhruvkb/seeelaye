@@ -14,10 +14,9 @@ export const nameExtensionSplit = (fullName: string): [string, string | null] =>
 }
 
 export interface FsNodeInterface {
-  type: FsNodeType
   name: string
-  aliases: string[]
-  children: FsNodeInterface[]
+  aliases?: string[]
+  children?: FsNodeInterface[]
 }
 
 export class FsNode implements FsNodeInterface {
