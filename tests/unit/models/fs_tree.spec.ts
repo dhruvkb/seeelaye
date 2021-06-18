@@ -56,10 +56,10 @@ describe('FsNode', () => {
 
   describe('isRoot', () => {
     it('checks if node is parent of itself', () => {
-      const node = new FsNode(FsNodeType.FOLDER, '~')
-      expect(node.isRoot).toEqual(false)
-      node.parent = node
-      expect(node.isRoot).toEqual(true)
+      const node = new FsNode(FsNodeType.FOLDER, 'name')
+      expect(node.isRoot).toBe(true)
+      node.parent = new FsNode(FsNodeType.FOLDER, 'parent')
+      expect(node.isRoot).toBe(false)
     })
   })
 
@@ -86,14 +86,14 @@ describe('FsNode', () => {
   describe('isType', () => {
     it('checks type for files', () => {
       const node = new FsNode(FsNodeType.FILE, 'name')
-      expect(node.isType(FsNodeType.FILE)).toEqual(true)
-      expect(node.isType(FsNodeType.FOLDER)).toEqual(false)
+      expect(node.isType(FsNodeType.FILE)).toBe(true)
+      expect(node.isType(FsNodeType.FOLDER)).toBe(false)
     })
 
     it('checks type for folders', () => {
       const node = new FsNode(FsNodeType.FOLDER, 'name')
-      expect(node.isType(FsNodeType.FILE)).toEqual(false)
-      expect(node.isType(FsNodeType.FOLDER)).toEqual(true)
+      expect(node.isType(FsNodeType.FILE)).toBe(false)
+      expect(node.isType(FsNodeType.FOLDER)).toBe(true)
     })
   })
 })
