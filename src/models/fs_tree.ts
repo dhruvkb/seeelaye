@@ -99,4 +99,48 @@ export class FsNode implements FsNodeInterface {
   isType(type: FsNodeType): boolean {
     return this.type === type
   }
+
+  /**
+   * Traverse the tree using the DFT algorithm. DFT was preferred over BFT
+   * because it requires less code.
+   *
+   * The argument is a callback function that accepts a node and returns
+   * a boolean value, which if `false`, stops further traversal.
+   *
+   * @param {function} func - the function to execute on each node
+   * @return {boolean} whether to continue traversal
+   */
+  traverse(func: (node: FsNode) => boolean): boolean {
+    let shouldContinue = func(this)
+    if (!shouldContinue) {
+      return shouldContinue
+    }
+
+    Array.from(this.children.values())
+      .every((child) => {
+        shouldContinue = child.traverse(func)
+        return shouldContinue
+      })
+    return shouldContinue
+  }
+
+  /**
+   * Parse a POJO representation of a file system node or subtree into an
+   * `FsNode` object.
+   *
+   * @param {FsNodeInterface} pojo - the POJO representation to parse
+   * @return {FsNode} the parsed `FsNode` instance generated from the POJO
+   */
+  static parse(pojo: FsNodeInterface): FsNode {
+    const type = pojo.children ? FsNodeType.FOLDER : FsNodeType.FILE
+    const node = new FsNode(type, pojo.name, pojo.aliases)
+    if (pojo.children) {
+      pojo.children.forEach((childPojo) => {
+        const childNode = FsNode.parse(childPojo)
+        node.children.push(childNode)
+        childNode.parent = node
+      })
+    }
+    return node
+  }
 }
