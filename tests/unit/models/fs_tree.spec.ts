@@ -78,7 +78,6 @@ describe('FsNode', () => {
 
     it('includes just a slash for root directory', () => {
       const node = new FsNode(FsNodeType.FOLDER, '~')
-      node.parent = node
       expect(node.allNames).toContain('/')
     })
   })
