@@ -30,7 +30,7 @@ export class FsNode implements FsNodeInterface {
     this.type = type
     this.name = name
     this.aliases = aliases
-
+    this.parent = this
     this.children = []
   }
 
