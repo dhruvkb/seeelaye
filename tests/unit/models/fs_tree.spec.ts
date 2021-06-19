@@ -1,7 +1,7 @@
 import {
-  FsNodeType,
   FsNode,
-  FsNodeInterface,
+  FsNodeType,
+  IFsNode,
   nameExtensionSplit,
 } from '@/models/fs_tree'
 
@@ -136,7 +136,7 @@ describe('FsNode', () => {
   })
 
   describe('parse', () => {
-    let fs: FsNodeInterface
+    let fs: IFsNode
 
     beforeEach(() => {
       fs = {

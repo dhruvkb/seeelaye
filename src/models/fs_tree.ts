@@ -13,17 +13,17 @@ export const nameExtensionSplit = (fullName: string): [string, string | null] =>
   return [name, extension]
 }
 
-export interface FsNodeInterface {
+export interface IFsNode {
   name: string
   aliases?: string[]
-  children?: FsNodeInterface[]
+  children?: IFsNode[]
 }
 
 /**
  * A class that implements one node in a file-system tree. Each node may either
  * be a file or a folder and may have children if it is a folder.
  */
-export class FsNode implements FsNodeInterface {
+export class FsNode implements IFsNode {
   type: FsNodeType
   name: string
   aliases: string[]
@@ -142,10 +142,10 @@ export class FsNode implements FsNodeInterface {
    * Parse a POJO representation of a file system node or subtree into an
    * `FsNode` object.
    *
-   * @param {FsNodeInterface} pojo - the POJO representation to parse
+   * @param {IFsNode} pojo - the POJO representation to parse
    * @return {FsNode} the parsed `FsNode` instance generated from the POJO
    */
-  static parse(pojo: FsNodeInterface): FsNode {
+  static parse(pojo: IFsNode): FsNode {
     const type = pojo.children ? FsNodeType.FOLDER : FsNodeType.FILE
     const node = new FsNode(type, pojo.name, pojo.aliases)
     if (pojo.children) {
