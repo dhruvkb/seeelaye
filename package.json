@@ -1,7 +1,26 @@
 {
   "name": "seeelaye",
   "version": "0.0.1",
-  "private": true,
+  "description": "A terminal-emulator-emulator for the browser",
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "Dhruv Bhanushali",
+    "url": "https://dhruvkb.github.io"
+  },
+  "repository": "github:dhruvkb/seeelaye",
+  "homepage": "https://seeelaye.vercel.app",
+  "bugs": "https://github.com/dhruvkb/seeelaye/issues",
+  "keywords": [
+    "vue",
+    "terminal-emulator",
+    "terminal-emulator-emulator",
+    "cli"
+  ],
+  "files": [
+    "dist/*.js",
+    "dist/*.css",
+    "README.md"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,38 +29,49 @@
     "storybook": "start-storybook -p 6006 -s ./src/assets --ci",
     "build-storybook": "build-storybook -o ./docs -s ./src/assets"
   },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0",
-    "vuex": "^4.0.0-0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.6",
     "@dhruvkb/storybook-addon-themes": "^6.1.0",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/vue3": "^6.2.9",
+    "@storybook/addon-actions": "^6.3.0-rc.11",
+    "@storybook/addon-essentials": "^6.3.0-rc.11",
+    "@storybook/addon-links": "^6.3.0-rc.11",
+    "@storybook/builder-webpack5": "^6.3.0-rc.11",
+    "@storybook/manager-webpack5": "^6.3.0-rc.11",
+    "@storybook/vue3": "^6.3.0-rc.11",
     "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-plugin-eslint": "^4.5.12",
-    "@vue/cli-plugin-typescript": "^4.5.12",
-    "@vue/cli-plugin-unit-jest": "^4.5.12",
-    "@vue/cli-plugin-vuex": "^4.5.12",
-    "@vue/cli-service": "^4.5.12",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "@vue/cli-plugin-babel": "^5.0.0-beta.2",
+    "@vue/cli-plugin-eslint": "^5.0.0-beta.2",
+    "@vue/cli-plugin-typescript": "^5.0.0-beta.2",
+    "@vue/cli-plugin-unit-jest": "^5.0.0-beta.2",
+    "@vue/cli-plugin-vuex": "^5.0.0-beta.2",
+    "@vue/cli-service": "^5.0.0-beta.2",
     "@vue/compiler-sfc": "^3.0.0",
-    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-airbnb": "^5.3.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
     "babel-loader": "^8.2.2",
-    "eslint": "^6.7.2",
+    "eslint": "^7.26.0",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^7.0.0",
+    "eslint-plugin-vue": "^7.2.0",
     "husky": "^4.3.0",
+    "rollup": "^2.52.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-vue": "^6.0.0",
     "typescript": "~4.1.5",
     "vue-jest": "^5.0.0-0",
     "vue-loader": "^16.2.0"
+  },
+  "peerDependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^3.0.0",
+    "vuex": "^4.0.0"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^3.0.0",
+    "vuex": "^4.0.0"
   }
 }
