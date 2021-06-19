@@ -19,6 +19,10 @@ export interface FsNodeInterface {
   children?: FsNodeInterface[]
 }
 
+/**
+ * A class that implements one node in a file-system tree. Each node may either
+ * be a file or a folder and may have children if it is a folder.
+ */
 export class FsNode implements FsNodeInterface {
   type: FsNodeType
   name: string
@@ -26,6 +30,16 @@ export class FsNode implements FsNodeInterface {
   parent!: FsNode
   children: FsNode[]
 
+  /**
+   * Create a new object of class `FsNode`.
+   *
+   * @constructor
+   * @constructs {FsNode}
+   *
+   * @param {FsNodeType} type - whether the node represents a file or a folder
+   * @param {string} name - the name of the node
+   * @param {string[]} aliases - the list of alternative names of the node
+   */
   constructor(type: FsNodeType, name: string, aliases: string[] = []) {
     this.type = type
     this.name = name
