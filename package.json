@@ -32,6 +32,7 @@
     "unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:package": "rollup -c rollup.config.js",
+    "build:dts": "api-extractor run --local --verbose && tail -n +2 src/global_extensions.ts >> dist/seeelaye.d.ts",
     "build:storybook": "build-storybook -o ./docs -s ./src/assets"
   },
   "devDependencies": {
