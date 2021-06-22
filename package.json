@@ -21,17 +21,25 @@
     "dist/*.css",
     "README.md"
   ],
+  "main": "dist/seeelaye.cjs.js",
+  "unpkg": "dist/seeelaye.global.js",
+  "jsdelivr": "dist/seeelaye.global.js",
+  "module": "dist/seeelaye.esm-bundler.js",
+  "browser": "dist/seeelaye.esm-browser.js",
+  "types": "dist/seeelaye.d.ts",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "start-storybook -p 6006 -s ./src/assets --ci",
     "unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006 -s ./src/assets --ci",
-    "build-storybook": "build-storybook -o ./docs -s ./src/assets"
+    "build:package": "rollup -c rollup.config.js",
+    "build:storybook": "build-storybook -o ./docs -s ./src/assets"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@dhruvkb/storybook-addon-themes": "^6.1.0",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@storybook/addon-actions": "^6.3.0-rc.11",
     "@storybook/addon-essentials": "^6.3.0-rc.11",
     "@storybook/addon-links": "^6.3.0-rc.11",
@@ -57,6 +65,7 @@
     "eslint-plugin-vue": "^7.2.0",
     "husky": "^4.3.0",
     "rollup": "^2.52.2",
+    "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-vue": "^6.0.0",
