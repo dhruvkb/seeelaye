@@ -33,12 +33,9 @@ export class FsNode implements IFsNode {
   /**
    * Create a new object of class `FsNode`.
    *
-   * @constructor
-   * @constructs {FsNode}
-   *
-   * @param {FsNodeType} type - whether the node represents a file or a folder
-   * @param {string} name - the name of the node
-   * @param {string[]} aliases - the list of alternative names of the node
+   * @param type - whether the node represents a file or a folder
+   * @param name - the name of the node
+   * @param aliases - the list of alternative names of the node
    */
   constructor(type: FsNodeType, name: string, aliases: string[] = []) {
     this.type = type
@@ -50,7 +47,7 @@ export class FsNode implements IFsNode {
 
   /**
    * Determine whether this node represents a file system folder.
-   * @return {boolean} whether this node represents a file system folder
+   * @returns whether this node represents a file system folder
    */
   get isFolder(): boolean {
     return this.isType(FsNodeType.FOLDER)
@@ -58,7 +55,7 @@ export class FsNode implements IFsNode {
 
   /**
    * Determine whether this node represents a file system file.
-   * @return {boolean} whether this node represents a file system file
+   * @returns whether this node represents a file system file
    */
   get isFile(): boolean {
     return this.isType(FsNodeType.FILE)
@@ -66,7 +63,7 @@ export class FsNode implements IFsNode {
 
   /**
    * Determine whether this node is the root of the file system.
-   * @return {boolean} whether this node is the root of the file system
+   * @returns whether this node is the root of the file system
    */
   get isRoot(): boolean {
     return this.parent === this
@@ -84,7 +81,7 @@ export class FsNode implements IFsNode {
    *
    * Duplicates names are removed.
    *
-   * @returns {string[]} the list of all valid names for the node
+   * @returns the list of all valid names for the node
    */
   get allNames(): string[] {
     const allNames = [this.name, ...this.aliases]
@@ -107,8 +104,8 @@ export class FsNode implements IFsNode {
 
   /**
    * Determine whether this node represents a file system file or folder.
-   * @param {FsNodeType} type - the type of the node to compare this node with
-   * @return {boolean} whether this node is of the given node type
+   * @param type - the type of the node to compare this node with
+   * @returns whether this node is of the given node type
    */
   isType(type: FsNodeType): boolean {
     return this.type === type
@@ -121,8 +118,8 @@ export class FsNode implements IFsNode {
    * The argument is a callback function that accepts a node and returns
    * a boolean value, which if `false`, stops further traversal.
    *
-   * @param {function} func - the function to execute on each node
-   * @return {boolean} whether to continue traversal
+   * @param func - the function to execute on each node
+   * @returns whether to continue traversal
    */
   traverse(func: (node: FsNode) => boolean): boolean {
     let shouldContinue = func(this)
@@ -142,8 +139,8 @@ export class FsNode implements IFsNode {
    * Parse a POJO representation of a file system node or subtree into an
    * `FsNode` object.
    *
-   * @param {IFsNode} pojo - the POJO representation to parse
-   * @return {FsNode} the parsed `FsNode` instance generated from the POJO
+   * @param pojo - the POJO representation to parse
+   * @returns the parsed `FsNode` instance generated from the POJO
    */
   static parse(pojo: IFsNode): FsNode {
     const type = pojo.children ? FsNodeType.FOLDER : FsNodeType.FILE
