@@ -1,6 +1,5 @@
-import path from 'path'
+import ttypescript from 'ttypescript'
 
-import aliasPlugin from '@rollup/plugin-alias'
 import resolvePlugin from '@rollup/plugin-node-resolve'
 import commonjsPlugin from '@rollup/plugin-commonjs'
 
@@ -65,17 +64,16 @@ const createConfig = (format, out, extraPlugins = []) => {
     output.name = pkg.name
   }
 
-  const aliasOptions = {
-    entries: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
-    ],
-  }
-
+  const shouldEmitDeclarations = !hasTSChecked
   const typescript2Options = {
+    typescript: ttypescript,
     check: !hasTSChecked, // run TS checks if not already
     tsconfigOverride: {
       compilerOptions: {
         sourceMap: output.sourcemap,
+        // Declarations are bundled up by API extractor.
+        declaration: shouldEmitDeclarations,
+        declarationMap: shouldEmitDeclarations,
       },
       exclude: [
         'tests',
@@ -90,7 +88,6 @@ const createConfig = (format, out, extraPlugins = []) => {
     // Global and browser ESM builds inline everything and can be used alone.
     external: ['vue', 'vuex'],
     plugins: [
-      aliasPlugin(aliasOptions),
       resolvePlugin(),
       vuePlugin(),
       typescript2Plugin(typescript2Options),

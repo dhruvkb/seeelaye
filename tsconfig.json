@@ -10,7 +10,10 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "rootDir": ".",
     "baseUrl": ".",
+    "outDir": "dist",
+    "noEmit": true,
     "types": [
       "webpack-env",
       "jest"
@@ -20,6 +23,14 @@
         "src/*"
       ]
     },
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths",
+        "exclude": [
+          "*",
+        ]
+      }
+    ],
     "lib": [
       "esnext",
       "dom",
