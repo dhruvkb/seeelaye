@@ -17,8 +17,10 @@
     "cli"
   ],
   "files": [
+    "dist/seeelaye.d.ts",
     "dist/*.js",
     "dist/*.css",
+    "LICENSE",
     "README.md"
   ],
   "main": "dist/seeelaye.cjs.js",
