@@ -1,6 +1,6 @@
 import { Story } from '@storybook/vue3'
 
-import Prompt from './Prompt_.vue'
+import Prompt from '@/components/prompt/Prompt_.vue'
 
 export default {
   title: 'Elements/Prompt',
