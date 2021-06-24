@@ -3,7 +3,13 @@ export enum FsNodeType {
   FOLDER = 'folder'
 }
 
-export const nameExtensionSplit = (fullName: string): [string, string | null] => {
+/**
+ * Split the given file name into a name and an extension. Extension here is
+ * defined as the substring of the name after the last dot/full stop/period.
+ *
+ * @param fullName - then name of the node
+ */
+export const nameExtSplit = (fullName: string): [string, string | null] => {
   if (!fullName.includes('.')) {
     return [fullName, null]
   }
@@ -87,8 +93,8 @@ export class FsNode implements IFsNode {
     const allNames = [this.name, ...this.aliases]
     if (this.isFile) {
       allNames.forEach((name) => {
-        const [nameMinusExtension] = nameExtensionSplit(name)
-        allNames.push(nameMinusExtension)
+        const [nameMinusExt] = nameExtSplit(name)
+        allNames.push(nameMinusExt)
       })
     }
     if (this.isFolder) {

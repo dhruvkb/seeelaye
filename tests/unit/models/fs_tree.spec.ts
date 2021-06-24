@@ -2,36 +2,36 @@ import {
   FsNode,
   FsNodeType,
   IFsNode,
-  nameExtensionSplit,
+  nameExtSplit,
 } from '@/models/fs_tree'
 
 describe('nameExtensionSplit', () => {
   it('handles node names without extension', () => {
-    const [name, ext] = nameExtensionSplit('name')
+    const [name, ext] = nameExtSplit('name')
     expect(name).toEqual('name')
     expect(ext).toBeNull()
   })
 
   it('handles simple names', () => {
-    const [name, ext] = nameExtensionSplit('name.ext')
+    const [name, ext] = nameExtSplit('name.ext')
     expect(name).toEqual('name')
     expect(ext).toEqual('ext')
   })
 
   it('handles names with multiple dots', () => {
-    const [name, ext] = nameExtensionSplit('name.name.ext')
+    const [name, ext] = nameExtSplit('name.name.ext')
     expect(name).toEqual('name.name')
     expect(ext).toEqual('ext')
   })
 
   it('handles names ending with a dot', () => {
-    const [name, ext] = nameExtensionSplit('name.')
+    const [name, ext] = nameExtSplit('name.')
     expect(name).toEqual('name')
     expect(ext).toEqual('')
   })
 
   it('handles names starting with a dot', () => {
-    const [name, ext] = nameExtensionSplit('.ext')
+    const [name, ext] = nameExtSplit('.ext')
     expect(name).toEqual('')
     expect(ext).toEqual('ext')
   })
