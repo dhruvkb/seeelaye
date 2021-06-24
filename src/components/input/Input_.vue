@@ -19,7 +19,7 @@
   import { computed, defineComponent } from 'vue'
 
   /**
-   * Input field for passing commands to the CLI
+   * Accepts typed commands from the user.
    *
    * Renders an `<input>` element so should be coupled with a `<label>` element
    * for accessibility.
