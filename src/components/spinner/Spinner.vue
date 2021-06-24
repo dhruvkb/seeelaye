@@ -1,5 +1,9 @@
 <template>
-  <div class="spinner">{{ displayText }}</div>
+  <div class="spinner">
+    <span class="edge">[</span>
+    <span class="char">{{ displayText }}</span>
+    <span class="edge">]</span>
+  </div>
 </template>
 
 <script>
@@ -20,8 +24,8 @@
     name: 'Spinner',
     setup() {
       const spinnerStrings = [
-        '[     ]', '[·    ]', '[··   ]', '[···  ]', '[ ··· ]', '[  ···]', '[   ··]', '[    ·]',
-        '[     ]', '[    ·]', '[   ··]', '[  ···]', '[ ··· ]', '[···  ]', '[··   ]', '[·    ]',
+        '     ', '=    ', '==   ', '===  ', ' === ', '  ===', '   ==', '    =',
+        '     ', '    =', '   ==', '  ===', ' === ', '===  ', '==   ', '=    ',
       ]
 
       const index = ref(0)
@@ -46,3 +50,17 @@
     },
   })
 </script>
+
+<style scoped lang="css">
+  .spinner {
+    font-variant-ligatures: none;
+  }
+
+  .spinner .edge {
+    color: var(--spinner-edge-color, var(--color-secondary-fg));
+  }
+
+  .spinner .char {
+    color: var(--spinner-char-color, var(--color-normal-fg));
+  }
+</style>
