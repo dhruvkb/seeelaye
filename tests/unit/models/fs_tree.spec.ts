@@ -87,6 +87,33 @@ describe('FsNode', () => {
     })
   })
 
+  describe('language', () => {
+    it('returns null for folders', () => {
+      const node = new FsNode(FsNodeType.FOLDER, 'name')
+      expect(node.language).toBeNull()
+    })
+
+    it('returns null for files without extensions', () => {
+      const node = new FsNode(FsNodeType.FILE, 'name')
+      expect(node.language).toBeNull()
+    })
+
+    it('returns null for files with unknown extensions', () => {
+      const node = new FsNode(FsNodeType.FILE, 'name.txt')
+      expect(node.language).toBeNull()
+    })
+
+    it('returns languages wrapped in an array', () => {
+      const node = new FsNode(FsNodeType.FILE, 'name.py')
+      expect(node.language).toEqual(['python'])
+    })
+
+    it('returns array of languages', () => {
+      const node = new FsNode(FsNodeType.FILE, 'Name.vue')
+      expect(node.language).toEqual(['xml', 'javascript'])
+    })
+  })
+
   describe('isType', () => {
     it('checks type for files', () => {
       const node = new FsNode(FsNodeType.FILE, 'name')

@@ -19,6 +19,22 @@ export const nameExtSplit = (fullName: string): [string, string | null] => {
   return [name, extension]
 }
 
+/**
+ * Maps extensions to programming languages. This is used when setting up
+ * syntax highlighting for files.
+ */
+export const extLang: Record<string, string | string[] | undefined> = Object.freeze({
+  java: 'java',
+  js: 'javascript',
+  md: 'markdown',
+  py: 'python',
+  rb: 'ruby',
+  rst: 'markdown', // TODO: Use a proper language parser
+  tex: 'latex',
+  vue: ['xml', 'javascript'],
+  yml: 'yaml',
+})
+
 export interface IFsNode {
   name: string
   aliases?: string[]
@@ -106,6 +122,29 @@ export class FsNode implements IFsNode {
       allNames.push('/')
     }
     return Array.from(new Set(allNames))
+  }
+
+  /**
+   * Get the list of languages present in the file based on the extension.
+   * Evaluates to `null` if
+   * - the node is a folder
+   * - the node does not have an extension.
+   *
+   * @returns the list of languages that apply to the file
+   */
+  get language(): string[] | null {
+    if (this.isFolder) return null
+
+    const [, ext] = nameExtSplit(this.name)
+    if (!ext) return null
+
+    const language = extLang[ext]
+    if (!language) return null
+
+    if (Array.isArray(language)) {
+      return language
+    }
+    return [language]
   }
 
   /**
