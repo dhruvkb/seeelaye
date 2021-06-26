@@ -47,15 +47,13 @@ export class Interaction implements IInteraction {
   /**
    * Create a new object of class `Interaction`.
    *
-   * @param wd - the working directory in which command was executed
+   * @param context - the circumstances in which command was executed
    * @param rawInput - the exact string of the executed command
    */
-  constructor(wd: FsNode, rawInput: string) {
-    this.context = {
-      wd,
-    }
-
+  constructor(context: { wd: FsNode }, rawInput: string) {
+    this.context = context
     this.rawInput = rawInput
+
     const [bin, ...argv] = rawInput.split(' ')
     this.input = {
       bin,
