@@ -1,4 +1,4 @@
-import { Seeelaye } from '@/models/seeelaye'
+import { Seeelaye } from '@/base/seeelaye'
 import { IArg } from '@/models/arg'
 
 declare module '@vue/runtime-core' {
