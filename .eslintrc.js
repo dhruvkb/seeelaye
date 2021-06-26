@@ -35,7 +35,6 @@ module.exports = {
     {
       files: ['*.vue'],
       rules: {
-        'max-len': 'off',
         indent: 'off', // Replaced by vue/script-indent
       },
     },
