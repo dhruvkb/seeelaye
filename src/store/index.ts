@@ -1,14 +1,10 @@
-import { createStore } from 'vuex'
+import { Module } from 'vuex'
 
-import { RootState } from '@/store/modules/state'
+import { state, TerminalState } from '@/store/state'
+import { mutations } from '@/store/mutations'
 
-import { module as terminal } from '@/store/modules/terminal/index'
-
-const store = createStore<RootState>({
-  strict: process.env.NODE_ENV !== 'production',
-  modules: {
-    terminal,
-  },
+export const getVuexModule = <T>(): Module<TerminalState, T> => ({
+  namespaced: true,
+  state,
+  mutations,
 })
-
-export default store

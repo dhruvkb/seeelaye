@@ -1,27 +1,24 @@
 import { FsNode } from '@/models/fs_tree'
+import { Interaction } from '@/models/interaction'
 
 export interface TerminalState {
   username: string
   hostname: string
 
-  currentNode: FsNode | null
   tree: FsNode | null
+  currentNode: FsNode | null
 
   history: Interaction[]
   isReady: boolean
-
-  commandInput: string
 }
 
 export const state = (): TerminalState => ({
   username: 'guest',
-  hostname: 'username',
+  hostname: 'seeelaye',
 
-  currentNode: null,
   tree: null,
+  currentNode: null,
 
   history: [] as Interaction[],
   isReady: true,
-
-  commandInput: '',
 })
