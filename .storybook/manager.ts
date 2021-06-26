@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { addons } from '@storybook/addons'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from '@storybook/theming'
 
 const theme = create({
