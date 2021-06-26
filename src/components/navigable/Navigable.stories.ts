@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3'
+import type { Story } from '@storybook/vue3'
 
 import Navigable from '@/components/navigable/Navigable_.vue'
 

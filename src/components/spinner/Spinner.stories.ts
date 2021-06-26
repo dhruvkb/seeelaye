@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3'
+import type { Story } from '@storybook/vue3'
 
 import Spinner from '@/components/spinner/Spinner.vue'
 
