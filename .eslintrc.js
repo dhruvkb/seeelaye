@@ -49,12 +49,6 @@ module.exports = {
       },
     },
     {
-      files: ['*.stories.ts'],
-      rules: {
-        'import/no-extraneous-dependencies': 'off',
-      },
-    },
-    {
       files: [
         '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
