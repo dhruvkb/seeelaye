@@ -1,12 +1,5 @@
-body { /* Shown in 'Canvas' tab */
-  background: var(--color-normal-bg);
-  color: var(--color-normal-fg);
-
-  font-family: "JetBrains Mono", monospace;
-  font-size: 14px;
-}
-
 .docs-story { /* Shown in 'Docs' tab */
+  /* Styles copied from the class `.terminal` */
   background: var(--color-normal-bg);
   color: var(--color-normal-fg);
 }
