@@ -81,15 +81,15 @@ export class Interaction implements IInteraction {
       return
     }
     const bin = Interaction.allBins[this.input.bin]
-    if (!bin) {
-      this.output = {
-        component: 'Bad',
-        argv: ['--bin', this.input.bin],
-      }
-    } else {
+    if (bin && bin.name) {
       this.output = {
         component: bin.name,
         argv: this.input.argv,
+      }
+    } else {
+      this.output = {
+        component: 'Bad',
+        argv: ['--bin', this.input.bin],
       }
     }
   }
