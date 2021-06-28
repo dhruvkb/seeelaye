@@ -1,12 +1,13 @@
-import { App } from 'vue'
-import { Store } from 'vuex'
+import type { App } from 'vue'
+import type { Store } from 'vuex'
+
+import type { Binary } from '@/bins'
+
+import type { TerminalState } from '@/store/state'
 
 import { seeelayeKey } from '@/base/injection'
 
-import { Binary } from '@/bins'
 import { Interaction } from '@/models/interaction'
-
-import { TerminalState } from '@/store/state'
 
 import Input from '@/components/input/Input.vue'
 import Prompt from '@/components/prompt/Prompt.vue'
