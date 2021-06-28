@@ -1,5 +1,8 @@
-import { inject, InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue'
+
 import type { Seeelaye } from '@/base/seeelaye'
+
+import { inject } from 'vue'
 
 export const hasSymbol = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol'
 
