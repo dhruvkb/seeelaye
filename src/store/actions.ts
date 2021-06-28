@@ -1,5 +1,6 @@
-import { ActionContext, ActionTree } from 'vuex'
-import { TerminalState } from '@/store/state'
+import type { ActionContext, ActionTree } from 'vuex'
+
+import type { TerminalState } from '@/store/state'
 
 import { Interaction } from '@/models/interaction'
 

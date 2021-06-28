@@ -1,6 +1,8 @@
-import { Module } from 'vuex'
+import type { Module } from 'vuex'
 
-import { state, TerminalState } from '@/store/state'
+import type { TerminalState } from '@/store/state'
+
+import { state } from '@/store/state'
 import { mutations } from '@/store/mutations'
 import { getActions } from '@/store/actions'
 

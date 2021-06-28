@@ -1,5 +1,5 @@
-import { FsNode } from '@/models/fs_tree'
-import { Interaction } from '@/models/interaction'
+import type { FsNode } from '@/models/fs_tree'
+import type { Interaction } from '@/models/interaction'
 
 export interface TerminalState {
   username: string

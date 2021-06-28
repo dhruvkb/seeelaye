@@ -1,5 +1,6 @@
+import type { IArg } from '@/models/arg'
+
 import { Seeelaye } from '@/base/seeelaye'
-import { IArg } from '@/models/arg'
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
