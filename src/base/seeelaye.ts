@@ -60,7 +60,7 @@ export class Seeelaye {
 
   /**
    * Get the state from the Vuex module used by see·el·aye.
-   * @return the state object of see·el·aye's Vuex module
+   * @returns the state object of see·el·aye's Vuex module
    */
   get state(): TerminalState {
     return this.store.state[this.storeModule]
@@ -79,7 +79,7 @@ export class Seeelaye {
    * Dispatch an action to the Vuex module used by see·el·aye.
    * @param actionName - the unprefixed name of the action to dispatch
    * @param payload - the data payload object to pass to the action
-   * @return the return value from the dispatched action
+   * @returns the return value from the dispatched action
    */
   dispatch<T = void>(actionName: string, payload: unknown): Promise<T> {
     return this.store.dispatch(`${this.storeModule}/${actionName}`, payload)
