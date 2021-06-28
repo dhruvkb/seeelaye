@@ -54,9 +54,9 @@ export class Seeelaye {
     }
   }
 
-  //----------------
-  // Vuex wrappers |
-  //----------------
+  /* ***************
+   * Vuex wrappers *
+   *************** */
 
   /**
    * Get the state from the Vuex module used by see·el·aye.
@@ -85,9 +85,9 @@ export class Seeelaye {
     return this.store.dispatch(`${this.storeModule}/${actionName}`, payload)
   }
 
-  //----------
-  // Install |
-  //----------
+  /* *********
+   * Install *
+   ********* */
 
   /**
    * Install this plugin in Vue app. Do not call this function, it will be
