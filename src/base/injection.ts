@@ -26,7 +26,7 @@ export const seeelayeKey = PolySymbol('seeelaye') as InjectionKey<Seeelaye>
  *
  * @returns the current app's see·el·aye instance
  */
-export function useSeeelaye(): Seeelaye {
+export const useSeeelaye = (): Seeelaye => {
   const seeelaye = inject(seeelayeKey)
   if (!seeelaye) {
     throw new Error('see·el·aye is not installed.')
