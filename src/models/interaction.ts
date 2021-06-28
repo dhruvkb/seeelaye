@@ -1,3 +1,5 @@
+import type { Binary } from '@/bins'
+
 import { builtInBins } from '@/bins'
 
 import { FsNode } from '@/models/fs_tree'
@@ -25,7 +27,7 @@ export interface IInteraction {
  * context.
  */
 export class Interaction implements IInteraction {
-  static allBins = builtInBins
+  static allBins: Record<string, Binary> = builtInBins
 
   context: {
     wd: FsNode
