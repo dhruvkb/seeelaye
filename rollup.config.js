@@ -10,7 +10,7 @@ import vuePlugin from 'rollup-plugin-vue'
 
 import pkg from './package.json'
 
-/** **********
+/* ***********
  * Variables *
  *********** */
 
@@ -46,7 +46,7 @@ const bundleFormats = {
 // Ensure that TS checks run only once for each build.
 let hasTSChecked = false
 
-/** **********
+/* ***********
  * Functions *
  *********** */
 
@@ -56,7 +56,10 @@ const createConfig = (format, out, extraPlugins = []) => {
     banner,
     sourcemap: !!process.env.SOURCE_MAP,
     externalLiveBindings: false,
-    globals: { vue: 'Vue', vuex: 'Vuex' },
+    globals: {
+      vue: 'Vue',
+      vuex: 'Vuex',
+    },
   }
   if (format === 'global') {
     output.name = pkg.name[0].toUpperCase() + pkg.name.slice(1)
@@ -123,7 +126,7 @@ const createMinifiedConfig = (format) => createConfig(
   ],
 )
 
-/** ******
+/* *******
  * Entry *
  ******* */
 
