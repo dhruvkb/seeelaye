@@ -4,8 +4,17 @@ import type { Seeelaye } from '@/base/seeelaye'
 
 import { inject } from 'vue'
 
+/**
+ * whether the environment has support for the built-in object `Symbol`
+ */
 export const hasSymbol = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol'
 
+/**
+ * Create a symbol for the given string, if the environment supports it,
+ * otherwise return the string as is.
+ *
+ * @param name - the name to use for the `Symbol` instance
+ */
 export const PolySymbol = (name: string): symbol | string => (hasSymbol ? Symbol(name) : name)
 
 export const seeelayeKey = PolySymbol('seeelaye') as InjectionKey<Seeelaye>
