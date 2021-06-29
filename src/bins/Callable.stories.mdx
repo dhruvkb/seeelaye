@@ -1,0 +1,107 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+
+import { terminalContent } from '@/../.storybook/terminal_content'
+
+import Binary from '@/mixins/bin.ts'
+
+import Hello from '@/bins/Hello.vue'
+import WhoAmI from '@/bins/WhoAmI.vue'
+import Hostname from '@/bins/Hostname.vue'
+import WorkDir from '@/bins/WorkDir.vue'
+
+<Meta
+  title="Bins/Callable"
+  component={Binary}
+  decorators={[
+    terminalContent,
+  ]} />
+
+# Callable binaries
+
+see·el·aye comes with a set of built-in binaries for handling some common CLI
+actions. These include the following.
+
+## `hello`
+
+<Description of={Hello} />
+
+export const helloTemplate = () => ({
+  components: { Hello },
+  template: `
+    <Hello/>
+  `
+})
+
+<Canvas>
+  <Story name="hello">
+    { helloTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+## `hostname`
+
+<Description of={Hostname} />
+
+export const hostnameTemplate = () => ({
+  components: { Hostname },
+  template: `
+    <Hostname/>
+  `
+})
+
+<Canvas>
+  <Story name="hostname">
+    { hostnameTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+## `pwd`
+
+<Description of={WorkDir} />
+
+export const pwdTemplate = () => ({
+  components: { WorkDir },
+  template: `
+    <WorkDir/>
+  `
+})
+
+<Canvas>
+  <Story name="pwd">
+    { pwdTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+## `whoami`
+
+<Description of={WhoAmI} />
+
+export const whoamiTemplate = (args) => ({
+  components: { WhoAmI },
+  setup() {
+    return { args }
+  },
+  template: `
+    <WhoAmI v-bind="args"/>
+  `
+})
+
+<Canvas>
+  <Story
+    name="whoami"
+    argTypes={{
+      '--groot': {
+        table: {
+          type: { summary: 'boolean' },
+          defaultValue: { summary: false },
+        },
+        description: 'run as Groot',
+        control: null
+      },
+    }}
+    args={{ argv: ['--groot'] }}>
+    { whoamiTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+<ArgsTable story="whoami" />

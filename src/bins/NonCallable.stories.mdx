@@ -1,0 +1,70 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+
+import { terminalContent } from '@/../.storybook/terminal_content'
+
+import Binary from '@/mixins/bin.ts'
+
+import Bad from '@/bins/Bad.vue'
+import Nop from '@/bins/Nop.vue'
+
+<Meta
+  title="Bins/Non-callable"
+  component={Binary}
+  decorators={[
+   terminalContent,
+  ]} />
+
+# Non-callable binaries
+
+see·el·aye comes with a few binaries that are invoked internally and cannot be
+called from the CLI by issuing any commands. These include the following.
+
+## Bad
+
+<Description of={Bad} />
+
+export const badTemplate = (args) => ({
+  components: { Bad },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Bad v-bind="args"/>
+  `
+})
+
+<Canvas>
+  <Story
+    name="Bad"
+    argTypes={{
+      '--bin': {
+        table: {
+          type: { summary: 'string', required: true },
+        },
+        description: 'the invalid binary that was invoked',
+        control: null
+      },
+    }}
+    args={{ argv: ['--bin', 'unknown'] }}>
+    { badTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+<ArgsTable story="Bad" />
+
+## Nop
+
+<Description of={Nop} />
+
+export const nopTemplate = () => ({
+  components: { Nop },
+  template: `
+    <Nop/>
+  `
+})
+
+<Canvas>
+  <Story name="Nop">
+    { nopTemplate.bind({}) }
+  </Story>
+</Canvas>
