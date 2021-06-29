@@ -5,7 +5,9 @@ describe('Interaction', () => {
   let context: { wd: FsNode }
 
   beforeEach(() => {
-    context.wd = new FsNode(FsNodeType.FILE, 'name')
+    context = {
+      wd: new FsNode(FsNodeType.FILE, 'name'),
+    }
   })
 
   describe('constructor', () => {
