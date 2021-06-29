@@ -24,6 +24,10 @@ export default defineComponent({
   },
   data() {
     return {
+      /**
+       * whether to mark the terminal as ready as soon as the component
+       * is mounted; This should be set to false on long-running bins like `cat`.
+       */
       markReadyOnMount: true,
     }
   },
