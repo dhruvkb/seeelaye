@@ -35,7 +35,7 @@ export interface IInstallOptions {
  * communicated via this class.
  */
 export class Seeelaye {
-  store: Store<never>
+  store: Store<unknown>
   storeModule: string
 
   /**
@@ -45,7 +45,7 @@ export class Seeelaye {
    * @param storeModule - the name of the Vuex store module that holds CLI state
    * @param bins - the name to use in the greeting
    */
-  constructor(store: Store<never>, storeModule: string, bins: Record<string, Binary> = {}) {
+  constructor(store: Store<unknown>, storeModule: string, bins: Record<string, Binary> = {}) {
     this.store = store
     this.storeModule = storeModule
 
@@ -64,7 +64,8 @@ export class Seeelaye {
    * @returns the state object of see·el·aye's Vuex module
    */
   get state(): TerminalState {
-    return this.store.state[this.storeModule]
+    // TypeScript hack: Assumes all values of state object to be terminal states
+    return (this.store.state as Record<string, TerminalState>)[this.storeModule]
   }
 
   /**
