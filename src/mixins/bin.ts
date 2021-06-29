@@ -1,5 +1,8 @@
-import { defineComponent, PropType } from 'vue'
-import argLib, { Handler } from 'arg'
+import type { PropType } from 'vue'
+import type { Handler } from 'arg'
+
+import { defineComponent } from 'vue'
+import argLib from 'arg'
 
 /**
  * This mixin provides basic functions shared across all see·el·aye binaries:
