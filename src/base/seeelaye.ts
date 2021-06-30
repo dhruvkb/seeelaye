@@ -87,8 +87,13 @@ export class Seeelaye {
    * @param mutationName - the unprefixed name of the mutation to commit
    * @param payload - the data payload object to pass to the mutation
    */
-  commit(mutationName: string, payload: unknown): void {
-    this.store.commit(`${this.storeModule}/${mutationName}`, payload)
+  commit(mutationName: string, payload: unknown = null): void {
+    const fqn = `${this.storeModule}/${mutationName}`
+    if (payload) {
+      this.store.commit(fqn, payload)
+      return
+    }
+    this.store.commit(fqn)
   }
 
   /**
@@ -97,8 +102,12 @@ export class Seeelaye {
    * @param payload - the data payload object to pass to the action
    * @returns the return value from the dispatched action
    */
-  dispatch<T = void>(actionName: string, payload: unknown): Promise<T> {
-    return this.store.dispatch(`${this.storeModule}/${actionName}`, payload)
+  dispatch<T = void>(actionName: string, payload: unknown = null): Promise<T> {
+    const fqn = `${this.storeModule}/${actionName}`
+    if (payload) {
+      return this.store.dispatch(fqn, payload)
+    }
+    return this.store.dispatch(fqn)
   }
 
   /* *********
