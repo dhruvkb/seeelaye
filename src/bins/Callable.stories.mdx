@@ -90,12 +90,12 @@ export const whoamiTemplate = (args) => ({
   <Story
     name="whoami"
     argTypes={{
-      '--groot': {
+      '--groot/-g': {
         table: {
           type: { summary: 'boolean' },
           defaultValue: { summary: false },
         },
-        description: 'run as Groot',
+        description: 'whether to run command as Groot',
         control: null
       },
     }}
