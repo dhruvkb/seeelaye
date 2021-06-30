@@ -35,6 +35,15 @@ export const extLang: Record<string, string | string[] | undefined> = Object.fre
   yml: 'yaml',
 })
 
+/**
+ * Defines special directory names such as '.' and '..' which refer to the
+ * current and parent directories respectively.
+ */
+export const specialNames = Object.freeze({
+  CURRENT_DIR: ['.', './'],
+  PARENT_DIR: ['..', '../'],
+})
+
 export interface IFsNode {
   name: string
   aliases?: string[]

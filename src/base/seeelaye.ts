@@ -69,6 +69,20 @@ export class Seeelaye {
   }
 
   /**
+   * Compute a getter in the Vuex module used by see·el·aye.
+   * @param getterName - the unprefixed name of the getter to compute
+   * @param payload - the data payload object to pass to the getter
+   * @returns the return  value from the computed getter
+   */
+  compute<T = void>(getterName: string, payload: unknown = null): T {
+    const fqn = `${this.storeModule}/${getterName}`
+    if (payload) {
+      return this.store.getters[fqn](payload)
+    }
+    return this.store.getters[fqn]()
+  }
+
+  /**
    * Commit a mutation in the Vuex module used by see·el·aye.
    * @param mutationName - the unprefixed name of the mutation to commit
    * @param payload - the data payload object to pass to the mutation
