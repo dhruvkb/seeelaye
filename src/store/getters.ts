@@ -9,7 +9,7 @@ export interface TerminalGetterTree<S, RS> extends GetterTree<S, RS> {
 }
 
 export const getGetters = <RS>(): TerminalGetterTree<TerminalState, RS> => ({
-  nodeLocatedAt(state: TerminalState): (payload: { path: string }) => FsNode | null {
+  nodeLocatedAt(state: TerminalState) {
     return (payload: { path: string }): FsNode | null => {
       const { path } = payload
       let node = state.currentNode
