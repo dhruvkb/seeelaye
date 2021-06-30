@@ -8,6 +8,7 @@
   import { defineComponent } from 'vue'
 
   import binMixin from '@/mixins/bin'
+  import { FsNode } from '@/models/fs_tree'
 
   /**
    * Displays the current working directory.
@@ -18,9 +19,15 @@
     description: 'Display the current working directory.',
     mixins: [binMixin],
     computed: {
-      workDir(): string {
-        return this.$seeelaye.state.currentNode?.name ?? 'unknown'
+      currentNode(): FsNode {
+        return this.$seeelaye.state.currentNode
       },
+      workDir(): string {
+        return this.node?.absolutePath
+      },
+    },
+    created() {
+      this.node = this.currentNode
     },
   })
 </script>
