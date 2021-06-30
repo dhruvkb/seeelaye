@@ -5,8 +5,9 @@ import { terminalContent } from '@/../.storybook/terminal_content'
 import Binary from '@/mixins/bin.ts'
 
 import Hello from '@/bins/Hello.vue'
-import WhoAmI from '@/bins/WhoAmI.vue'
+import ChangeDir from '@/bins/ChangeDir.vue'
 import Hostname from '@/bins/Hostname.vue'
+import WhoAmI from '@/bins/WhoAmI.vue'
 import WorkDir from '@/bins/WorkDir.vue'
 
 <Meta
@@ -37,6 +38,53 @@ export const helloTemplate = () => ({
     { helloTemplate.bind({}) }
   </Story>
 </Canvas>
+
+## `cd`
+
+<Description of={ChangeDir}/>
+
+export const cdTemplate = (args) => ({
+  components: { ChangeDir },
+  setup() {
+    return { args }
+  },
+  template: `
+    <ChangeDir v-bind="args"/>
+  `
+})
+
+<Canvas>
+  <Story
+    name="cd"
+    argTypes={{
+      '--verbose/-v': {
+        table: {
+          type: { summary: 'boolean' },
+          defaultValue: { summary: false },
+        },
+        description: 'whether to display more messages on screen',
+        control: null
+      },
+      'dirpath': {
+        table: {
+          type: { summary: 'string' },
+          defaultValue: { summary: '~' },
+        },
+        description: 'the path or name of the directory to switch to',
+        control: null
+      },
+    }}
+    args={{
+      argv: [
+        '--verbose',
+        '~/c'
+      ]
+    }}>
+    { cdTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+<ArgsTable story="cd" />
 
 ## `hostname`
 
