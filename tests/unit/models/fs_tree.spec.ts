@@ -114,6 +114,24 @@ describe('FsNode', () => {
     })
   })
 
+  describe('absolutePath', () => {
+    it('returns node name for root node', () => {
+      const node = new FsNode(FsNodeType.FOLDER, '~')
+      expect(node.absolutePath).toEqual('~')
+    })
+
+    it('joins ancestry for non-root node', () => {
+      const a = new FsNode(FsNodeType.FOLDER, 'a')
+      const b = new FsNode(FsNodeType.FOLDER, 'b')
+      b.parent = a
+      a.children.push(b)
+      const c = new FsNode(FsNodeType.FOLDER, 'c')
+      c.parent = b
+      b.children.push(c)
+      expect(c.absolutePath).toEqual('a/b/c')
+    })
+  })
+
   describe('isType', () => {
     it('checks type for files', () => {
       const node = new FsNode(FsNodeType.FILE, 'name')
@@ -125,6 +143,24 @@ describe('FsNode', () => {
       const node = new FsNode(FsNodeType.FOLDER, 'name')
       expect(node.isType(FsNodeType.FILE)).toBe(false)
       expect(node.isType(FsNodeType.FOLDER)).toBe(true)
+    })
+  })
+
+  describe('hasName', () => {
+    it('compares name ignoring case', () => {
+      const node = new FsNode(FsNodeType.FOLDER, 'nAmE', ['aLiAs'])
+      expect(node.hasName('NaMe')).toBe(true)
+      expect(node.hasName('NaMe/')).toBe(true)
+      expect(node.hasName('alias')).toBe(true)
+      expect(node.hasName('ALIAS/')).toBe(true)
+    })
+
+    it('checks partial match if set', () => {
+      const node = new FsNode(FsNodeType.FOLDER, 'name')
+      expect(node.hasName('n', true)).toBe(true)
+      expect(node.hasName('nA', true)).toBe(true)
+      expect(node.hasName('Am', true)).toBe(true)
+      expect(node.hasName('mE/', true)).toBe(true)
     })
   })
 
@@ -159,6 +195,36 @@ describe('FsNode', () => {
       a.traverse(callback)
       expect(callback.mock.calls.length).toEqual(2)
       expect(callback.mock.calls.map((call) => call[0])).toEqual([a, ab])
+    })
+  })
+
+  describe('descendantNamed', () => {
+    let a: FsNode   // a
+    let ab: FsNode  // ├── ab
+    let abd: FsNode // │   └── abd
+    let ac: FsNode  // └── ac
+
+    beforeEach(() => {
+      a = new FsNode(FsNodeType.FOLDER, 'a')
+      ab = new FsNode(FsNodeType.FOLDER, 'ab')
+      ab.parent = a
+      a.children.push(ab)
+      abd = new FsNode(FsNodeType.FOLDER, 'abd')
+      abd.parent = ab
+      ab.children.push(abd)
+      ac = new FsNode(FsNodeType.FOLDER, 'ac')
+      ac.parent = a
+      a.children.push(ac)
+    })
+
+    it('returns node with matching name', () => {
+      const match = a.descendantNamed('abd')
+      expect(match).toEqual(abd)
+    })
+
+    it('returns null if no match found', () => {
+      const match = a.descendantNamed('none')
+      expect(match).toBeNull()
     })
   })
 

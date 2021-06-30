@@ -148,12 +148,37 @@ export class FsNode implements IFsNode {
   }
 
   /**
+   * Get the absolute path to this node. The absolute path of the root node is
+   * the name itself. For any other node it is the name of the node prefixed
+   * with the absolute path of its parent with the '/' separator.
+   */
+  get absolutePath(): string {
+    if (this.isRoot) {
+      return this.name
+    }
+    return `${this.parent.absolutePath}/${this.name}`
+  }
+
+  /**
    * Determine whether this node represents a file system file or folder.
    * @param type - the type of the node to compare this node with
    * @returns whether this node is of the given node type
    */
   isType(type: FsNodeType): boolean {
     return this.type === type
+  }
+
+  /**
+   * Determine whether this node has the given name as one of its names.
+   * @param name - the name to check for association with the node
+   * @param isPartial - whether to allow partial matches
+   */
+  hasName(name: string, isPartial = false): boolean {
+    const allNames = this.allNames.map((nodeName) => nodeName.toLowerCase())
+    if (isPartial) {
+      return allNames.some((nodeName) => nodeName.includes(name.toLowerCase()))
+    }
+    return allNames.includes(name.toLowerCase())
   }
 
   /**
@@ -178,6 +203,24 @@ export class FsNode implements IFsNode {
         return shouldContinue
       })
     return shouldContinue
+  }
+
+  /**
+   * Get the descendant of the node with the given name. Returns null if no
+   * matching node is found.
+   *
+   * @param name - the name to use for matching nodes
+   */
+  descendantNamed(name: string): FsNode | null {
+    let result: FsNode | null = null
+    this.traverse((node) => {
+      if (node.hasName(name)) {
+        result = node
+        return false
+      }
+      return true
+    })
+    return result
   }
 
   /**
