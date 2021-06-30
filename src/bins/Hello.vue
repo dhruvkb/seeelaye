@@ -40,7 +40,7 @@
     command: 'hello',
     description: 'Display ASCII art for see·el·aye along with relevant links.',
     mixins: [binMixin],
-    setup() {
+    data() {
       const links = [
         {
           text: '💻 GitHub',
