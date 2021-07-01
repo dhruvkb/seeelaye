@@ -4,6 +4,7 @@ import {
   IFsNode,
   nameExtSplit,
 } from '@/models/fs_tree'
+import { getTree } from '../../fixtures/fs_tree.fix'
 
 describe('nameExtensionSplit', () => {
   it('handles node names without extension', () => {
@@ -165,65 +166,45 @@ describe('FsNode', () => {
   })
 
   describe('traverse', () => {
-    let a: FsNode   // a
-    let ab: FsNode  // ├── ab
-    let abd: FsNode // │   └── abd
-    let ac: FsNode  // └── ac
+    let root: FsNode
+    let a: FsNode
+    let ab: FsNode
+    let c: FsNode
 
     beforeEach(() => {
-      a = new FsNode(FsNodeType.FOLDER, 'a')
-      ab = new FsNode(FsNodeType.FOLDER, 'ab')
-      ab.parent = a
-      a.children.push(ab)
-      abd = new FsNode(FsNodeType.FOLDER, 'abd')
-      abd.parent = ab
-      ab.children.push(abd)
-      ac = new FsNode(FsNodeType.FOLDER, 'ac')
-      ac.parent = a
-      a.children.push(ac)
+      [root, a, ab, c] = getTree()
     })
 
     it('covers all nodes depth wise', () => {
       const callback = jest.fn((node: FsNode) => node !== null)
-      a.traverse(callback)
+      root.traverse(callback)
       expect(callback.mock.calls.length).toEqual(4)
-      expect(callback.mock.calls.map((call) => call[0])).toEqual([a, ab, abd, ac])
+      expect(callback.mock.calls.map((call) => call[0])).toEqual([root, a, ab, c])
     })
 
     it('stops when the callback returns false', () => {
-      const callback = jest.fn((node: FsNode) => node !== ab)
-      a.traverse(callback)
+      const callback = jest.fn((node: FsNode) => node !== a)
+      root.traverse(callback)
       expect(callback.mock.calls.length).toEqual(2)
-      expect(callback.mock.calls.map((call) => call[0])).toEqual([a, ab])
+      expect(callback.mock.calls.map((call) => call[0])).toEqual([root, a])
     })
   })
 
   describe('descendantNamed', () => {
-    let a: FsNode   // a
-    let ab: FsNode  // ├── ab
-    let abd: FsNode // │   └── abd
-    let ac: FsNode  // └── ac
+    let root: FsNode
+    let ab: FsNode
 
     beforeEach(() => {
-      a = new FsNode(FsNodeType.FOLDER, 'a')
-      ab = new FsNode(FsNodeType.FOLDER, 'ab')
-      ab.parent = a
-      a.children.push(ab)
-      abd = new FsNode(FsNodeType.FOLDER, 'abd')
-      abd.parent = ab
-      ab.children.push(abd)
-      ac = new FsNode(FsNodeType.FOLDER, 'ac')
-      ac.parent = a
-      a.children.push(ac)
+      [root, , ab] = getTree()
     })
 
     it('returns node with matching name', () => {
-      const match = a.descendantNamed('abd')
-      expect(match).toEqual(abd)
+      const match = root.descendantNamed('ab')
+      expect(match).toEqual(ab)
     })
 
     it('returns null if no match found', () => {
-      const match = a.descendantNamed('none')
+      const match = root.descendantNamed('none')
       expect(match).toBeNull()
     })
   })
