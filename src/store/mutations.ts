@@ -17,6 +17,8 @@ export interface TerminalMutationTree<S> extends MutationTree<S> {
 
   pushInteraction(state: S, payload: { interaction: Interaction }): void
 
+  deleteInteractions(state: S): void
+
   hideInteractions(state: S): void
 }
 
@@ -39,6 +41,10 @@ export const mutations: TerminalMutationTree<TerminalState> = {
 
   setIsReady(state: TerminalState, payload: { isReady: boolean }) {
     state.isReady = payload.isReady
+  },
+
+  deleteInteractions(state: TerminalState) {
+    state.history = []
   },
 
   pushInteraction(state: TerminalState, payload: { interaction: Interaction }) {
