@@ -1,0 +1,54 @@
+import {
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
+
+import Spinner from '@/components/spinner/Spinner.vue'
+
+<Meta
+  title="Elements/Spinner"
+  component={Spinner}/>
+
+# Spinner
+
+<Description of={Spinner}/>
+
+export const Template = (args) => ({
+  components: { Spinner },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Spinner v-bind="args"/>
+  `,
+})
+
+<Canvas>
+  <Story name="Default">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Styling
+
+The component can be styled by setting the following CSS custom properties.
+
+| Property               | Description                      | Default                |
+|------------------------|----------------------------------|------------------------|
+| `--spinner-edge-color` | Color of the end brackets        | `--color-secondary-fg` |
+| `--spinner-char-color` | Color of the moving progress bar | `--color-normal-fg`    |
+
+<Canvas>
+  <Story
+    name="With Style"
+    args={{
+      style: {
+        '--spinner-edge-color': 'var(--color-normal-blue)',
+        '--spinner-char-color': 'var(--color-normal-yellow)',
+      }
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
