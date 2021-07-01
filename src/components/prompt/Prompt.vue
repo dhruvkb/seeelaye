@@ -2,29 +2,44 @@
   <Prompt_
     :username="username"
     :hostname="hostname"
-    :current-node-name="currentNodeName"/>
+    :working-directory-name="workingDirectoryName"/>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { computed, defineComponent, PropType } from 'vue'
+
+  import { useSeeelaye } from '@/base/injection'
 
   import Prompt_ from '@/components/prompt/Prompt_.vue'
-  import { useStore } from 'vuex'
+
+  import type { FsNode } from '@/models/fs_tree'
 
   export default defineComponent({
     name: 'Prompt',
     components: { Prompt_ },
-    setup() {
-      const store = useStore()
+    props: {
+      /**
+       * node to override as the current working directory
+       */
+      workingDirectory: {
+        type: Object as PropType<FsNode>,
+      },
+    },
+    setup(props) {
+      const seeelaye = useSeeelaye()
 
-      const username = computed(() => store.state.terminal.username)
-      const hostname = computed(() => store.state.terminal.hostname)
-      const currentNodeName = computed(() => store.state.terminal.currentNode.name)
+      const username = computed(() => seeelaye.state.username)
+      const hostname = computed(() => seeelaye.state.hostname)
+      const currentNodeName = computed(() => seeelaye.state.currentNode?.name)
+
+      const workingDirectoryName = props.workingDirectory?.name
+        ?? currentNodeName.value
+        ?? 'unknown'
 
       return {
         username,
         hostname,
-        currentNodeName,
+        workingDirectoryName,
       }
     },
   })
