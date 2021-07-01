@@ -52,6 +52,7 @@ export const parameters = {
       order: [
         'see·el·aye',
         'Elements',
+        'Sections',
         'Bins',
       ],
     },
