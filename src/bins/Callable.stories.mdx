@@ -1,4 +1,10 @@
-import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
 
 import { terminalContent } from '@/../.storybook/terminal_content'
 
@@ -15,7 +21,7 @@ import WorkDir from '@/bins/WorkDir.vue'
   component={Binary}
   decorators={[
     terminalContent,
-  ]} />
+  ]}/>
 
 # Callable binaries
 
@@ -24,7 +30,7 @@ actions. These include the following.
 
 ## `hello`
 
-<Description of={Hello} />
+<Description of={Hello}/>
 
 export const helloTemplate = () => ({
   components: { Hello },
@@ -35,7 +41,7 @@ export const helloTemplate = () => ({
 
 <Canvas>
   <Story name="hello">
-    { helloTemplate.bind({}) }
+    {helloTemplate.bind({})}
   </Story>
 </Canvas>
 
@@ -49,7 +55,7 @@ export const cdTemplate = (args) => ({
     return { args }
   },
   template: `
-    <ChangeDir v-bind="args"/>
+    <ChangeDir v-bind="args" />
   `
 })
 
@@ -77,18 +83,18 @@ export const cdTemplate = (args) => ({
     args={{
       argv: [
         '--verbose',
-        '~/c'
-      ]
+        '~/c',
+      ],
     }}>
-    { cdTemplate.bind({}) }
+    {cdTemplate.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable story="cd" />
+<ArgsTable story="cd"/>
 
 ## `hostname`
 
-<Description of={Hostname} />
+<Description of={Hostname}/>
 
 export const hostnameTemplate = () => ({
   components: { Hostname },
@@ -99,13 +105,13 @@ export const hostnameTemplate = () => ({
 
 <Canvas>
   <Story name="hostname">
-    { hostnameTemplate.bind({}) }
+    {hostnameTemplate.bind({})}
   </Story>
 </Canvas>
 
 ## `pwd`
 
-<Description of={WorkDir} />
+<Description of={WorkDir}/>
 
 export const pwdTemplate = () => ({
   components: { WorkDir },
@@ -116,13 +122,13 @@ export const pwdTemplate = () => ({
 
 <Canvas>
   <Story name="pwd">
-    { pwdTemplate.bind({}) }
+    {pwdTemplate.bind({})}
   </Story>
 </Canvas>
 
 ## `whoami`
 
-<Description of={WhoAmI} />
+<Description of={WhoAmI}/>
 
 export const whoamiTemplate = (args) => ({
   components: { WhoAmI },
@@ -148,8 +154,8 @@ export const whoamiTemplate = (args) => ({
       },
     }}
     args={{ argv: ['--groot'] }}>
-    { whoamiTemplate.bind({}) }
+    {whoamiTemplate.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable story="whoami" />
+<ArgsTable story="whoami"/>
