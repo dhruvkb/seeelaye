@@ -6,17 +6,12 @@ import {
   Story
 } from '@storybook/addon-docs'
 
-import { terminalContent } from '@/../.storybook/terminal_content'
-
 import Prompt_ from '@/components/prompt/Prompt_.vue'
 import Prompt from '@/components/prompt/Prompt.vue'
 
 <Meta
   title="Elements/Prompt"
-  component={Prompt_}
-  decorators={[
-    terminalContent
-  ]}/>
+  component={Prompt_}/>
 
 # Prompt
 
@@ -61,7 +56,7 @@ export const WithStoreTemplate = () => ({
 })
 
 <Canvas>
-  <Story name="WithStore">
+  <Story name="With Store">
     {WithStoreTemplate.bind({})}
   </Story>
 </Canvas>
