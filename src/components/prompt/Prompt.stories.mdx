@@ -1,4 +1,10 @@
-import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
 
 import { terminalContent } from '@/../.storybook/terminal_content'
 
@@ -10,13 +16,13 @@ import Prompt from '@/components/prompt/Prompt.vue'
   component={Prompt_}
   decorators={[
     terminalContent
-  ]} />
+  ]}/>
 
 # Prompt
 
 ## Presentational
 
-<Description of={Prompt_} />
+<Description of={Prompt_}/>
 
 export const DefaultTemplate = (args) => ({
   components: { Prompt_ },
@@ -36,11 +42,11 @@ export const DefaultTemplate = (args) => ({
       hostname: 'seeelaye',
       workingDirectoryName: '~',
     }}>
-    { DefaultTemplate.bind({}) }
+    {DefaultTemplate.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable story="Default" />
+<ArgsTable story="Default"/>
 
 ## With store
 
@@ -56,8 +62,8 @@ export const WithStoreTemplate = () => ({
 
 <Canvas>
   <Story name="WithStore">
-    { WithStoreTemplate.bind({}) }
+    {WithStoreTemplate.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable of={Prompt} />
+<ArgsTable of={Prompt}/>
