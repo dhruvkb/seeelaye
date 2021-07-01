@@ -1,0 +1,63 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+
+import { terminalContent } from '@/../.storybook/terminal_content'
+
+import Prompt_ from '@/components/prompt/Prompt_.vue'
+import Prompt from '@/components/prompt/Prompt.vue'
+
+<Meta
+  title="Elements/Prompt"
+  component={Prompt_}
+  decorators={[
+    terminalContent
+  ]} />
+
+# Prompt
+
+## Presentational
+
+<Description of={Prompt_} />
+
+export const DefaultTemplate = (args) => ({
+  components: { Prompt_ },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Prompt_ v-bind="args"/>
+  `,
+})
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      username: 'dhruvkb',
+      hostname: 'seeelaye',
+      workingDirectoryName: '~',
+    }}>
+    { DefaultTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## With store
+
+Using the smart component `Prompt`, the values of props can be automatically
+fetched from the underlying Vuex store module.
+
+export const WithStoreTemplate = () => ({
+  components: { Prompt },
+  template: `
+    <Prompt/>
+  `,
+})
+
+<Canvas>
+  <Story name="WithStore">
+    { WithStoreTemplate.bind({}) }
+  </Story>
+</Canvas>
+
+<ArgsTable of={Prompt} />
