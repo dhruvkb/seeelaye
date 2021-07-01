@@ -1,7 +1,7 @@
 <template>
-  <div class="prompt">
-    [{{ username }}@{{ hostname }} {{ currentNodeName }}]$
-  </div>
+  <span class="prompt">
+    [{{ username }}@{{ hostname }} {{ workingDirectoryName }}]$
+  </span>
 </template>
 
 <script lang="ts">
@@ -31,9 +31,9 @@
         required: true,
       },
       /**
-       * the name of the current working node
+       * the name of the working directory node
        */
-      currentNodeName: {
+      workingDirectoryName: {
         type: String,
         required: true,
       },
