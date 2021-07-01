@@ -1,4 +1,10 @@
-import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
 
 import { terminalContent } from '@/../.storybook/terminal_content'
 
@@ -11,8 +17,8 @@ import Nop from '@/bins/Nop.vue'
   title="Bins/Non-callable"
   component={Binary}
   decorators={[
-   terminalContent,
-  ]} />
+    terminalContent,
+  ]}/>
 
 # Non-callable binaries
 
@@ -21,7 +27,7 @@ called from the CLI by issuing any commands. These include the following.
 
 ## Bad
 
-<Description of={Bad} />
+<Description of={Bad}/>
 
 export const badTemplate = (args) => ({
   components: { Bad },
@@ -39,22 +45,25 @@ export const badTemplate = (args) => ({
     argTypes={{
       '--bin': {
         table: {
-          type: { summary: 'string', required: true },
+          type: {
+            summary: 'string',
+            required: true,
+          },
         },
         description: 'the invalid binary that was invoked',
         control: null
       },
     }}
     args={{ argv: ['--bin', 'unknown'] }}>
-    { badTemplate.bind({}) }
+    {badTemplate.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable story="Bad" />
+<ArgsTable story="Bad"/>
 
 ## Nop
 
-<Description of={Nop} />
+<Description of={Nop}/>
 
 export const nopTemplate = () => ({
   components: { Nop },
@@ -65,6 +74,6 @@ export const nopTemplate = () => ({
 
 <Canvas>
   <Story name="Nop">
-    { nopTemplate.bind({}) }
+    {nopTemplate.bind({})}
   </Story>
 </Canvas>
