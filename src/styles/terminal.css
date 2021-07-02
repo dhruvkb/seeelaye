@@ -18,6 +18,10 @@
   border-right: 1px solid var(--color-highlight-bg);
 }
 
+.terminal-content p {
+  margin: 0;
+}
+
 .terminal-content ul {
   list-style: none;
 
@@ -27,4 +31,8 @@
 
 .terminal-content a {
   color: inherit;
+}
+
+.terminal-content .error {
+  color: var(--color-normal-red);
 }
