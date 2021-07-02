@@ -13,10 +13,10 @@ import { FsNode, FsNodeType } from '@/models/fs_tree'
  * ```
  */
 export const getTree = (): [FsNode, FsNode, FsNode, FsNode] => {
-  const root = new FsNode(FsNodeType.FOLDER, '~') // ~/
-  const a = new FsNode(FsNodeType.FOLDER, 'a')    // ├── a/
-  const ab = new FsNode(FsNodeType.FILE, 'ab')    // │   └── ab
-  const c = new FsNode(FsNodeType.FOLDER, 'c')    // └── c/
+  const root = new FsNode(FsNodeType.FOLDER, '~')
+  const a = new FsNode(FsNodeType.FOLDER, 'a', ['ax'])
+  const ab = new FsNode(FsNodeType.FILE, 'ab')
+  const c = new FsNode(FsNodeType.FOLDER, 'c')
 
   a.parent = root
   root.children.push(a)
