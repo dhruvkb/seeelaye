@@ -1,6 +1,4 @@
-import type { Binary } from '@/bins'
-
-import { callableBins } from '@/bins'
+import type { Binary } from '@/bins/type'
 
 import { FsNode } from '@/models/fs_tree'
 
@@ -27,7 +25,7 @@ export interface IInteraction {
  * context.
  */
 export class Interaction implements IInteraction {
-  static allBins: Record<string, Binary> = callableBins
+  static allBins: Record<string, Binary> = {}
 
   context: {
     wd: FsNode
@@ -71,10 +69,6 @@ export class Interaction implements IInteraction {
    * arguments to a binary are not handled at this step.
    */
   processOutput(): void {
-    if (!Interaction.allBins) {
-      throw new Error('No binaries configured in terminal')
-    }
-
     if (!this.rawInput) {
       this.output = {
         component: 'Nop',
@@ -82,10 +76,10 @@ export class Interaction implements IInteraction {
       }
       return
     }
-    const bin = Interaction.allBins[this.input.bin]
-    if (bin && bin.name) {
+    const binary = Interaction.allBins[this.input.bin]
+    if (binary) {
       this.output = {
-        component: bin.name,
+        component: binary.name,
         argv: this.input.argv,
       }
     } else {
