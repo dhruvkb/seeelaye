@@ -1,0 +1,77 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
+
+import Navigable_ from '@/components/navigable/Navigable_.vue'
+
+<Meta
+  title="Elements/Navigable"
+  component={Navigable_}
+  argTypes={{
+    navigate: {
+      description: 'emitted when the link is clicked to navigate to the node',
+      action: 'navigate',
+    },
+  }}/>
+
+# Navigable
+
+<Description of={Navigable_}/>
+
+export const Template = (args) => ({
+  components: { Navigable_ },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Navigable_
+      v-bind="args"
+      v-on="args"/>
+  `,
+})
+
+export const defaultArgs = {
+  name: 'name',
+  aliases: ['alias', 'nickname'],
+  isFolder: true,
+  isClickable: true,
+}
+
+<Canvas>
+  <Story
+    name="Default"
+    args={defaultArgs}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default"/>
+
+## Styling
+
+The component can be styled by setting the following CSS custom properties.
+
+| Property         | Description                 | Default                  |
+|------------------|-----------------------------|--------------------------|
+| `--folder-color` | Text color for folder links | `--color-normal-cyan`    |
+| `--file-color`   | Text color for file links   | `--color-normal-magenta` |
+| `--alias-color`  | Text color for node aliases | `--color-secondary-fg`   |
+
+<Canvas>
+  <Story
+    name="With Style"
+    args={{
+      ...defaultArgs,
+      style: {
+        '--folder-color': 'var(--color-normal-green)',
+        '--file-color': 'var(--color-normal-blue)',
+        '--alias-color': 'var(--color-normal-fg)',
+      },
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

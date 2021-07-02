@@ -5,7 +5,7 @@
     v-on="{ click: isClickable ? handleClick : null }">
     <!-- @slot Alternative display text goes here. -->
     <slot>
-      <span class="name">{{ name }}</span>
+      <span>{{ name }}</span>
       <span
         v-if="args.length"
         class="args">&nbsp;{{ args.join(' ') }}</span>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
 
   /**
    * Interactively links to a given binary.
@@ -32,7 +32,7 @@
        * the list of arguments associated with the binary
        */
       args: {
-        type: Array,
+        type: Array as PropType<string[]>,
         default: () => [],
       },
       /**
@@ -59,8 +59,8 @@
   button.executable { /* Reset UA button */
     appearance: none;
 
-    color: inherit;
-    font: inherit;
+    font-family: inherit;
+    font-size: inherit;
     background: none;
 
     padding: 0;
@@ -71,12 +71,13 @@
     cursor: pointer;
   }
 
-  .executable .name {
-    color: var(--executable-name-color, var(--color-normal-green));
+  .executable {
+    color: var(--binary-color, var(--color-normal-green));
     font-weight: bold;
   }
 
-  .executable .args {
-    color: var(--executable-arg-color, var(--color-normal-blue));
+  .executable ::v-slotted(.args) {
+    color: var(--argument-color, var(--color-normal-blue));
+    font-weight: normal;
   }
 </style>

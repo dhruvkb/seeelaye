@@ -6,7 +6,7 @@
     v-on="{ click: isClickable ? handleClick : null }">
     <!-- @slot Alternative display text goes here. -->
     <slot>
-      <span class="name">{{ name }}</span>
+      <span>{{ name }}</span>
       <span
         v-if="aliases.length"
         class="aliases">&nbsp;(~ {{ aliases.join(', ') }})</span>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
 
   /**
    * Interactively links to a given filesystem node.
@@ -33,7 +33,7 @@
        * the list of aliases associated with the node
        */
       aliases: {
-        type: Array,
+        type: Array as PropType<string[]>,
         default: () => [],
       },
       /**
@@ -66,8 +66,8 @@
   button.navigable { /* Reset UA button */
     appearance: none;
 
-    color: inherit;
-    font: inherit;
+    font-family: inherit;
+    font-size: inherit;
     background: none;
 
     padding: 0;
@@ -78,17 +78,18 @@
     cursor: pointer;
   }
 
-  .navigable.is-folder .name {
-    color: var(--navigable-folder-color, var(--color-normal-cyan));
+  .is-folder {
+    color: var(--folder-color, var(--color-normal-cyan));
     font-weight: bold;
   }
 
-  .navigable.is-file .name {
-    color: var(--navigable-file-color, var(--color-normal-magenta));
+  .is-file {
+    color: var(--file-color, var(--color-normal-magenta));
     font-weight: normal;
   }
 
-  .navigable .aliases {
-    color: var(--navigable-alias-color, var(--color-secondary-fg));
+  .navigable ::v-slotted(.aliases) {
+    color: var(--alias-color, var(--color-secondary-fg));
+    font-weight: normal;
   }
 </style>

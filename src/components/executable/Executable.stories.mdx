@@ -1,0 +1,75 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
+
+import Executable_ from '@/components/executable/Executable_.vue'
+
+<Meta
+  title="Elements/Executable"
+  component={Executable_}
+  argTypes={{
+    execute: {
+      description: 'emitted when the link is clicked to execute the binary',
+      action: 'execute',
+    },
+  }}/>
+
+# Executable
+
+<Description of={Executable_}/>
+
+export const Template = (args) => ({
+  components: { Executable_ },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Executable_
+      v-bind="args"
+      v-on="args"/>
+  `,
+})
+
+export const defaultArgs = {
+  name: 'name',
+  args: ['argument', 'parameter'],
+  isClickable: true,
+}
+
+<Canvas>
+  <Story
+    name="Default"
+    args={defaultArgs}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default"/>
+
+## Styling
+
+The component can be styled by setting the following CSS custom properties.
+
+| Property           | Description                | Default                |
+|--------------------|----------------------------|------------------------|
+| `--binary-color`   | Text color for binary name | `--color-normal-green` |
+| `--argument-color` | Text color for arguments   | `--color-normal-blue`  |
+
+
+<Canvas>
+  <Story
+    name="With Style"
+    args={{
+      ...defaultArgs,
+      style: {
+        '--binary-color': 'var(--color-normal-cyan)',
+        '--argument-color': 'var(--color-normal-magenta)',
+      },
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
