@@ -8,17 +8,19 @@ import {
 
 import { terminalContent } from '@/../.storybook/terminal_content'
 
-import Binary from '@/mixins/bin.ts'
-
+import ChangeDir, { binary as cdBinary } from '@/bins/ChangeDir.vue'
+import Clear from '@/bins/Clear.vue'
 import Hello from '@/bins/Hello.vue'
-import ChangeDir from '@/bins/ChangeDir.vue'
+import Help from '@/bins/Help.vue'
 import Hostname from '@/bins/Hostname.vue'
-import WhoAmI from '@/bins/WhoAmI.vue'
+import List, { binary as lsBinary } from '@/bins/List.vue'
+import Manual, { binary as manBinary } from '@/bins/Manual.vue'
+import Tree, { binary as treeBinary } from '@/bins/Tree.vue'
+import WhoAmI, { binary as whoamiBinary } from '@/bins/WhoAmI.vue'
 import WorkDir from '@/bins/WorkDir.vue'
 
 <Meta
   title="Bins/Callable"
-  component={Binary}
   decorators={[
     terminalContent,
   ]}/>
@@ -68,15 +70,15 @@ export const cdTemplate = (args) => ({
           type: { summary: 'boolean' },
           defaultValue: { summary: false },
         },
-        description: 'whether to display more messages on screen',
+        description: cdBinary.argSpec.kwArgs[0].description,
         control: null
       },
       'dirpath': {
         table: {
           type: { summary: 'string' },
-          defaultValue: { summary: '~' },
+          defaultValue: { summary: cdBinary.argSpec.posArgs[0].default },
         },
-        description: 'the path or name of the directory to switch to',
+        description: cdBinary.argSpec.posArgs[0].description,
         control: null
       },
     }}
@@ -91,6 +93,40 @@ export const cdTemplate = (args) => ({
 </Canvas>
 
 <ArgsTable story="cd"/>
+
+## `clear`
+
+<Description of={Clear}/>
+
+export const clearTemplate = () => ({
+  components: { Clear },
+  template: `
+    <Clear/>
+  `
+})
+
+<Canvas>
+  <Story name="clear">
+    {clearTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## `help`
+
+<Description of={Help}/>
+
+export const helpTemplate = () => ({
+  components: { Help },
+  template: `
+    <Help/>
+  `
+})
+
+<Canvas>
+  <Story name="help">
+    {helpTemplate.bind({})}
+  </Story>
+</Canvas>
 
 ## `hostname`
 
@@ -109,6 +145,90 @@ export const hostnameTemplate = () => ({
   </Story>
 </Canvas>
 
+## `ls`
+
+<Description of={List}/>
+
+export const listTemplate = (args) => ({
+  components: { List },
+  setup() {
+    return { args }
+  },
+  template: `
+    <List v-bind="args" />
+  `
+})
+
+<Canvas>
+  <Story
+    name="ls"
+    argTypes={{
+      '--all/-a': {
+        table: {
+          type: { summary: 'boolean' },
+          defaultValue: { summary: lsBinary.argSpec.kwArgs[0].default },
+        },
+        description: lsBinary.argSpec.kwArgs[0].description,
+        control: null
+      },
+      'dirpath': {
+        table: {
+          type: { summary: 'string' },
+          defaultValue: { summary: lsBinary.argSpec.posArgs[0].default },
+        },
+        description: lsBinary.argSpec.posArgs[0].description,
+        control: null
+      },
+    }}
+    args={{
+      argv: [
+        '--all',
+        '~',
+      ],
+    }}>
+    {listTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="ls"/>
+
+## `man`
+
+<Description of={Manual}/>
+
+export const manualTemplate = (args) => ({
+  components: { Manual },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Manual v-bind="args" />
+  `
+})
+
+<Canvas>
+  <Story
+    name="man"
+    argTypes={{
+      'bin': {
+        table: {
+          type: { summary: 'string' },
+        },
+        description: manBinary.argSpec.posArgs[0].description,
+        control: null
+      },
+    }}
+    args={{
+      argv: [
+        'tree',
+      ],
+    }}>
+    {manualTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="man"/>
+
 ## `pwd`
 
 <Description of={WorkDir}/>
@@ -125,6 +245,53 @@ export const pwdTemplate = () => ({
     {pwdTemplate.bind({})}
   </Story>
 </Canvas>
+
+## `tree`
+
+<Description of={Tree}/>
+
+export const treeTemplate = (args) => ({
+  components: { Tree },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Tree v-bind="args" />
+  `
+})
+
+<Canvas>
+  <Story
+    name="tree"
+    argTypes={{
+      '--verbose/-v': {
+        table: {
+          type: { summary: 'boolean' },
+          defaultValue: { summary: treeBinary.argSpec.kwArgs[0].default },
+        },
+        description: treeBinary.argSpec.kwArgs[0].description,
+        control: null
+      },
+      'dirpath': {
+        table: {
+          type: { summary: 'string' },
+          defaultValue: { summary: treeBinary.argSpec.posArgs[0].default },
+        },
+        description: treeBinary.argSpec.posArgs[0].description,
+        control: null
+      },
+    }}
+    args={{
+      argv: [
+        '--verbose',
+        '~',
+      ],
+    }}>
+    {treeTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="tree"/>
 
 ## `whoami`
 
@@ -147,9 +314,9 @@ export const whoamiTemplate = (args) => ({
       '--groot/-g': {
         table: {
           type: { summary: 'boolean' },
-          defaultValue: { summary: false },
+          defaultValue: { summary: whoamiBinary.argSpec.kwArgs[0].default },
         },
-        description: 'whether to run command as Groot',
+        description: whoamiBinary.argSpec.kwArgs[0].description,
         control: null
       },
     }}

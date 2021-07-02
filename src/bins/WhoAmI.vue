@@ -1,25 +1,24 @@
 <template>
   <div class="whoami">
-    <template v-if="args.groot">groot</template>
-    <template v-else>{{ username }}</template>
+    {{ username }}
   </div>
 </template>
 
 <script lang="ts">
+  import type { Binary } from '@/bins/type'
+  import type { IArg } from '@/models/arg'
+
   import { defineComponent } from 'vue'
 
-  import binMixin from '@/mixins/bin'
+  import { useSeeelaye } from '@/base/injection'
+  import { binProps, binComposition } from '@/compositions/bin'
 
-  import { IArg } from '@/models/arg'
-
-  /**
-   * Displays the name of the current active user.
-   */
-  export default defineComponent({
+  export const binary: Binary = {
     name: 'WhoAmI',
     command: 'whoami',
     description: 'Display the name of the current active user.',
     argSpec: {
+      posArgs: [],
       kwArgs: [
         {
           name: 'groot',
@@ -30,11 +29,24 @@
         } as IArg<boolean>,
       ],
     },
-    mixins: [binMixin],
-    computed: {
-      username(): string {
-        return this.$seeelaye.state.username
-      },
+  }
+
+  /**
+   * Displays the name of the current active user.
+   */
+  export default defineComponent({
+    name: 'WhoAmI',
+    props: binProps,
+    setup(props) {
+      const { processedArgs } = binComposition(binary)
+      const args = processedArgs(props.argv)
+
+      const seeelaye = useSeeelaye()
+      const username = args.groot ? 'groot' : seeelaye.state.username
+
+      return {
+        username,
+      }
     },
   })
 </script>

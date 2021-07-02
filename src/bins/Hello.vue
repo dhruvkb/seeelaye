@@ -22,9 +22,21 @@
 </template>
 
 <script lang="ts">
+  import type { Binary } from '@/bins/type'
+
   import { defineComponent } from 'vue'
 
-  import binMixin from '@/mixins/bin'
+  import { binComposition } from '@/compositions/bin'
+
+  export const binary: Binary = {
+    name: 'Hello',
+    command: 'hello',
+    description: 'Display ASCII art for see·el·aye along with relevant links.',
+    argSpec: {
+      kwArgs: [],
+      posArgs: [],
+    },
+  }
 
   /**
    * Displays ASCII art for see·el·aye along with relevant links.
@@ -39,8 +51,9 @@
     name: 'Hello',
     command: 'hello',
     description: 'Display ASCII art for see·el·aye along with relevant links.',
-    mixins: [binMixin],
-    data() {
+    setup() {
+      binComposition(binary)
+
       const links = [
         {
           text: '💻 GitHub',
@@ -63,21 +76,21 @@
 </script>
 
 <style scoped lang="css">
-  .hello .ascii {
-    margin: 0;
-  }
-
-  .hello .red {
+  .red {
     color: #dc322f;
     font-weight: 600;
   }
 
-  .hello .grey {
+  .grey {
     color: #7f7f7f;
     font-weight: 400;
   }
 
-  .hello ul {
+  pre {
+    margin: 0;
+  }
+
+  ul {
     display: inline-flex;
     gap: 1ch;
   }

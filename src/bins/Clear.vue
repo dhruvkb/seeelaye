@@ -1,5 +1,5 @@
 <template>
-  <div class="nop"/>
+  <div class="clear"/>
 </template>
 
 <script lang="ts">
@@ -7,27 +7,29 @@
 
   import { defineComponent } from 'vue'
 
+  import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
   export const binary: Binary = {
-    name: 'Nop',
-    command: 'nop',
-    description: 'Display nothing and do nothing.',
+    name: 'Clear',
+    command: 'clear',
+    description: 'Clear the screen by hiding all previous interactions.',
     argSpec: {
-      kwArgs: [],
       posArgs: [],
+      kwArgs: [],
     },
   }
 
   /**
-   * Displays nothing and does nothing.
-   *
-   * This binary is invoked when a blank input is entered into the terminal.
+   * Clears the screen by hiding all previous interactions.
    */
   export default defineComponent({
-    name: 'Nop',
+    name: 'Clear',
     setup() {
       binComposition(binary)
+
+      const seeelaye = useSeeelaye()
+      seeelaye.commit('hideInteractions')
     },
   })
 </script>

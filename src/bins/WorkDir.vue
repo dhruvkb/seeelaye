@@ -5,29 +5,37 @@
 </template>
 
 <script lang="ts">
+  import type { Binary } from '@/bins/type'
+
   import { defineComponent } from 'vue'
 
-  import binMixin from '@/mixins/bin'
-  import { FsNode } from '@/models/fs_tree'
+  import { useSeeelaye } from '@/base/injection'
+  import { binComposition } from '@/compositions/bin'
+
+  export const binary: Binary = {
+    name: 'WorkDir',
+    command: 'pwd',
+    description: 'Display the current working directory.',
+    argSpec: {
+      posArgs: [],
+      kwArgs: [],
+    },
+  }
 
   /**
    * Displays the current working directory.
    */
   export default defineComponent({
     name: 'WorkDir',
-    command: 'pwd',
-    description: 'Display the current working directory.',
-    mixins: [binMixin],
-    computed: {
-      currentNode(): FsNode {
-        return this.$seeelaye.state.currentNode
-      },
-      workDir(): string {
-        return this.node?.absolutePath
-      },
-    },
-    created() {
-      this.node = this.currentNode
+    setup() {
+      binComposition(binary)
+
+      const seeelaye = useSeeelaye()
+      const workDir = seeelaye.state.currentNode?.absolutePath ?? 'unknown'
+
+      return {
+        workDir,
+      }
     },
   })
 </script>
