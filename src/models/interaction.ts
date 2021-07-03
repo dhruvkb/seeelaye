@@ -1,4 +1,4 @@
-import type { Binary } from '@/bins/type'
+import type { IBinary } from '@/models/bin'
 
 import { FsNode } from '@/models/fs_tree'
 
@@ -25,7 +25,7 @@ export interface IInteraction {
  * context.
  */
 export class Interaction implements IInteraction {
-  static allBins: Record<string, Binary> = {}
+  static allBins: Record<string, IBinary> = {}
 
   context: {
     wd: FsNode

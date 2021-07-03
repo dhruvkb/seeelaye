@@ -1,6 +1,6 @@
 import type { IArg } from '@/models/arg'
 
-export interface Binary {
+export interface IBinary {
   /**
    * the name of the Vue component to render for this binary
    */

@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
   import type { IArg } from '@/models/arg'
 
   import { defineComponent } from 'vue'
@@ -50,7 +50,7 @@
   import { binProps, binComposition } from '@/compositions/bin'
   import { argRepr, ArgType } from '@/models/arg'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'Manual',
     command: 'man',
     description: 'Display information about the given command.',

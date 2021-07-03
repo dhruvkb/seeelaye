@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'Nop',
     command: 'nop',
     description: 'Display nothing and do nothing.',

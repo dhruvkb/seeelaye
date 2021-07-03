@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import type { Handler } from 'arg'
 
-import type { Binary } from '@/bins/type'
+import type { IBinary } from '@/models/bin'
 
 import { onMounted } from 'vue'
 import argLib from 'arg'
@@ -23,7 +23,7 @@ export interface IBinComposition {
   setTerminalReady: (isReady: boolean) => void
 }
 
-export const binComposition = (binary: Binary, markReadyOnMount = true): IBinComposition => {
+export const binComposition = (binary: IBinary, markReadyOnMount = true): IBinComposition => {
   const seeelaye = useSeeelaye()
 
   // Methods

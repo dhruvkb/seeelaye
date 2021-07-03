@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
   import type { IArg } from '@/models/arg'
 
   import { defineComponent } from 'vue'
@@ -15,7 +15,7 @@
   import Executable from '@/components/executable/Executable.vue'
   import { binProps, binComposition } from '@/compositions/bin'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'Bad',
     command: 'bad',
     description: 'Display the invalidity of the input and suggest alternatives.',

@@ -16,9 +16,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+  import type { PropType } from 'vue'
 
-  import { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
+
+  import { defineComponent } from 'vue'
 
   import Executable_ from '@/components/executable/Executable_.vue'
 
@@ -35,7 +37,7 @@
        * the binary for which to render the interactive link
        */
       bin: {
-        type: Object as PropType<Binary>,
+        type: Object as PropType<IBinary>,
         required: true,
       },
       /**

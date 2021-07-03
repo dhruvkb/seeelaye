@@ -1,7 +1,7 @@
 import type { App, Component } from 'vue'
 import type { Store } from 'vuex'
 
-import type { Binary } from '@/bins/type'
+import type { IBinary } from '@/models/bin'
 
 import type { TerminalState } from '@/store/state'
 
@@ -44,7 +44,7 @@ export class Seeelaye {
   store: Store<unknown>
   storeModule: string
 
-  allBins: Record<string, Binary>
+  allBins: Record<string, IBinary>
 
   /**
    * Create a new object of class `Seeelaye`.
@@ -53,7 +53,7 @@ export class Seeelaye {
    * @param storeModule - the name of the Vuex store module that holds CLI state
    * @param bins - the name to use in the greeting
    */
-  constructor(store: Store<unknown>, storeModule: string, bins: Record<string, Binary> = {}) {
+  constructor(store: Store<unknown>, storeModule: string, bins: Record<string, IBinary> = {}) {
     this.store = store
     this.storeModule = storeModule
 

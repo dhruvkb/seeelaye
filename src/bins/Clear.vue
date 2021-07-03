@@ -3,14 +3,14 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'Clear',
     command: 'clear',
     description: 'Clear the screen by hiding all previous interactions.',

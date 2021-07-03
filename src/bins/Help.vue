@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
@@ -22,7 +22,7 @@
   import Executable from '@/components/executable/Executable.vue'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'Help',
     command: 'help',
     description: 'Show help about using the terminal.',

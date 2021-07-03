@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
   import type { IArg } from '@/models/arg'
 
   import { defineComponent } from 'vue'
@@ -13,7 +13,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binProps, binComposition } from '@/compositions/bin'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'WhoAmI',
     command: 'whoami',
     description: 'Display the name of the current active user.',

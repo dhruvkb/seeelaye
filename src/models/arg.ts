@@ -1,6 +1,6 @@
 import type { Handler } from 'arg'
 
-import type { Binary } from '@/bins/type'
+import type { IBinary } from '@/models/bin'
 import type { FsNodeType } from '@/models/fs_tree'
 
 export enum ArgType {
@@ -45,7 +45,7 @@ export const argRepr = (arg: IArg, argType: ArgType): string => {
   return repr
 }
 
-export const allArgs = (binary: Binary): string[] => {
+export const allArgs = (binary: IBinary): string[] => {
   const { argSpec } = binary
   const kwArgs = argSpec?.kwArgs ?? []
   const posArgs = argSpec?.posArgs ?? []

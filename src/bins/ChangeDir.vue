@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/bins/type'
+  import type { IBinary } from '@/models/bin'
   import type { IArg } from '@/models/arg'
 
   import { defineComponent } from 'vue'
@@ -21,7 +21,7 @@
   import { pathComposition } from '@/compositions/path'
   import { FsNodeType } from '@/models/fs_tree'
 
-  export const binary: Binary = {
+  export const binary: IBinary = {
     name: 'ChangeDir',
     command: 'cd',
     description: 'Switch to the given directory as the working directory.',
