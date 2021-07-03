@@ -90,7 +90,9 @@
       },
     },
     setup(props, { slots }) {
-      const { processedArgs } = binComposition(binary)
+      const isRoot = computed(() => !slots.default)
+
+      const { processedArgs } = binComposition(binary, isRoot.value)
       const args = processedArgs(props.argv)
 
       const { node } = pathComposition(
@@ -106,7 +108,6 @@
         dash: '─',
         space: '\xa0',
       }
-      const isRoot = computed(() => !slots.default)
       const isLastChild = computed(() => {
         if (!node) return false
         const siblings = node.parent.children
