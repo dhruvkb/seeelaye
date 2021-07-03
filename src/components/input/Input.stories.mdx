@@ -1,0 +1,114 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Meta,
+  Story
+} from '@storybook/addon-docs'
+
+import { useSeeelaye } from '@/base/injection'
+
+import Input_ from '@/components/input/Input_.vue'
+import Input from '@/components/input/Input.vue'
+
+<Meta
+  title="Elements/Input"
+  component={Input_}/>
+
+# Input
+
+## Presentational
+
+<Description of={Input_}/>
+
+export const DefaultTemplate = (args) => ({
+  components: { Input_ },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Input_
+      v-bind="args"
+      v-on="args"/>
+  `,
+})
+
+<Canvas>
+  <Story
+    name="Default"
+    argTypes={{
+      'update:modelValue': {
+        description: 'emitted when the `modelValue` prop changes; This is useful for `v-model` bindings.',
+        table: { type: { summary: 'string' } },
+        action: 'update:modelValue',
+      },
+      submit: {
+        description: 'emitted when Enter is pressed to execute the command',
+        action: 'submit',
+      },
+      traversePrev: {
+        description: 'emitted when Arrow Up is pressed to cycle back through history',
+        action: 'traversePrev',
+      },
+      traverseNext: {
+        description: 'emitted when Arrow Down is pressed to cycle forward through history',
+        action: 'traverseNext',
+      },
+      autocomplete: {
+        description: 'emitted when Tab is pressed to autocomplete the command',
+        action: 'autocomplete',
+      }
+    }}
+  args={{
+    modelValue: 'type something here'
+  }}>
+    {DefaultTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default"/>
+
+## With store
+
+Using the smart component `Input`, the events associated with input such as
+submit (<kbd>Enter ⏎</kbd>) and history traversal (<kbd>↑</kbd> and <kbd>↓</kbd>) are automatically
+handled.
+
+Autocomplete (<kbd>Tab ↹</kbd>) events are emitted to the parent.
+
+export const WithStoreTemplate = (args) => ({
+  components: { Input },
+  setup() {
+    const seeelaye = useSeeelaye()
+    seeelaye.commit('deleteInteractions')
+    const commands = ['hello', 'ls', 'tree']
+    commands.forEach((command) => {
+      seeelaye.dispatch('executeCmd', { rawInput: command })
+      // Commit mutation manually as components are not mounted
+      seeelaye.commit('setIsReady', { isReady: true })
+    })
+    return { args }
+  },
+  template: `
+    <Input
+      v-bind="args"
+      v-on="args"/>
+  `
+})
+
+<Canvas>
+  <Story
+    name="With Store"
+    argTypes={{
+      autocomplete: {
+        description: 'emitted when Tab is pressed to autocomplete the command',
+        action: 'autocomplete',
+      },
+      flash: {
+        description: 'emitted when either end of history traversal is reached',
+        action: 'flash',
+      }
+    }}>
+    {WithStoreTemplate.bind({})}
+  </Story>
+</Canvas>

@@ -1,30 +1,74 @@
 <template>
   <Input_
     v-model="command"
-    @submit="submit"/>
+    @submit="submit"
+    @traverse-prev="traversePrev"
+    @traverse-next="traverseNext"
+    @autocomplete="autocomplete"/>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
+
+  import { useSeeelaye } from '@/base/injection'
 
   import Input_ from '@/components/input/Input_.vue'
 
   export default defineComponent({
     name: 'Input',
     components: { Input_ },
-    setup() {
-      const command = ref('')
+    setup(props, { emit }) {
+      const seeelaye = useSeeelaye()
+
+      const command = computed({
+        get: (): string => seeelaye.state.input,
+        set: (val: string) => {
+          seeelaye.commit('setInput', { input: val })
+        },
+      })
+
       const submit = () => {
-        console.log(`Submitted: ${command.value}`)
+        seeelaye.dispatch('executeCmd', {
+          rawInput: command.value,
+        })
+        command.value = ''
       }
       const autocomplete = () => {
-        console.log(`Autocomplete: ${command.value}`)
+        emit('autocomplete')
       }
+
+      const nonEmptyHistory = computed(() => seeelaye.state.history
+        .filter((interaction) => Boolean(interaction.rawInput)))
+      const traversalIndex = ref(0)
+      const commandBackup = ref('')
+
       const traversePrev = () => {
-        console.log(`Traverse prev: ${command.value}`)
+        if (traversalIndex.value === nonEmptyHistory.value.length) {
+          emit('flash')
+          return
+        }
+
+        if (traversalIndex.value === 0) {
+          commandBackup.value = command.value
+        }
+        traversalIndex.value += 1
+        const index = nonEmptyHistory.value.length - traversalIndex.value
+        command.value = nonEmptyHistory.value[index].rawInput
       }
+
       const traverseNext = () => {
-        console.log(`Traverse next: ${command.value}`)
+        if (traversalIndex.value === 0) {
+          emit('flash')
+          return
+        }
+
+        traversalIndex.value -= 1
+        if (traversalIndex.value === 0) {
+          command.value = commandBackup.value
+        } else {
+          const index = nonEmptyHistory.value.length - traversalIndex.value
+          command.value = nonEmptyHistory.value[index].rawInput
+        }
       }
 
       return {
