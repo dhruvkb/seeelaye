@@ -27,14 +27,14 @@ export const builtInBinaries: Record<string, Binary> = Object.fromEntries([
 ].map((binary: Binary): [string | symbol, Binary] => [binary.command, binary]))
 
 export const binaryComponents: Record<string, Component> = {
-  [cdBinary.command]: ChangeDir,
-  [clearBinary.command]: Clear,
-  [helloBinary.command]: Hello,
-  [helpBinary.command]: Help,
-  [hostnameBinary.command]: Hostname,
-  [lsBinary.command]: List,
-  [manBinary.command]: Manual,
-  [treeBinary.command]: Tree,
-  [pwdBinary.command]: WorkDir,
-  [whoamiBinary.command]: WhoAmI,
+  ChangeDir,
+  Clear,
+  Hello,
+  Help,
+  Hostname,
+  List,
+  Manual,
+  Tree,
+  WorkDir,
+  WhoAmI,
 }
