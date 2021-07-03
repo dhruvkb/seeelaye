@@ -22,7 +22,7 @@
 
   import Executable_ from '@/components/executable/Executable_.vue'
 
-  import { useSeeelaye } from '@/index'
+  import { useSeeelaye } from '@/base/injection'
   import { allArgs } from '@/models/arg'
 
   export default defineComponent({
