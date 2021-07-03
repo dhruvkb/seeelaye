@@ -10,6 +10,8 @@ export interface TerminalState {
 
   history: Interaction[]
   isReady: boolean
+
+  input: string
 }
 
 export const state = (): TerminalState => ({
@@ -21,4 +23,6 @@ export const state = (): TerminalState => ({
 
   history: [] as Interaction[],
   isReady: true,
+
+  input: '',
 })

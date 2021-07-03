@@ -20,6 +20,8 @@ export interface TerminalMutationTree<S> extends MutationTree<S> {
   deleteInteractions(state: S): void
 
   hideInteractions(state: S): void
+
+  setInput(state: S, payload: { input: string }): void
 }
 
 export const mutations: TerminalMutationTree<TerminalState> = {
@@ -55,5 +57,9 @@ export const mutations: TerminalMutationTree<TerminalState> = {
     state.history.forEach((interaction) => {
       interaction.hide()
     })
+  },
+
+  setInput(state: TerminalState, payload: { input: string }) {
+    state.input = payload.input
   },
 }
