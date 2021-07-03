@@ -38,10 +38,8 @@
     },
     setup(props, { emit }) {
       const value = computed({
-        get(): string {
-          return props.modelValue
-        },
-        set(val: string) {
+        get: (): string => props.modelValue,
+        set: (val: string) => {
           emit('update:modelValue', val)
         },
       })
