@@ -32,14 +32,14 @@
       const displayText = computed(() => spinnerStrings[index.value]
         .replace(/\s/g, '\xa0'))
 
-      let updateLooper
+      let updateLooper: number
       const startLooping = () => {
-        updateLooper = setInterval(() => {
+        updateLooper = window.setInterval(() => {
           index.value = (index.value + 1) % spinnerStrings.length
         }, 100)
       }
       const stopLooping = () => {
-        clearInterval(updateLooper)
+        window.clearInterval(updateLooper)
       }
       onMounted(startLooping)
       onBeforeUnmount(stopLooping)
