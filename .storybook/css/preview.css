@@ -3,3 +3,22 @@
   background: var(--color-normal-bg);
   color: var(--color-normal-fg);
 }
+
+kbd {
+  display: inline-block;
+
+  font-family: sans-serif;
+  font-size: 0.875em;
+  line-height: 1.5;
+
+  color: inherit;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #f8f8f8;
+
+  padding: 0.1em 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.20);
+  border-radius: 0.25em;
+  margin: 0 0.1em;
+
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20), inset 0 1px 0 0 #ffffff;
+}
