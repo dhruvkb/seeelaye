@@ -28,9 +28,6 @@ export const binComposition = (binary: Binary, markReadyOnMount = true): IBinCom
 
   // Methods
   const processedArgs = (argv: string[]) => {
-    const args: Record<string, string | number | boolean | undefined> = {}
-    if (!argv.length) return args
-
     const { argSpec: { posArgs, kwArgs } } = binary
 
     // Generate spec compatible with the arg library
@@ -52,6 +49,7 @@ export const binComposition = (binary: Binary, markReadyOnMount = true): IBinCom
     })
 
     // Extract keyword and positional arguments from the parsed result
+    const args: Record<string, string | number | boolean | undefined> = {}
     kwArgs.forEach((arg) => {
       args[arg.name] = processed[`--${arg.name}`]
     })
