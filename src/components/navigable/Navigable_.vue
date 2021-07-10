@@ -18,7 +18,7 @@
   import { defineComponent, PropType } from 'vue'
 
   /**
-   * Interactively links to a given filesystem node.
+   * Interactively links to a given file-system node.
    */
   export default defineComponent({
     name: 'Navigable_',
