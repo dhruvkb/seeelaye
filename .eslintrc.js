@@ -46,6 +46,7 @@ module.exports = {
         'no-multi-spaces': ['warn', { ignoreEOLComments: true }],
         'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
+        'max-classes-per-file': 'off',
       },
     },
     {
