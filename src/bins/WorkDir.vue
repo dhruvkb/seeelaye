@@ -5,22 +5,20 @@
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
+  import { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'WorkDir',
-    command: 'pwd',
-    description: 'Display the current working directory.',
-    argSpec: {
-      posArgs: [],
-      kwArgs: [],
-    },
-  }
+  export const binary = new Binary<[], []>(
+    'WorkDir',
+    'pwd',
+    'Display the current working directory.',
+    [],
+    [],
+  )
 
   /**
    * Displays the current working directory.

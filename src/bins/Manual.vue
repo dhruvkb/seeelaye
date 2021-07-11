@@ -14,14 +14,14 @@
       </div>
 
       <strong>DESCRIPTION:</strong><br/>
-      <template v-if="hasArgs">
+      <template v-if="hasParams">
         The following options are available:
         <table class="indent">
-          <template v-for="(value, key, typeIndex) in argTypes">
+          <template v-for="(key, typeIndex) in argTypes">
             <tr
-              v-for="(arg, argIndex) in bin.argSpec[key]"
+              v-for="(arg, argIndex) in bin[key]"
               :key="`${typeIndex}-${argIndex}`">
-              <td class="arg">{{ argRepr(arg, value) }}</td>
+              <td class="arg">{{ arg.repr }}</td>
               <td>-- {{ arg.description }}</td>
             </tr>
           </template>
@@ -32,14 +32,14 @@
       </template>
     </template>
     <template v-else>
-      <strong class="error">{{ args.bin }}</strong> is not a valid binary.
+      <strong class="error">{{ binname }}</strong> is not a valid binary.
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
-  import type { IArg } from '@/models/arg'
+  import { Binary } from '@/models/bin'
+  import { Arg, ArgType } from '@/models/arg'
 
   import { defineComponent } from 'vue'
 
@@ -47,25 +47,21 @@
 
   import Executable from '@/components/executable/Executable.vue'
 
-  import { binProps, binComposition } from '@/compositions/bin'
-  import { argRepr, ArgType } from '@/models/arg'
+  import { binComposition, binProps } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'Manual',
-    command: 'man',
-    description: 'Display information about the given command.',
-    argSpec: {
-      posArgs: [
-        {
-          name: 'bin',
-          description: 'the name of the binary to get help about',
-          required: true,
-          type: String,
-        } as IArg<string>,
-      ],
-      kwArgs: [],
-    },
-  }
+  const binname = new Arg<string>(
+    ArgType.POSITIONAL,
+    'binname',
+    'the name of the binary to get help about',
+    String,
+  )
+  export const binary = new Binary<[string], []>(
+    'Manual',
+    'man',
+    'Display information about the given command.',
+    [binname],
+    [],
+  )
 
   /**
    * Displays information about the given command.
@@ -77,29 +73,25 @@
       Executable,
     },
     setup(props) {
-      const { processedArgs } = binComposition(binary)
-      const args = processedArgs(props.argv)
+      const { processArgs } = binComposition(binary)
+      processArgs(props.argv)
 
       const seeelaye = useSeeelaye()
-      const bin = seeelaye.allBins[args.bin as string]
+      const binnameValue = binname.value
+      const bin = seeelaye.allBins[binnameValue]
 
-      const hasKwArgs = bin ? Boolean(bin.argSpec.kwArgs.length) : false
-      const hasPosArgs = bin ? Boolean(bin.argSpec.posArgs.length) : false
-      const hasArgs = hasKwArgs || hasPosArgs
+      const hasKwargs = bin?.kwargs?.length > 0
+      const hasArgs = bin?.args?.length > 0
+      const hasParams = hasKwargs || hasArgs
 
-      const argTypes = {
-        kwArgs: ArgType.KEYWORD,
-        posArgs: ArgType.POSITIONAL,
-      }
+      const argTypes = ['kwargs', 'args']
 
       return {
-        argRepr,
-        ArgType,
+        binname: binnameValue,
 
-        args,
         bin,
-        hasArgs,
         argTypes,
+        hasParams,
       }
     },
   })
@@ -125,5 +117,6 @@
 
   table td {
     padding: 0 1ch 0 0;
+    vertical-align: top;
   }
 </style>

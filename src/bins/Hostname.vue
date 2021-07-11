@@ -5,22 +5,20 @@
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
+  import { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'Hostname',
-    command: 'hostname',
-    description: 'Display the name of the host machine.',
-    argSpec: {
-      posArgs: [],
-      kwArgs: [],
-    },
-  }
+  export const binary = new Binary<[], []>(
+    'Hostname',
+    'hostname',
+    'Display the name of the host machine.',
+    [],
+    [],
+  )
 
   /**
    * Displays the name of the host machine.

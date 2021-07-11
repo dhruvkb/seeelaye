@@ -1,23 +1,24 @@
-import type { IArg } from '@/models/arg'
+import type { NodeArg } from '@/models/arg'
+import type { FsNode } from '@/models/fs_tree'
 
 import { useSeeelaye } from '@/base/injection'
-import { FsNode, FsNodeType } from '@/models/fs_tree'
 
 export interface IPathComposition {
-  node: FsNode | null
-  isNodeFound: boolean
+  processNode: () => void
 }
 
-type INodeArg = IArg<string> & { nodeType: FsNodeType }
-
-export const pathComposition = (path: string, nodeArg: INodeArg): IPathComposition => {
+export const pathComposition = (nodeArg: NodeArg): IPathComposition => {
   const seeelaye = useSeeelaye()
 
-  const node = seeelaye.compute<FsNode | null>('nodeLocatedAt', { path })
-  const isNodeFound = node !== null && node.isType(nodeArg.nodeType)
+  // Methods
+  const processNode = () => {
+    const node = seeelaye.compute<FsNode | null>('nodeLocatedAt', { path: nodeArg.value })
+    if (node !== null) {
+      nodeArg.setNode(node)
+    }
+  }
 
   return {
-    node,
-    isNodeFound,
+    processNode,
   }
 }

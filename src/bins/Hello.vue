@@ -22,21 +22,19 @@
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
+  import { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'Hello',
-    command: 'hello',
-    description: 'Display ASCII art for see·el·aye along with relevant links.',
-    argSpec: {
-      kwArgs: [],
-      posArgs: [],
-    },
-  }
+  export const binary = new Binary<[], []>(
+    'Hello',
+    'hello',
+    'Display ASCII art for see·el·aye along with relevant links.',
+    [],
+    [],
+  )
 
   /**
    * Displays ASCII art for see·el·aye along with relevant links.

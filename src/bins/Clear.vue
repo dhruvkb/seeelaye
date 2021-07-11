@@ -3,22 +3,20 @@
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
+  import { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'Clear',
-    command: 'clear',
-    description: 'Clear the screen by hiding all previous interactions.',
-    argSpec: {
-      posArgs: [],
-      kwArgs: [],
-    },
-  }
+  export const binary = new Binary<[], []>(
+    'Clear',
+    'clear',
+    'Clear the screen by hiding all previous interactions.',
+    [],
+    [],
+  )
 
   /**
    * Clears the screen by hiding all previous interactions.

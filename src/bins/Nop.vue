@@ -3,21 +3,19 @@
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
+  import { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binary: IBinary = {
-    name: 'Nop',
-    command: 'nop',
-    description: 'Display nothing and do nothing.',
-    argSpec: {
-      kwArgs: [],
-      posArgs: [],
-    },
-  }
+  export const binary = new Binary<[], []>(
+    'Nop',
+    'nop',
+    'Display nothing and do nothing.',
+    [],
+    [],
+  )
 
   /**
    * Displays nothing and does nothing.

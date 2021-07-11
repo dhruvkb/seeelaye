@@ -1,7 +1,7 @@
 <template>
   <div class="list">
-    <ul v-if="node && isNodeFound">
-      <template v-if="args.all">
+    <ul v-if="node && isNodeOk">
+      <template v-if="all">
         <li>
           <Navigable :node="node">{{ specialNames.CURRENT_DIR[0] }}</Navigable>
         </li>
@@ -16,47 +16,44 @@
       </li>
     </ul>
     <template v-else>
-      <strong class="error">{{ args.dirpath }}</strong> is not a valid directory.
+      <strong class="error">{{ dirpath }}</strong> is not a valid directory.
     </template>
   </div>
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
-  import type { IArg } from '@/models/arg'
+  import { Binary } from '@/models/bin'
+  import { Arg, ArgType, NodeArg } from '@/models/arg'
+  import { FsNodeType, specialNames } from '@/models/fs_tree'
 
   import { defineComponent } from 'vue'
 
   import Navigable from '@/components/navigable/Navigable.vue'
-  import { binProps, binComposition } from '@/compositions/bin'
+  import { binComposition, binProps } from '@/compositions/bin'
   import { pathComposition } from '@/compositions/path'
-  import { FsNodeType, specialNames } from '@/models/fs_tree'
 
-  export const binary: IBinary = {
-    name: 'List',
-    command: 'ls',
-    description: 'List the contents of the given directory.',
-    argSpec: {
-      kwArgs: [
-        {
-          name: 'all',
-          description: 'whether to display hidden files and directories',
-          aliases: ['a'],
-          type: Boolean,
-          default: false,
-        } as IArg<boolean>,
-      ],
-      posArgs: [
-        {
-          name: 'dirpath',
-          description: 'the path or name of the directory whose contents to list',
-          type: String,
-          default: '.',
-          nodeType: FsNodeType.FOLDER,
-        } as IArg<string>,
-      ],
-    },
-  }
+  const dirpath = new NodeArg(
+    ArgType.POSITIONAL,
+    'dirpath',
+    'the path or name of the directory whose contents to list',
+    FsNodeType.FOLDER,
+    specialNames.CURRENT_DIR[0],
+  )
+  const all = new Arg<boolean>(
+    ArgType.KEYWORD,
+    'all',
+    'whether to display hidden files and directories',
+    Boolean,
+    false,
+    ['a'],
+  )
+  export const binary = new Binary<[string], [boolean]>(
+    'List',
+    'ls',
+    'List the contents of the given directory.',
+    [dirpath],
+    [all],
+  )
 
   /**
    * Lists the contents of the given directory.
@@ -68,20 +65,26 @@
     },
     props: binProps,
     setup(props) {
-      const { processedArgs } = binComposition(binary)
-      const args = processedArgs(props.argv)
+      const { processArgs } = binComposition(binary)
+      processArgs(props.argv)
 
-      const { node, isNodeFound } = pathComposition(
-        args.dirpath as string,
-        binary.argSpec.posArgs[0] as IArg<string> & { nodeType: FsNodeType },
-      )
+      const dirpathValue = dirpath.value
+      const allValue = all.value
+
+      const { processNode } = pathComposition(dirpath)
+      processNode()
+
+      const { node } = dirpath
+      const isNodeOk = dirpath.isNodeFound && dirpath.isNodeValidType
 
       return {
         specialNames,
 
-        args,
+        dirpath: dirpathValue,
+        all: allValue,
+
         node,
-        isNodeFound,
+        isNodeOk,
       }
     },
   })

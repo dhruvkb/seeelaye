@@ -1,35 +1,35 @@
 <template>
   <div class="bad">
-    Command <strong class="error">{{ args.bin }}</strong> does not exist in the
+    Command <strong class="error">{{ binname }}</strong> does not exist in the
     CLI. Try <Executable :bin="helpBinary"/>.
   </div>
 </template>
 
 <script lang="ts">
-  import type { IBinary } from '@/models/bin'
-  import type { IArg } from '@/models/arg'
+  import { Binary } from '@/models/bin'
+  import { Arg, ArgType } from '@/models/arg'
 
   import { defineComponent } from 'vue'
 
-  import { binary as helpBinary } from '@/bins/Help.vue'
   import Executable from '@/components/executable/Executable.vue'
-  import { binProps, binComposition } from '@/compositions/bin'
+  import { binComposition, binProps } from '@/compositions/bin'
+  import { binary as helpBinary } from './Help.vue'
 
-  export const binary: IBinary = {
-    name: 'Bad',
-    command: 'bad',
-    description: 'Display the invalidity of the input and suggest alternatives.',
-    argSpec: {
-      posArgs: [],
-      kwArgs: [
-        {
-          name: 'bin',
-          description: 'the invalid binary that was invoked',
-          type: String,
-        } as IArg<string>,
-      ],
-    },
-  }
+  const binname = new Arg<string>(
+    ArgType.POSITIONAL,
+    'binname',
+    'the name of the invalid binary that was invoked',
+    String,
+    undefined,
+    ['b'],
+  )
+  export const binary = new Binary<[string], []>(
+    'Bad',
+    'bad',
+    'Display the invalidity of the input and suggest alternatives.',
+    [binname],
+    [],
+  )
 
   /**
    * Displays the invalidity of the input and suggests alternatives.
@@ -44,13 +44,15 @@
     },
     props: binProps,
     setup(props) {
-      const { processedArgs } = binComposition(binary)
-      const args = processedArgs(props.argv)
+      const { processArgs } = binComposition(binary)
+      processArgs(props.argv)
+
+      const binnameValue = binname.value
 
       return {
-        helpBinary,
+        binname: binnameValue,
 
-        args,
+        helpBinary,
       }
     },
   })

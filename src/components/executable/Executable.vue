@@ -16,16 +16,14 @@
 </template>
 
 <script lang="ts">
+  import type { Binary } from '@/models/bin'
   import type { PropType } from 'vue'
 
-  import type { IBinary } from '@/models/bin'
-
-  import { defineComponent } from 'vue'
+  import { computed, defineComponent } from 'vue'
 
   import Executable_ from '@/components/executable/Executable_.vue'
 
   import { useSeeelaye } from '@/base/injection'
-  import { allArgs } from '@/models/arg'
 
   export default defineComponent({
     name: 'Executable',
@@ -37,7 +35,7 @@
        * the binary for which to render the interactive link
        */
       bin: {
-        type: Object as PropType<IBinary>,
+        type: Object as PropType<Binary<unknown[], unknown[]>>,
         required: true,
       },
       /**
@@ -59,7 +57,7 @@
     setup(props) {
       const seeelaye = useSeeelaye()
 
-      const argRepr = allArgs(props.bin)
+      const argRepr = computed(() => props.bin.allArgs)
 
       const handleExecute = () => {
         seeelaye.dispatch('executeCmd', {

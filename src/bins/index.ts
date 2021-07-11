@@ -1,6 +1,6 @@
 import type { Component } from 'vue'
 
-import type { IBinary } from '@/models/bin'
+import type { Binary } from '@/models/bin'
 
 import ChangeDir, { binary as cdBinary } from '@/bins/ChangeDir.vue'
 import Clear, { binary as clearBinary } from '@/bins/Clear.vue'
@@ -13,18 +13,21 @@ import Tree, { binary as treeBinary } from '@/bins/Tree.vue'
 import WhoAmI, { binary as whoamiBinary } from '@/bins/WhoAmI.vue'
 import WorkDir, { binary as pwdBinary } from '@/bins/WorkDir.vue'
 
-export const builtInBinaries: Record<string, IBinary> = Object.fromEntries([
+export const builtInBinaries: Record<string, Binary<unknown[], unknown[]>> = Object.fromEntries([
   cdBinary,
   clearBinary,
   helloBinary,
   helpBinary,
   hostnameBinary,
   lsBinary,
-  treeBinary,
   manBinary,
-  pwdBinary,
+  treeBinary,
   whoamiBinary,
-].map((binary: IBinary): [string | symbol, IBinary] => [binary.command, binary]))
+  pwdBinary,
+].map((binary: Binary<unknown[], unknown[]>): [string | symbol, Binary<unknown[], unknown[]>] => [
+  binary.command,
+  binary,
+]))
 
 export const binaryComponents: Record<string, Component> = {
   ChangeDir,
@@ -35,6 +38,6 @@ export const binaryComponents: Record<string, Component> = {
   List,
   Manual,
   Tree,
-  WorkDir,
   WhoAmI,
+  WorkDir,
 }

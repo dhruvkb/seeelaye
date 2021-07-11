@@ -1,10 +1,8 @@
 import type { PropType } from 'vue'
-import type { Handler } from 'arg'
 
-import type { IBinary } from '@/models/bin'
+import type { Binary } from '@/models/bin'
 
 import { onMounted } from 'vue'
-import argLib from 'arg'
 
 import { useSeeelaye } from '@/base/injection'
 
@@ -19,45 +17,19 @@ export const binProps = {
 }
 
 export interface IBinComposition {
-  processedArgs: (argv: string[]) => Record<string, string | number | boolean | undefined>
+  processArgs: (argv: string[]) => void
   setTerminalReady: (isReady: boolean) => void
 }
 
-export const binComposition = (binary: IBinary, markReadyOnMount = true): IBinComposition => {
+export const binComposition = (
+  binary: Binary<unknown[], unknown[]>,
+  markReadyOnMount = true,
+): IBinComposition => {
   const seeelaye = useSeeelaye()
 
   // Methods
-  const processedArgs = (argv: string[]) => {
-    const { argSpec: { posArgs, kwArgs } } = binary
-
-    // Generate spec compatible with the arg library
-    const spec: Record<string, string | Handler> = {}
-    kwArgs.forEach((arg) => {
-      // The full name of the keyword argument is mapped to a type handler.
-      spec[`--${arg.name}`] = arg.type
-
-      // Aliases for the keyword argument are mapped to the full name.
-      arg.aliases?.forEach((alias) => {
-        spec[`-${alias}`] = `--${arg.name}`
-      })
-    })
-
-    // Parse the argument vector using the generated spec
-    const processed = argLib(spec, {
-      argv,
-      permissive: true,
-    })
-
-    // Extract keyword and positional arguments from the parsed result
-    const args: Record<string, string | number | boolean | undefined> = {}
-    kwArgs.forEach((arg) => {
-      args[arg.name] = processed[`--${arg.name}`]
-    })
-    posArgs.forEach((arg) => {
-      args[arg.name] = processed._.shift() || arg.default
-    })
-
-    return args
+  const processArgs = (argv: string[]) => {
+    binary.processArgs(argv)
   }
 
   const setTerminalReady = (isReady = true) => {
@@ -72,7 +44,7 @@ export const binComposition = (binary: IBinary, markReadyOnMount = true): IBinCo
   }
 
   return {
-    processedArgs,
+    processArgs,
     setTerminalReady,
   }
 }
