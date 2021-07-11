@@ -70,15 +70,15 @@ export const cdTemplate = (args) => ({
           type: { summary: 'boolean' },
           defaultValue: { summary: false },
         },
-        description: cdBinary.argSpec.kwArgs[0].description,
+        description: cdBinary.kwargs[0].description,
         control: null
       },
       'dirpath': {
         table: {
           type: { summary: 'string' },
-          defaultValue: { summary: cdBinary.argSpec.posArgs[0].default },
+          defaultValue: { summary: cdBinary.args[0].default },
         },
-        description: cdBinary.argSpec.posArgs[0].description,
+        description: cdBinary.args[0].description,
         control: null
       },
     }}
@@ -166,17 +166,17 @@ export const listTemplate = (args) => ({
       '--all/-a': {
         table: {
           type: { summary: 'boolean' },
-          defaultValue: { summary: lsBinary.argSpec.kwArgs[0].default },
+          defaultValue: { summary: lsBinary.kwargs[0].default },
         },
-        description: lsBinary.argSpec.kwArgs[0].description,
+        description: lsBinary.kwargs[0].description,
         control: null
       },
       'dirpath': {
         table: {
           type: { summary: 'string' },
-          defaultValue: { summary: lsBinary.argSpec.posArgs[0].default },
+          defaultValue: { summary: lsBinary.args[0].default },
         },
-        description: lsBinary.argSpec.posArgs[0].description,
+        description: lsBinary.args[0].description,
         control: null
       },
     }}
@@ -214,7 +214,7 @@ export const manualTemplate = (args) => ({
         table: {
           type: { summary: 'string' },
         },
-        description: manBinary.argSpec.posArgs[0].description,
+        description: manBinary.args[0].description,
         control: null
       },
     }}
@@ -267,17 +267,17 @@ export const treeTemplate = (args) => ({
       '--verbose/-v': {
         table: {
           type: { summary: 'boolean' },
-          defaultValue: { summary: treeBinary.argSpec.kwArgs[0].default },
+          defaultValue: { summary: treeBinary.kwargs[0].default },
         },
-        description: treeBinary.argSpec.kwArgs[0].description,
+        description: treeBinary.kwargs[0].description,
         control: null
       },
       'dirpath': {
         table: {
           type: { summary: 'string' },
-          defaultValue: { summary: treeBinary.argSpec.posArgs[0].default },
+          defaultValue: { summary: treeBinary.args[0].default },
         },
-        description: treeBinary.argSpec.posArgs[0].description,
+        description: treeBinary.args[0].description,
         control: null
       },
     }}
@@ -314,9 +314,9 @@ export const whoamiTemplate = (args) => ({
       '--groot/-g': {
         table: {
           type: { summary: 'boolean' },
-          defaultValue: { summary: whoamiBinary.argSpec.kwArgs[0].default },
+          defaultValue: { summary: whoamiBinary.kwargs[0].default },
         },
-        description: whoamiBinary.argSpec.kwArgs[0].description,
+        description: whoamiBinary.kwargs[0].description,
         control: null
       },
     }}
