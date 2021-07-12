@@ -1,3 +1,4 @@
+import { builtInBinaries } from '@/bins'
 import { Interaction } from '@/models/interaction'
 import { FsNode, FsNodeType } from '@/models/fs_tree'
 
@@ -24,6 +25,10 @@ describe('Interaction', () => {
   })
 
   describe('processOutput', () => {
+    beforeEach(() => {
+      Interaction.allBins = builtInBinaries
+    })
+
     it('shows Nop no-op input', () => {
       const interaction = new Interaction(context, '')
       interaction.processOutput()
