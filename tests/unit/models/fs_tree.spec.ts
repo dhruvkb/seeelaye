@@ -1,9 +1,6 @@
-import {
-  FsNode,
-  FsNodeType,
-  IFsNode,
-  nameExtSplit,
-} from '@/models/fs_tree'
+import type { IFsNode } from '@/models/fs_tree'
+
+import { FsNode, FsNodeType, nameExtSplit } from '@/models/fs_tree'
 import { getTree } from '../../fixtures/fs_tree.fix'
 
 describe('nameExtensionSplit', () => {
