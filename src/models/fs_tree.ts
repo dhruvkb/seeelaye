@@ -40,6 +40,7 @@ export const extLang: Record<string, string | string[] | undefined> = Object.fre
  * current and parent directories respectively.
  */
 export const specialNames = Object.freeze({
+  HOME_DIR: ['~', '~/'],
   CURRENT_DIR: ['.', './'],
   PARENT_DIR: ['..', '../'],
 })
