@@ -33,15 +33,17 @@ export const parameters = {
     },
   },
   themes: {
-    default: 'Dark',
+    icon: 'paintbrush',
+    clearable: false,
+    default: 'Solarized dark',
     list: [
       {
-        name: 'Dark',
+        name: 'Solarized dark',
         class: ['terminal', 'solarized', 'dark'],
         color: '#002b36',
       },
       {
-        name: 'Light',
+        name: 'Solarized light',
         class: ['terminal', 'solarized', 'light'],
         color: '#fdf6e3',
       },
