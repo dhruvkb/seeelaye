@@ -32,9 +32,9 @@
       const hostname = computed(() => seeelaye.state.hostname)
       const currentNodeName = computed(() => seeelaye.state.currentNode?.name)
 
-      const workingDirectoryName = props.workingDirectory?.name
+      const workingDirectoryName = computed(() => props.workingDirectory?.name
         ?? currentNodeName.value
-        ?? 'unknown'
+        ?? 'unknown')
 
       return {
         username,
