@@ -21,7 +21,7 @@ export enum ArgType {
  */
 export class Arg<T> {
   /**
-   * whether the argument is a positional argument or keyword argument
+   * whether the argument is a positional or keyword argument
    */
   type: ArgType
 
@@ -54,20 +54,20 @@ export class Arg<T> {
   value!: T
 
   /**
-   * a list of aliases for this argument; This only makes sense for keyword
-   * arguments where `--<name>` can be replaced with `-<alias>`.
+   * a list of other names that refer to this argument; This only makes sense
+   * for keyword arguments where `--<name>` can be replaced with `-<alias>`.
    */
   aliases: string[]
 
   /**
    * Create a new object of class `Arg`.
    *
-   * @param type - the positional/keyword nature of the argument
+   * @param type - whether the argument is a positional or keyword argument
    * @param name - the name of the argument
-   * @param description - the description for the argument used in `man` pages
-   * @param handler - a function for parsing arguments from strings
-   * @param defaultValue - the default value of the argument
-   * @param aliases - a list of other names that can refer to this argument
+   * @param description - the description for this argument
+   * @param handler - the function that will be invoked to parse the argument
+   * @param defaultValue - the default value of this argument
+   * @param aliases - a list of other names that refer to this argument
    */
   constructor(
     type: ArgType,
