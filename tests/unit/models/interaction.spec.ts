@@ -40,14 +40,14 @@ describe('Interaction', () => {
       const interaction = new Interaction(context, 'unknown')
       interaction.processOutput()
       expect(interaction.output?.component).toEqual('Bad')
-      expect(interaction.output?.argv).toEqual(['--bin', 'unknown'])
+      expect(interaction.output?.argv).toEqual(['unknown'])
     })
 
     it('shows Bad for non-callable binary', () => {
       const interaction = new Interaction(context, 'bad')
       interaction.processOutput()
       expect(interaction.output?.component).toEqual('Bad')
-      expect(interaction.output?.argv).toEqual(['--bin', 'bad'])
+      expect(interaction.output?.argv).toEqual(['bad'])
     })
 
     it('returns the mapped component for valid binary', () => {

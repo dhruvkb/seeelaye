@@ -85,7 +85,7 @@ export class Interaction implements IInteraction {
     } else {
       this.output = {
         component: 'Bad',
-        argv: ['--bin', this.input.bin],
+        argv: [this.input.bin],
       }
     }
   }
