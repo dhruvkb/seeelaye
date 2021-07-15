@@ -51,19 +51,25 @@ export class Seeelaye {
    *
    * @param store - the Vuex store instance used in the app
    * @param storeModule - the name of the Vuex store module that holds CLI state
-   * @param bins - the name to use in the greeting
+   * @param excludedBins - list of built-in bins to remove from the terminal
+   * @param additionalBins - additional bins to enable in the terminal
    */
   constructor(
     store: Store<unknown>,
     storeModule: string,
-    bins: Record<string, Binary<unknown[], unknown[]>> = {},
+    excludedBins: string[] = [],
+    additionalBins: Record<string, Binary<unknown[], unknown[]>> = {},
   ) {
     this.store = store
     this.storeModule = storeModule
 
     this.allBins = {
-      ...builtInBinaries,
-      ...bins,
+      ...Object.fromEntries(
+        Object.keys(builtInBinaries)
+          .filter((key) => !excludedBins.includes(key))
+          .map((key): [string, Binary<unknown[], unknown[]>] => [key, builtInBinaries[key]]),
+      ),
+      ...additionalBins,
     }
     Interaction.allBins = this.allBins
   }
