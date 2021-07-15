@@ -15,9 +15,10 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineAsyncComponent, defineComponent } from 'vue'
+  import { computed, defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
+  import { binaryComponents } from '@/bins'
 
   import Prompt from '@/components/prompt/Prompt.vue'
 
@@ -25,7 +26,7 @@
     name: 'Past',
     components: {
       Prompt,
-      Hello: defineAsyncComponent(() => import('@/bins/Hello.vue')),
+      ...binaryComponents,
     },
     setup() {
       const seeelaye = useSeeelaye()
