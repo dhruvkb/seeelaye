@@ -56,6 +56,13 @@ describe('Interaction', () => {
       expect(interaction.output?.component).toEqual('Hello')
       expect(interaction.output?.argv).toEqual(['arg1', 'arg2'])
     })
+
+    it('splits multiple spaces same as a single space', () => {
+      const interaction = new Interaction(context, 'hello  arg1   arg2')
+      interaction.processOutput()
+      expect(interaction.output?.component).toEqual('Hello')
+      expect(interaction.output?.argv).toEqual(['arg1', 'arg2'])
+    })
   })
 
   describe('hide', () => {

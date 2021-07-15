@@ -54,7 +54,7 @@ export class Interaction implements IInteraction {
     this.context = context
     this.rawInput = rawInput
 
-    const [bin, ...argv] = rawInput.split(' ')
+    const [bin, ...argv] = rawInput.split(/\s+/)
     this.input = {
       bin,
       argv,
