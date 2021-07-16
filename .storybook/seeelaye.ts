@@ -3,11 +3,7 @@ import store from './store'
 
 import { getTree } from '../tests/fixtures/fs_tree.fix'
 
-const seeelaye = new Seeelaye(
-  store,
-  'terminal',
-  {},
-)
+const seeelaye = new Seeelaye(store, 'terminal')
 
 const [root, a] = getTree()
 
