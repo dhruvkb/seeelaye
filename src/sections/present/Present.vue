@@ -2,7 +2,7 @@
   <div class="present">
     <label class="input-area">
       <Prompt/>
-      <Input @autocomplete="autocomplete"/>
+      <Input @autocomplete="handleAutocomplete"/>
     </label>
     <ul>
       <li
@@ -63,7 +63,7 @@
         EntityType,
 
         suggestions,
-        autocomplete,
+        handleAutocomplete: autocomplete,
         populateInput,
       }
     },
