@@ -8,7 +8,7 @@ import { FsNode } from '@/models/fs_tree'
  * context.
  */
 export class Interaction {
-  static allBins: Record<string, Binary<unknown[], unknown[]>> = {}
+  static allBins: Record<string, Binary> = {}
 
   /**
    * the circumstances in which command was executed; This should contain a

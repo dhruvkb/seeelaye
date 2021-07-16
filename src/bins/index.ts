@@ -13,7 +13,7 @@ import Tree, { binary as treeBinary } from '@/bins/Tree.vue'
 import WhoAmI, { binary as whoamiBinary } from '@/bins/WhoAmI.vue'
 import WorkDir, { binary as pwdBinary } from '@/bins/WorkDir.vue'
 
-export const builtInBinaries: Record<string, Binary<unknown[], unknown[]>> = Object.fromEntries([
+export const builtInBinaries: Record<string, Binary> = Object.fromEntries([
   cdBinary,
   clearBinary,
   helloBinary,
@@ -24,7 +24,7 @@ export const builtInBinaries: Record<string, Binary<unknown[], unknown[]>> = Obj
   treeBinary,
   whoamiBinary,
   pwdBinary,
-].map((binary: Binary<unknown[], unknown[]>): [string | symbol, Binary<unknown[], unknown[]>] => [
+].map((binary: Binary): [string | symbol, Binary] => [
   binary.command,
   binary,
 ]))

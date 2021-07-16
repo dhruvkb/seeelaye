@@ -35,7 +35,7 @@
        * the binary for which to render the interactive link
        */
       bin: {
-        type: Object as PropType<Binary<unknown[], unknown[]>>,
+        type: Object as PropType<Binary>,
         required: true,
       },
       /**

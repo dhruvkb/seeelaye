@@ -22,7 +22,7 @@ export interface IBinComposition {
 }
 
 export const binComposition = (
-  binary: Binary<unknown[], unknown[]>,
+  binary: Binary,
   markReadyOnMount = true,
 ): IBinComposition => {
   const seeelaye = useSeeelaye()

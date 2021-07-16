@@ -44,7 +44,7 @@ export class Seeelaye {
   store: Store<unknown>
   storeModule: string
 
-  allBins: Record<string, Binary<unknown[], unknown[]>>
+  allBins: Record<string, Binary>
 
   /**
    * Create a new object of class `Seeelaye`.
@@ -58,7 +58,7 @@ export class Seeelaye {
     store: Store<unknown>,
     storeModule: string,
     excludedBins: string[] = [],
-    additionalBins: Record<string, Binary<unknown[], unknown[]>> = {},
+    additionalBins: Record<string, Binary> = {},
   ) {
     this.store = store
     this.storeModule = storeModule
@@ -67,7 +67,7 @@ export class Seeelaye {
       ...Object.fromEntries(
         Object.keys(builtInBinaries)
           .filter((key) => !excludedBins.includes(key))
-          .map((key): [string, Binary<unknown[], unknown[]>] => [key, builtInBinaries[key]]),
+          .map((key): [string, Binary] => [key, builtInBinaries[key]]),
       ),
       ...additionalBins,
     }

@@ -7,7 +7,7 @@ import type { Arg, Handler } from '@/models/arg'
  */
 type Argify<T> = { [I in keyof T]: Arg<T[I]> }
 
-export class Binary<A extends unknown[], K extends unknown[]> {
+export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unknown[]> {
   /**
    * the name of the Vue component to render for this binary
    */
