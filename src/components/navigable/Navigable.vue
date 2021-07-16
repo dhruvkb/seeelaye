@@ -4,7 +4,7 @@
     :aliases="showAliases ? node.aliases : []"
     :is-folder="node.isFolder"
     :is-clickable="isClickable"
-    @navigate="handleNavigate">
+    @click="handleClick">
     <template
       v-for="(_, name) in $slots"
       v-slot:[name]="scope">
@@ -65,14 +65,14 @@
         return [bin, ...argv].join(' ')
       })
 
-      const handleNavigate = () => {
+      const navigate = () => {
         seeelaye.dispatch('executeCmd', {
           rawInput: command.value,
         })
       }
 
       return {
-        handleNavigate,
+        handleClick: navigate,
       }
     },
   })

@@ -2,8 +2,7 @@
   <component
     class="navigable"
     :class="[ isFolder ? 'is-folder' : 'is-file' ]"
-    :is="isClickable ? 'button' : 'span'"
-    v-on="{ click: isClickable ? handleClick : null }">
+    :is="isClickable ? 'button' : 'span'">
     <!-- @slot Alternative display text goes here. -->
     <slot>
       <span>{{ name }}</span>
@@ -51,15 +50,6 @@
       isClickable: {
         type: Boolean,
       },
-    },
-    setup(props, { emit }) {
-      const handleClick = () => {
-        emit('navigate')
-      }
-
-      return {
-        handleClick,
-      }
     },
   })
 </script>

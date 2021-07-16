@@ -3,7 +3,7 @@
     :name="bin.command"
     :args="showArgs ? bin.allArgs : []"
     :is-clickable="isClickable"
-    @execute="handleExecute">
+    @click="handleClick">
     <template
       v-for="(_, name) in $slots"
       v-slot:[name]="scope">
@@ -58,14 +58,14 @@
     setup(props) {
       const seeelaye = useSeeelaye()
 
-      const handleExecute = () => {
+      const execute = () => {
         seeelaye.dispatch('executeCmd', {
           rawInput: props.bin.command,
         })
       }
 
       return {
-        handleExecute,
+        handleClick: execute,
       }
     },
   })
