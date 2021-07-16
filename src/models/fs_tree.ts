@@ -1,5 +1,11 @@
 export enum FsNodeType {
+  /**
+   * A file is a type of node that cannot have any child nodes.
+   */
   FILE = 'file',
+  /**
+   * A folder is a type of node that can have child nodes.
+   */
   FOLDER = 'folder'
 }
 
@@ -46,28 +52,55 @@ export const specialNames = Object.freeze({
 })
 
 export interface IFsNode {
+  /**
+   * the primary name of the node
+   */
   name: string
+  /**
+   * a list of alternative names of this node
+   */
   aliases?: string[]
+  /**
+   * a list of sub-nodes of this node
+   */
   children?: IFsNode[]
 }
 
 /**
- * A class that implements one node in a file-system tree. Each node may either
- * be a file or a folder and may have children if it is a folder.
+ * Represents a node in a file-system tree. Each node may either be a file or a
+ * folder. A folder can have sub-nodes, referred to as its "children".
  */
 export class FsNode implements IFsNode {
+  /**
+   * whether the node represents a file or a folder
+   */
   type: FsNodeType
+
+  /**
+   * the primary name of the node
+   */
   name: string
+  /**
+   * a list of alternative names of this node
+   */
   aliases: string[]
+
+  /**
+   * the parent of this node
+   */
   parent!: FsNode
+  /**
+   * a list of sub-nodes of this node; This only makes sense if the node is a
+   * folder.
+   */
   children: FsNode[]
 
   /**
    * Create a new object of class `FsNode`.
    *
    * @param type - whether the node represents a file or a folder
-   * @param name - the name of the node
-   * @param aliases - the list of alternative names of the node
+   * @param name - the primary name of the node
+   * @param aliases - a list of alternative names of this node
    */
   constructor(type: FsNodeType, name: string, aliases: string[] = []) {
     this.type = type

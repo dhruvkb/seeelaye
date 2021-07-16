@@ -54,8 +54,8 @@ export class Arg<T> {
   value!: T
 
   /**
-   * a list of other names that refer to this argument; This only makes sense
-   * for keyword arguments where `--<name>` can be replaced with `-<alias>`.
+   * a list of alternative names of this argument; This only makes sense for
+   * keyword arguments where `--<name>` can be replaced with `-<alias>`.
    */
   aliases: string[]
 
