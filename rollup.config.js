@@ -17,7 +17,7 @@ import pkg from './package.json'
 
 const banner = `\
 /*!
- * ${pkg.name} - ${pkg.description}
+ * see·el·aye - ${pkg.description}
  *
  * @version ${pkg.version}
  * @author ${pkg.author.name}
