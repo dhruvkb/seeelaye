@@ -168,6 +168,24 @@ export class FsNode implements IFsNode {
   }
 
   /**
+   * Get the name of the node to use for autocompletion.
+   *
+   * During autocompletion,
+   * - folders are completed with a trailing slash
+   *     Subsequent suggestions consider children of the folder.
+   * - files are completed with a trailing space
+   *     Indicates that the argument is completed.
+   *
+   * @returns the name of the node to use for autocompletion
+   */
+  get autocompleteName(): string {
+    if (this.isFolder) {
+      return `${this.name}/`
+    }
+    return `${this.name} `
+  }
+
+  /**
    * Get the list of languages present in the file based on the extension.
    * Evaluates to `null` if
    * - the node is a folder
