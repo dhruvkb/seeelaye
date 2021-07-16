@@ -1,4 +1,4 @@
-import type { App, Component } from 'vue'
+import type { App } from 'vue'
 import type { Store } from 'vuex'
 
 import type { Binary } from '@/models/bin'
@@ -6,23 +6,11 @@ import type { Binary } from '@/models/bin'
 import type { TerminalState } from '@/store/state'
 
 import { seeelayeKey } from '@/base/injection'
-
-import { builtInBinaries, binaryComponents } from '@/bins'
 import { Interaction } from '@/models/interaction'
+import { builtInBinaries } from '@/bins'
 
 import Bad from '@/bins/Bad.vue'
 import Nop from '@/bins/Nop.vue'
-
-import Input from '@/components/input/Input.vue'
-import Prompt from '@/components/prompt/Prompt.vue'
-import Spinner from '@/components/spinner/Spinner.vue'
-import Navigable from '@/components/navigable/Navigable.vue'
-import Executable from '@/components/executable/Executable.vue'
-
-import Input_ from '@/components/input/Input_.vue'
-import Prompt_ from '@/components/prompt/Prompt_.vue'
-import Navigable_ from '@/components/navigable/Navigable_.vue'
-import Executable_ from '@/components/executable/Executable_.vue'
 
 export interface IInstallOptions {
   /**
@@ -147,45 +135,7 @@ export class Seeelaye {
     app.config.globalProperties.$seeelaye = this
 
     // Register non-callable binary components
-    Seeelaye.registerComponents(app, {
-      Bad,
-      Nop,
-    })
-
-    // Register only callable binary components
-    Seeelaye.registerComponents(app, binaryComponents)
-
-    // Register terminal components
-    if (options.registerComponents ?? true) {
-      Seeelaye.registerComponents(app, {
-        Input,
-        Prompt,
-        Spinner,
-        Navigable,
-        Executable,
-      })
-    }
-
-    if (options.registerPureComponents) {
-      Seeelaye.registerComponents(app, {
-        Input_,
-        Prompt_,
-        Navigable_,
-        Executable_,
-      })
-    }
-  }
-
-  /**
-   * Globally register the given map of component names and definitions.
-   *
-   * @param app - the Vue app for which to register the components
-   * @param componentMap - the mapping of component names and definitions
-   */
-  static registerComponents(app: App, componentMap: Record<string, Component>): void {
-    Object.entries(componentMap)
-      .forEach(([name, component]: [string, Component]) => {
-        app.component(name, component)
-      })
+    app.component('Bad', Bad)
+    app.component('Nop', Nop)
   }
 }

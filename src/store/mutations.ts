@@ -1,8 +1,8 @@
 import type { MutationTree } from 'vuex'
 
-import type { TerminalState } from '@/store/state'
-import type { Interaction } from '@/models/interaction'
 import type { FsNode } from '@/models/fs_tree'
+import type { Interaction } from '@/models/interaction'
+import type { TerminalState } from '@/store/state'
 
 export interface TerminalMutationTree<S> extends MutationTree<S> {
   setUsername(state: S, payload: { username: string }): void

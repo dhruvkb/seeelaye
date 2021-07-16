@@ -17,11 +17,13 @@
 </template>
 
 <script lang="ts">
+  import type { PropType } from 'vue'
+
+  import type { FsNode } from '@/models/fs_tree'
+
   import { computed, defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
-
-  import { FsNode } from '@/models/fs_tree'
 
   import Navigable_ from '@/components/navigable/Navigable_.vue'
 
@@ -35,7 +37,7 @@
        * the node for which to render the interactive link
        */
       node: {
-        type: FsNode,
+        type: Object as PropType<FsNode>,
         required: true,
       },
       /**

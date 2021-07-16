@@ -1,15 +1,15 @@
 import type { Ref } from 'vue'
 
-import type { FsNode } from '@/models/fs_tree'
 import type { Binary } from '@/models/bin'
+import type { FsNode } from '@/models/fs_tree'
 import type { ISuggestion } from '@/models/suggestion'
 
 import { computed, ref } from 'vue'
 
 import { useSeeelaye } from '@/base/injection'
 
-import { EntityType } from '@/models/suggestion'
 import { specialNames } from '@/models/fs_tree'
+import { EntityType } from '@/models/suggestion'
 
 export interface IAutocompleteComposition {
   suggestions: Ref<ISuggestion[]>

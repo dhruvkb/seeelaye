@@ -10,9 +10,9 @@
 
   import { useSeeelaye } from '@/base/injection'
 
-  import Prompt_ from '@/components/prompt/Prompt_.vue'
-
   import type { FsNode } from '@/models/fs_tree'
+
+  import Prompt_ from '@/components/prompt/Prompt_.vue'
 
   export default defineComponent({
     name: 'Prompt',

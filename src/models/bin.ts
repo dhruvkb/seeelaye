@@ -1,6 +1,6 @@
-import argLib from 'arg'
-
 import type { Arg, Handler } from '@/models/arg'
+
+import argLib from 'arg'
 
 /**
  * Wraps all elements of the given tuple/array of types with `Arg`.

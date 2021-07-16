@@ -18,6 +18,7 @@
   import { computed, defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
+
   import { binaryComponents } from '@/bins'
 
   import Prompt from '@/components/prompt/Prompt.vue'

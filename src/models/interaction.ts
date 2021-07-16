@@ -1,6 +1,5 @@
 import type { Binary } from '@/models/bin'
-
-import { FsNode } from '@/models/fs_tree'
+import type { FsNode } from '@/models/fs_tree'
 
 /**
  * A class that implements one interaction of the CLI. Each interaction consists

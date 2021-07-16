@@ -1,7 +1,7 @@
 <template>
   <Executable_
     :name="bin.command"
-    :args="showArgs ? argRepr : []"
+    :args="showArgs ? bin.allArgs : []"
     :is-clickable="isClickable"
     @execute="handleExecute">
     <template
@@ -16,14 +16,15 @@
 </template>
 
 <script lang="ts">
-  import type { Binary } from '@/models/bin'
   import type { PropType } from 'vue'
 
-  import { computed, defineComponent } from 'vue'
+  import type { Binary } from '@/models/bin'
 
-  import Executable_ from '@/components/executable/Executable_.vue'
+  import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
+
+  import Executable_ from '@/components/executable/Executable_.vue'
 
   export default defineComponent({
     name: 'Executable',
@@ -57,8 +58,6 @@
     setup(props) {
       const seeelaye = useSeeelaye()
 
-      const argRepr = computed(() => props.bin.allArgs)
-
       const handleExecute = () => {
         seeelaye.dispatch('executeCmd', {
           rawInput: props.bin.command,
@@ -66,8 +65,6 @@
       }
 
       return {
-        argRepr,
-
         handleExecute,
       }
     },

@@ -1,6 +1,7 @@
 import type { GetterTree } from 'vuex'
 
 import type { FsNode } from '@/models/fs_tree'
+
 import { specialNames } from '@/models/fs_tree'
 import { TerminalState } from '@/store/state'
 

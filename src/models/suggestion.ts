@@ -1,5 +1,5 @@
-import type { FsNode } from '@/models/fs_tree'
 import type { Binary } from '@/models/bin'
+import type { FsNode } from '@/models/fs_tree'
 
 export enum EntityType {
   /**

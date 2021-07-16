@@ -29,13 +29,13 @@
 
   import { useSeeelaye } from '@/base/injection'
 
+  import { EntityType } from '@/models/suggestion'
+  import { autocompleteComposition } from '@/compositions/autocomplete'
+
   import Prompt from '@/components/prompt/Prompt.vue'
   import Input from '@/components/input/Input.vue'
   import Navigable from '@/components/navigable/Navigable.vue'
   import Executable from '@/components/executable/Executable.vue'
-
-  import { autocompleteComposition } from '@/compositions/autocomplete'
-  import { EntityType } from '@/models/suggestion'
 
   export default defineComponent({
     name: 'Present',
