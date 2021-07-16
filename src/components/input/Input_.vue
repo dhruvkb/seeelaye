@@ -9,10 +9,10 @@
     autocapitalize="off"
     spellcheck="false"
 
-    @keydown.enter.exact="handleEnter"
-    @keydown.arrow-up.exact.prevent="handleArrowUp"
-    @keydown.arrow-down.exact.prevent="handleArrowDown"
-    @keydown.tab.exact.prevent="handleTab"/>
+    @keydown.enter.exact="() => handleKeydown('enter')"
+    @keydown.arrow-up.exact.prevent="() => handleKeydown('arrowUp')"
+    @keydown.arrow-down.exact.prevent="() => handleKeydown('arrowDown')"
+    @keydown.tab.exact.prevent="() => handleKeydown('tab')"/>
 </template>
 
 <script lang="ts">
@@ -44,26 +44,11 @@
         },
       })
 
-      const handleEnter = () => {
-        emit('submit')
-      }
-      const handleArrowUp = () => {
-        emit('traversePrev')
-      }
-      const handleArrowDown = () => {
-        emit('traverseNext')
-      }
-      const handleTab = () => {
-        emit('autocomplete')
-      }
+      const fireEvent = (eventName: string) => { emit(eventName) }
 
       return {
         value,
-
-        handleEnter,
-        handleArrowUp,
-        handleArrowDown,
-        handleTab,
+        handleKeydown: fireEvent,
       }
     },
   })

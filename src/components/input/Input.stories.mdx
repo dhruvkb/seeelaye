@@ -42,26 +42,26 @@ export const DefaultTemplate = (args) => ({
         table: { type: { summary: 'string' } },
         action: 'update:modelValue',
       },
-      submit: {
-        description: 'emitted when Enter is pressed to execute the command',
-        action: 'submit',
+      enter: {
+        description: 'emitted when Enter is pressed',
+        action: 'enter',
       },
-      traversePrev: {
-        description: 'emitted when Arrow Up is pressed to cycle back through history',
-        action: 'traversePrev',
+      arrowUp: {
+        description: 'emitted when Arrow Up is pressed',
+        action: 'arrowUp',
       },
-      traverseNext: {
-        description: 'emitted when Arrow Down is pressed to cycle forward through history',
-        action: 'traverseNext',
+      arrowDown: {
+        description: 'emitted when Arrow Down is pressed',
+        action: 'arrowDown',
       },
-      autocomplete: {
-        description: 'emitted when Tab is pressed to autocomplete the command',
-        action: 'autocomplete',
+      tab: {
+        description: 'emitted when Tab is pressed',
+        action: 'tab',
       }
     }}
-  args={{
-    modelValue: 'type something here'
-  }}>
+    args={{
+      modelValue: 'type something here'
+    }}>
     {DefaultTemplate.bind({})}
   </Story>
 </Canvas>
@@ -87,6 +87,7 @@ export const WithStoreTemplate = (args) => ({
       // Commit mutation manually as components are not mounted
       seeelaye.commit('setIsReady', { isReady: true })
     })
+    seeelaye.commit('setInput', { input: 'type something here' })
     return { args }
   },
   template: `
@@ -104,9 +105,9 @@ export const WithStoreTemplate = (args) => ({
         description: 'emitted when Tab is pressed to autocomplete the command',
         action: 'autocomplete',
       },
-      flash: {
+      error: {
         description: 'emitted when either end of history traversal is reached',
-        action: 'flash',
+        action: 'error',
       }
     }}>
     {WithStoreTemplate.bind({})}

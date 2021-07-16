@@ -1,10 +1,10 @@
 <template>
   <Input_
     v-model="command"
-    @submit="submit"
-    @traverse-prev="traversePrev"
-    @traverse-next="traverseNext"
-    @autocomplete="autocomplete"/>
+    @enter="handleEnter"
+    @arrow-up="handleArrowUp"
+    @arrow-down="handleArrowDown"
+    @tab="handleTab"/>
 </template>
 
 <script lang="ts">
@@ -33,9 +33,6 @@
         })
         command.value = ''
       }
-      const autocomplete = () => {
-        emit('autocomplete')
-      }
 
       const nonEmptyHistory = computed(() => seeelaye.state.history
         .filter((interaction) => Boolean(interaction.rawInput)))
@@ -44,7 +41,7 @@
 
       const traversePrev = () => {
         if (traversalIndex.value === nonEmptyHistory.value.length) {
-          emit('flash')
+          emit('error')
           return
         }
 
@@ -58,7 +55,7 @@
 
       const traverseNext = () => {
         if (traversalIndex.value === 0) {
-          emit('flash')
+          emit('error')
           return
         }
 
@@ -71,13 +68,15 @@
         }
       }
 
+      const fireAutocomplete = () => { emit('autocomplete') }
+
       return {
         command,
 
-        submit,
-        autocomplete,
-        traversePrev,
-        traverseNext,
+        handleEnter: submit,
+        handleArrowUp: traversePrev,
+        handleArrowDown: traverseNext,
+        handleTab: fireAutocomplete,
       }
     },
   })
