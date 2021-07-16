@@ -55,6 +55,7 @@ export const parameters = {
         'see·el·aye',
         'Elements',
         'Sections',
+        'Containers',
         'Bins',
       ],
     },

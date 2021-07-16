@@ -3,6 +3,7 @@ import ttypescript from 'ttypescript'
 import resolvePlugin from '@rollup/plugin-node-resolve'
 import commonjsPlugin from '@rollup/plugin-commonjs'
 
+import copyPlugin from 'rollup-plugin-copy'
 import postCssPlugin from 'rollup-plugin-postcss'
 import { terser as terserPlugin } from 'rollup-plugin-terser'
 import typescript2Plugin from 'rollup-plugin-typescript2'
@@ -91,6 +92,14 @@ const createConfig = (format, out, extraPlugins = []) => {
     // Global and browser ESM builds inline everything and can be used alone.
     external: ['vue', 'vuex'],
     plugins: [
+      copyPlugin({
+        targets: [
+          {
+            src: 'src/styles/solarized.css',
+            dest: 'dist/themes/',
+          },
+        ],
+      }),
       resolvePlugin(),
       vuePlugin(),
       typescript2Plugin(typescript2Options),
