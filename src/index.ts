@@ -19,6 +19,10 @@ export { Interaction } from '@/models/interaction'
 export { getVuexModule } from '@/store'
 export { TerminalState } from '@/store/state'
 
+// Compositions
+export { binProps, binComposition } from '@/compositions/bin'
+export { pathComposition } from '@/compositions/path'
+
 // Components
 export { default as Executable } from '@/components/executable/Executable.vue'
 export { default as Navigable } from '@/components/navigable/Navigable.vue'
