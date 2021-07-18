@@ -39,7 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@dhruvkb/storybook-addon-themes": "^6.2.1",
-    "@microsoft/api-extractor": "^7.18.0",
+    "@microsoft/api-extractor": "^7.18.4",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@storybook/addon-actions": "^6.3.4",
