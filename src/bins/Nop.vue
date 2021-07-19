@@ -9,7 +9,7 @@
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binary = new Binary<[], []>(
+  export const binaryFn = () => new Binary<[], []>(
     'Nop',
     'nop',
     'Display nothing and do nothing.',
@@ -25,7 +25,7 @@
   export default defineComponent({
     name: 'Nop',
     setup() {
-      binComposition(binary)
+      binComposition()
     },
   })
 </script>

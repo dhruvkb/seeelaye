@@ -5,5 +5,5 @@ declare module '*.vue' {
   export default component
 
   import type { Binary } from '@/models/bin'
-  export const binary: Binary
+  export const binaryFn: () => Binary
 }

@@ -13,9 +13,9 @@
 
   import Executable from '@/components/executable/Executable.vue'
   import { binComposition, binProps } from '@/compositions/bin'
-  import { binary as helpBinary } from './Help.vue'
+  import { binaryFn as helpBinaryFn } from './Help.vue'
 
-  const binname = new Arg<string>(
+  const binnameFn = () => new Arg<string>(
     ArgType.POSITIONAL,
     'binname',
     'the name of the invalid binary that was invoked',
@@ -23,13 +23,16 @@
     undefined,
     ['b'],
   )
-  export const binary = new Binary<[string], []>(
-    'Bad',
-    'bad',
-    'Display the invalidity of the input and suggest alternatives.',
-    [binname],
-    [],
-  )
+  export const binaryFn = (): Binary<[string], []> => {
+    const binname = binnameFn()
+    return new Binary<[string], []>(
+      'Bad',
+      'bad',
+      'Display the invalidity of the input and suggest alternatives.',
+      [binname],
+      [],
+    )
+  }
 
   /**
    * Displays the invalidity of the input and suggests alternatives.
@@ -44,15 +47,18 @@
     },
     props: binProps,
     setup(props) {
-      const { processArgs } = binComposition(binary)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const binname = binary.args[0]
+
+      binComposition()
+      binary.processArgs(props.argv)
 
       const binnameValue = binname.value
 
       return {
         binname: binnameValue,
 
-        helpBinary,
+        helpBinary: helpBinaryFn(),
       }
     },
   })

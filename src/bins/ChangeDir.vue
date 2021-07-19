@@ -21,14 +21,14 @@
   import { binComposition, binProps } from '@/compositions/bin'
   import { pathComposition } from '@/compositions/path'
 
-  const dirpath = new NodeArg(
+  const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,
     'dirpath',
     'the path or name of the directory to switch to',
     FsNodeType.FOLDER,
     specialNames.HOME_DIR[0],
   )
-  const verbose = new Arg(
+  const verboseFn = () => new Arg(
     ArgType.KEYWORD,
     'verbose',
     'whether to display more information on-screen',
@@ -36,13 +36,17 @@
     false,
     ['v'],
   )
-  export const binary = new Binary<[string], [boolean]>(
-    'ChangeDir',
-    'cd',
-    'Switch to the given directory as the working directory.',
-    [dirpath],
-    [verbose],
-  )
+  export const binaryFn = (): Binary<[string], [boolean]> => {
+    const dirpath = dirpathFn()
+    const verbose = verboseFn()
+    return new Binary<[string], [boolean]>(
+      'ChangeDir',
+      'cd',
+      'Switch to the given directory as the working directory.',
+      [dirpath],
+      [verbose],
+    )
+  }
 
   /**
    * Switches to the given directory as the working directory.
@@ -54,8 +58,12 @@
       Navigable,
     },
     setup(props) {
-      const { processArgs } = binComposition(binary)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const dirpath = binary.args[0] as NodeArg
+      const verbose = binary.kwargs[0]
+
+      binComposition()
+      binary.processArgs(props.argv)
 
       const dirpathValue = dirpath.value
       const verboseValue = verbose.value

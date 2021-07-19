@@ -8,16 +8,22 @@ import {
 
 import { terminalContent } from '@/../.storybook/terminal_content'
 
-import ChangeDir, { binary as cdBinary } from '@/bins/ChangeDir.vue'
+import ChangeDir, { binaryFn as cdBinaryFn } from '@/bins/ChangeDir.vue'
 import Clear from '@/bins/Clear.vue'
 import Hello from '@/bins/Hello.vue'
 import Help from '@/bins/Help.vue'
 import Hostname from '@/bins/Hostname.vue'
-import List, { binary as lsBinary } from '@/bins/List.vue'
-import Manual, { binary as manBinary } from '@/bins/Manual.vue'
-import Tree, { binary as treeBinary } from '@/bins/Tree.vue'
-import WhoAmI, { binary as whoamiBinary } from '@/bins/WhoAmI.vue'
+import List, { binaryFn as lsBinaryFn } from '@/bins/List.vue'
+import Manual, { binaryFn as manBinaryFn } from '@/bins/Manual.vue'
+import Tree, { binaryFn as treeBinaryFn } from '@/bins/Tree.vue'
+import WhoAmI, { binaryFn as whoamiBinaryFn } from '@/bins/WhoAmI.vue'
 import WorkDir from '@/bins/WorkDir.vue'
+
+export const cdBinary = cdBinaryFn()
+export const lsBinary = lsBinaryFn()
+export const manBinary = manBinaryFn()
+export const treeBinary = treeBinaryFn()
+export const whoamiBinary = whoamiBinaryFn()
 
 <Meta
   title="Bins/Callable"

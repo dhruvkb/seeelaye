@@ -13,7 +13,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition, binProps } from '@/compositions/bin'
 
-  const groot = new Arg<boolean>(
+  const grootFn = () => new Arg<boolean>(
     ArgType.KEYWORD,
     'groot',
     'whether to run command as Groot',
@@ -21,13 +21,16 @@
     false,
     ['g'],
   )
-  export const binary = new Binary<[], [boolean]>(
-    'WhoAmI',
-    'whoami',
-    'Display the name of the current active user.',
-    [],
-    [groot],
-  )
+  export const binaryFn = (): Binary<[], [boolean]> => {
+    const groot = grootFn()
+    return new Binary<[], [boolean]>(
+      'WhoAmI',
+      'whoami',
+      'Display the name of the current active user.',
+      [],
+      [groot],
+    )
+  }
 
   /**
    * Displays the name of the current active user.
@@ -36,8 +39,11 @@
     name: 'WhoAmI',
     props: binProps,
     setup(props) {
-      const { processArgs } = binComposition(binary)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const groot = binary.kwargs[0]
+
+      binComposition()
+      binary.processArgs(props.argv)
 
       const grootValue = groot.value
 

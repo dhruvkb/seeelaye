@@ -49,19 +49,22 @@
 
   import { binComposition, binProps } from '@/compositions/bin'
 
-  const binname = new Arg<string>(
+  const binnameFn = () => new Arg<string>(
     ArgType.POSITIONAL,
     'binname',
     'the name of the binary to get help about',
     String,
   )
-  export const binary = new Binary<[string], []>(
-    'Manual',
-    'man',
-    'Display information about the given command.',
-    [binname],
-    [],
-  )
+  export const binaryFn = (): Binary<[string], []> => {
+    const binname = binnameFn()
+    return new Binary<[string], []>(
+      'Manual',
+      'man',
+      'Display information about the given command.',
+      [binname],
+      [],
+    )
+  }
 
   /**
    * Displays information about the given command.
@@ -73,8 +76,11 @@
       Executable,
     },
     setup(props) {
-      const { processArgs } = binComposition(binary)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const binname = binary.args[0]
+
+      binComposition()
+      binary.processArgs(props.argv)
 
       const seeelaye = useSeeelaye()
       const binnameValue = binname.value

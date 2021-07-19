@@ -36,14 +36,14 @@
   import { pathComposition } from '@/compositions/path'
   import Navigable from '../components/navigable/Navigable.vue'
 
-  const dirpath = new NodeArg(
+  const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,
     'dirpath',
     'the path or name of the directory whose contents to list',
     FsNodeType.FOLDER,
     specialNames.CURRENT_DIR[0],
   )
-  const verbose = new Arg<boolean>(
+  const verboseFn = () => new Arg<boolean>(
     ArgType.KEYWORD,
     'verbose',
     'whether to display more information on-screen',
@@ -51,13 +51,17 @@
     false,
     ['v'],
   )
-  export const binary = new Binary<[string], [boolean]>(
-    'Tree',
-    'tree',
-    'List contents of directory recursively like a tree.',
-    [dirpath],
-    [verbose],
-  )
+  export const binaryFn = (): Binary<[string], [boolean]> => {
+    const dirpath = dirpathFn()
+    const verbose = verboseFn()
+    return new Binary<[string], [boolean]>(
+      'Tree',
+      'tree',
+      'List contents of directory recursively like a tree.',
+      [dirpath],
+      [verbose],
+    )
+  }
 
   /**
    * Lists contents of directory recursively like a tree.
@@ -89,8 +93,12 @@
     setup(props, { slots }) {
       const isRoot = computed(() => !slots.default)
 
-      const { processArgs } = binComposition(binary, isRoot.value)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const dirpath = binary.args[0] as NodeArg
+      const verbose = binary.kwargs[0]
+
+      binComposition(isRoot.value)
+      binary.processArgs(props.argv)
 
       const dirpathValue = dirpath.value
       const verboseValue = verbose.value

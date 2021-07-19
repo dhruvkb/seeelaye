@@ -10,7 +10,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary = new Binary<[], []>(
+  export const binaryFn = () => new Binary<[], []>(
     'Clear',
     'clear',
     'Clear the screen by hiding all previous interactions.',
@@ -24,7 +24,7 @@
   export default defineComponent({
     name: 'Clear',
     setup() {
-      binComposition(binary)
+      binComposition()
 
       const seeelaye = useSeeelaye()
       seeelaye.commit('hideInteractions')

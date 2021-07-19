@@ -12,7 +12,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary = new Binary<[], []>(
+  export const binaryFn = () => new Binary<[], []>(
     'WorkDir',
     'pwd',
     'Display the current working directory.',
@@ -26,7 +26,7 @@
   export default defineComponent({
     name: 'WorkDir',
     setup() {
-      binComposition(binary)
+      binComposition()
 
       const seeelaye = useSeeelaye()
       const workDir = seeelaye.state.currentNode?.absolutePath ?? 'unknown'

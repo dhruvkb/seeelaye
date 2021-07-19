@@ -12,7 +12,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary = new Binary<[], []>(
+  export const binaryFn = () => new Binary<[], []>(
     'Hostname',
     'hostname',
     'Display the name of the host machine.',
@@ -26,7 +26,7 @@
   export default defineComponent({
     name: 'Hostname',
     setup() {
-      binComposition(binary)
+      binComposition()
 
       const seeelaye = useSeeelaye()
       const { hostname } = seeelaye.state

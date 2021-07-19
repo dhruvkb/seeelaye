@@ -32,14 +32,14 @@
   import { binComposition, binProps } from '@/compositions/bin'
   import { pathComposition } from '@/compositions/path'
 
-  const dirpath = new NodeArg(
+  const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,
     'dirpath',
     'the path or name of the directory whose contents to list',
     FsNodeType.FOLDER,
     specialNames.CURRENT_DIR[0],
   )
-  const all = new Arg<boolean>(
+  const allFn = () => new Arg<boolean>(
     ArgType.KEYWORD,
     'all',
     'whether to display hidden files and directories',
@@ -47,13 +47,17 @@
     false,
     ['a'],
   )
-  export const binary = new Binary<[string], [boolean]>(
-    'List',
-    'ls',
-    'List the contents of the given directory.',
-    [dirpath],
-    [all],
-  )
+  export const binaryFn = (): Binary<[string], [boolean]> => {
+    const dirpath = dirpathFn()
+    const all = allFn()
+    return new Binary<[string], [boolean]>(
+      'List',
+      'ls',
+      'List the contents of the given directory.',
+      [dirpath],
+      [all],
+    )
+  }
 
   /**
    * Lists the contents of the given directory.
@@ -65,8 +69,12 @@
     },
     props: binProps,
     setup(props) {
-      const { processArgs } = binComposition(binary)
-      processArgs(props.argv)
+      const binary = binaryFn()
+      const dirpath = binary.args[0] as NodeArg
+      const all = binary.kwargs[0]
+
+      binComposition()
+      binary.processArgs(props.argv)
 
       const dirpathValue = dirpath.value
       const allValue = all.value

@@ -22,7 +22,7 @@
   import Executable from '@/components/executable/Executable.vue'
   import { binComposition } from '@/compositions/bin'
 
-  export const binary = new Binary<[], []>(
+  export const binaryFn = () => new Binary<[], []>(
     'Help',
     'help',
     'Show help about using the terminal.',
@@ -39,7 +39,7 @@
       Executable,
     },
     setup() {
-      binComposition(binary)
+      binComposition()
 
       const seeelaye = useSeeelaye()
       const callableBins = Object.values(seeelaye.allBins)
