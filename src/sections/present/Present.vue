@@ -1,5 +1,5 @@
 <template>
-  <div class="present">
+  <div class="present" v-show="isReady">
     <label class="input-area">
       <Prompt/>
       <Input @autocomplete="handleAutocomplete"/>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-  import { watch, defineComponent } from 'vue'
+  import { watch, computed, defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
 
@@ -58,13 +58,15 @@
           suggestions.value = [] // Hide suggestions when input is changed
         }
       })
+      const isReady = computed(() => seeelaye.state.isReady)
 
       return {
         EntityType,
 
+        isReady,
         suggestions,
-        handleAutocomplete: autocomplete,
         populateInput,
+        handleAutocomplete: autocomplete,
       }
     },
   })
