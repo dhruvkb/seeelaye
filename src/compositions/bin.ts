@@ -1,7 +1,5 @@
 import type { PropType } from 'vue'
 
-import type { Binary } from '@/models/bin'
-
 import { onMounted } from 'vue'
 
 import { useSeeelaye } from '@/base/injection'
@@ -17,20 +15,11 @@ export const binProps = {
 }
 
 export interface IBinComposition {
-  processArgs: (argv: string[]) => void
   setTerminalReady: (isReady: boolean) => void
 }
 
-export const binComposition = (
-  binary: Binary,
-  markReadyOnMount = true,
-): IBinComposition => {
+export const binComposition = (markReadyOnMount = true): IBinComposition => {
   const seeelaye = useSeeelaye()
-
-  // Methods
-  const processArgs = (argv: string[]) => {
-    binary.processArgs(argv)
-  }
 
   const setTerminalReady = (isReady = true) => {
     seeelaye.commit('setIsReady', { isReady })
@@ -44,7 +33,6 @@ export const binComposition = (
   }
 
   return {
-    processArgs,
     setTerminalReady,
   }
 }
