@@ -2,13 +2,20 @@
   <div class="terminal">
     <div class="terminal-content">
       <Past/>
-      <Present/>
+      <Present ref="present"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import {
+    defineComponent,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+  } from 'vue'
+
+  import { useSeeelaye } from '@/base/injection'
 
   import Past from '@/sections/past/Past.vue'
   import Present from '@/sections/present/Present.vue'
@@ -18,6 +25,28 @@
     components: {
       Present,
       Past,
+    },
+    setup() {
+      const present = ref<{ $el: HTMLElement } | null>(null)
+
+      const seeelaye = useSeeelaye()
+      let unsubscribe: () => void
+      onMounted(() => {
+        unsubscribe = seeelaye.store.subscribe((mutation) => {
+          if (mutation.type.includes('/setIsReady') && mutation.payload.isReady) {
+            present.value?.$el.scrollIntoView()
+          }
+        })
+      })
+      onBeforeUnmount(() => {
+        if (unsubscribe) {
+          unsubscribe()
+        }
+      })
+
+      return {
+        present,
+      }
     },
   })
 </script>
