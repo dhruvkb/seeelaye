@@ -1,5 +1,5 @@
 <template>
-  <div class="present" v-show="isReady">
+  <div class="present" :class="[{ 'is-hidden': !isReady }]">
     <label class="input-area">
       <Prompt/>
       <Input @autocomplete="handleAutocomplete"/>
@@ -73,6 +73,10 @@
 </script>
 
 <style scoped lang="css">
+  .is-hidden {
+    visibility: hidden;
+  }
+
   .input-area {
     display: flex;
     flex-direction: row;
