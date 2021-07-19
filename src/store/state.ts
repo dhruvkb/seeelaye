@@ -22,7 +22,7 @@ export const state = (): TerminalState => ({
   currentNode: null,
 
   history: [] as Interaction[],
-  isReady: true,
+  isReady: false,
 
   input: '',
 })

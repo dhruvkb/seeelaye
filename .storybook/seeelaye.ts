@@ -9,5 +9,6 @@ const [root, a] = getTree()
 
 seeelaye.commit('setTree', { tree: root })
 seeelaye.commit('setCurrentNode', { currentNode: a })
+seeelaye.commit('setIsReady', { isReady: true })
 
 export default seeelaye
