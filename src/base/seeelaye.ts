@@ -51,7 +51,7 @@ export class Seeelaye {
     this.store = store
     this.storeModule = storeModule
 
-    this.allBins = {
+    const allBins = {
       ...Object.fromEntries(
         Object.keys(builtInBinaries)
           .filter((key) => !excludedBins.includes(key))
@@ -59,7 +59,15 @@ export class Seeelaye {
       ),
       ...additionalBins,
     }
-    Interaction.allBins = this.allBins
+    const sortedBins: Record<string, Binary> = {}
+    Object.keys(allBins)
+      .sort()
+      .forEach((name) => {
+        sortedBins[name] = allBins[name]
+      })
+
+    this.allBins = sortedBins
+    Interaction.allBins = sortedBins
   }
 
   /* ***************
