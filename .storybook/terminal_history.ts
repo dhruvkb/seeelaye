@@ -15,7 +15,7 @@ export const terminalHistory = (): Component => ({
       'tree',
     ]
 
-    // Sequentially issue commands to the CLI based on the ready state of te terminal
+    // Sequentially issue commands to the CLI based on the ready state of the terminal
     const unsubscribe = seeelaye.store.subscribe((mutation) => {
       if (mutation.type.includes('/setIsReady') && mutation.payload.isReady) {
         const command = commands[index]
