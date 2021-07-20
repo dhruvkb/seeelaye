@@ -82,9 +82,14 @@
 
   ::v-deep(.terminal-content) {
     --default-content-max-width: 80ch;
+
+    --default-content-border-width: 1px;
+
     max-width: var(--content-max-width, var(--default-content-max-width));
 
-    border-right: 1px solid var(--color-highlight-bg);
+    border-right: var(--content-border-width, var(--default-content-border-width))
+      solid
+      var(--color-highlight-bg);
   }
 
   ::v-deep(.terminal-content) p {
