@@ -1,0 +1,76 @@
+import { Meta, Canvas, Story, Description } from '@storybook/addon-docs'
+
+import Terminal from '@/containers/terminal/Terminal.vue'
+
+import { terminalHistory } from '@/../.storybook/terminal_history'
+
+<Meta
+  title="Containers/Terminal"
+  component={Terminal}
+  decorators={[
+    terminalHistory,
+  ]}/>
+
+# Terminal
+
+<Description of={Terminal}/>
+
+export const Template = (args) => ({
+  components: { Terminal },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Terminal v-bind="args"/>
+  `,
+})
+
+## Theming
+
+The terminal component supports theming using the `class` attribute. It ships
+with my favourite themes out-of-the-box, but you can surely
+[define custom themes](?path=/docs/guide-custom-themes--page) and add as many as
+you like.
+
+### Solarized dark
+
+**Classes:** `solarized`, `dark`
+
+<Canvas>
+  <Story
+    name="Solarized dark"
+    args={{
+      class: ['solarized', 'dark']
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Solarized light
+
+**Classes:** `solarized`, `light`
+
+<Canvas>
+  <Story
+    name="Solarized light"
+    args={{
+      class: ['solarized', 'light']
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### One dark
+
+**Classes:** `one`, `dark`
+
+<Canvas>
+  <Story
+    name="One dark"
+    args={{
+      class: ['one', 'dark']
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
