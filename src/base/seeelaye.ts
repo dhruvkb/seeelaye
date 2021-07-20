@@ -12,18 +12,6 @@ import { builtInBinaries } from '@/bins'
 import Bad from '@/bins/Bad.vue'
 import Nop from '@/bins/Nop.vue'
 
-export interface IInstallOptions {
-  /**
-   * whether to globally register the components included in the package
-   */
-  registerComponents?: boolean
-  /**
-   * whether to globally register the presentational components included in the
-   * package; These components are not supposed to be used directly.
-   */
-  registerPureComponents?: boolean
-}
-
 /**
  * This is the main class of the project. All operations on the CLI need to be
  * communicated via this class.
@@ -135,9 +123,8 @@ export class Seeelaye {
    *
    * @see {@link https://v3.vuejs.org/guide/plugins.html#using-a-plugin|Vue docs} for usage instructions
    * @param app - the app in which to install this instance as a plugin
-   * @param options - the configuration to use when setting up the plugin
    */
-  install(app: App, options: IInstallOptions = {}): void {
+  install(app: App): void {
     app.provide(seeelayeKey, this)
     // eslint-disable-next-line no-param-reassign
     app.config.globalProperties.$seeelaye = this
