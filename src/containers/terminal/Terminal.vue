@@ -20,6 +20,11 @@
   import Past from '@/sections/past/Past.vue'
   import Present from '@/sections/present/Present.vue'
 
+  /**
+   * This is the top-level component of see·el·aye, which renders the CLI. This
+   * should be imported by the user and placed into their application component
+   * tree.
+   */
   export default defineComponent({
     name: 'Terminal',
     components: {
