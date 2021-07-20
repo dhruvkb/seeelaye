@@ -12,7 +12,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binaryFn = () => new Binary<[], []>(
+  export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'WorkDir',
     'pwd',
     'Display the current working directory.',

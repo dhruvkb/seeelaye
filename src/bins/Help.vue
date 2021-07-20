@@ -22,7 +22,7 @@
   import Executable from '@/components/executable/Executable.vue'
   import { binComposition } from '@/compositions/bin'
 
-  export const binaryFn = () => new Binary<[], []>(
+  export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'Help',
     'help',
     'Show help about using the terminal.',

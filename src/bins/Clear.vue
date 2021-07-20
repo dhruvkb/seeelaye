@@ -10,7 +10,7 @@
   import { useSeeelaye } from '@/base/injection'
   import { binComposition } from '@/compositions/bin'
 
-  export const binaryFn = () => new Binary<[], []>(
+  export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'Clear',
     'clear',
     'Clear the screen by hiding all previous interactions.',

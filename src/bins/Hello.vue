@@ -28,7 +28,7 @@
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binaryFn = () => new Binary<[], []>(
+  export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'Hello',
     'hello',
     'Display ASCII art for see·el·aye along with relevant links.',

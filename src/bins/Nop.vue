@@ -9,7 +9,7 @@
 
   import { binComposition } from '@/compositions/bin'
 
-  export const binaryFn = () => new Binary<[], []>(
+  export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'Nop',
     'nop',
     'Display nothing and do nothing.',
