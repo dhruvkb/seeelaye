@@ -6,8 +6,7 @@ import seeelaye from './seeelaye'
 
 import Terminal from '../src/containers/terminal/Terminal.vue'
 
-import '@/styles/terminal.css'
-import '@/styles/solarized.css'
+import '@/themes/solarized.css'
 import './css/preview.css'
 
 app

@@ -95,7 +95,7 @@ const createConfig = (format, out, extraPlugins = []) => {
       copyPlugin({
         targets: [
           {
-            src: 'src/styles/solarized.css',
+            src: 'src/themes/solarized.css',
             dest: 'dist/themes/',
           },
         ],
