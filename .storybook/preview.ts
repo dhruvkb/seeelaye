@@ -7,6 +7,8 @@ import seeelaye from './seeelaye'
 import Terminal from '../src/containers/terminal/Terminal.vue'
 
 import '@/themes/solarized.css'
+import '@/themes/one_dark.css'
+
 import './css/preview.css'
 
 app
@@ -46,6 +48,11 @@ export const parameters = {
         class: ['solarized', 'light'],
         color: '#fdf6e3',
       },
+      {
+        name: 'One dark',
+        class: ['one', 'dark'],
+        color: '#21252b',
+      },
     ],
     Decorator: markRaw({
       template: `<Terminal :class="themeClasses"><slot/></Terminal>`,
@@ -60,7 +67,10 @@ export const parameters = {
     storySort: {
       order: [
         'see·el·aye',
+        'Guide',
+        ['Quickstart', 'Custom themes', 'Custom binaries'],
         'Elements',
+        ['Navigable', 'Executable', 'Spinner'],
         'Sections',
         'Containers',
         'Bins',

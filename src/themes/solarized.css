@@ -37,17 +37,17 @@
 }
 
 .solarized.dark {
-  --color-normal-bg:      var(--color-bright-black);
-  --color-highlight-bg:   var(--color-normal-black);
-  --color-normal-fg:      var(--color-bright-blue);
-  --color-highlight-fg:   var(--color-bright-cyan);
-  --color-secondary-fg:   var(--color-bright-green);
+  --color-normal-bg:      var(--color-base-03);
+  --color-highlight-bg:   var(--color-base-02);
+  --color-normal-fg:      var(--color-base-0);
+  --color-highlight-fg:   var(--color-base-1);
+  --color-secondary-fg:   var(--color-base-01);
 }
 
 .solarized.light {
-  --color-normal-bg:      var(--color-bright-white);
-  --color-highlight-bg:   var(--color-normal-white);
-  --color-normal-fg:      var(--color-bright-yellow);
-  --color-highlight-fg:   var(--color-bright-green);
-  --color-secondary-fg:   var(--color-bright-cyan);
+  --color-normal-bg:      var(--color-base-3);
+  --color-highlight-bg:   var(--color-base-2);
+  --color-normal-fg:      var(--color-base-00);
+  --color-highlight-fg:   var(--color-base-01);
+  --color-secondary-fg:   var(--color-base-1);
 }
