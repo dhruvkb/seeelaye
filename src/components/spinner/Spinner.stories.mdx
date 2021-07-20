@@ -1,15 +1,14 @@
-import {
-  Canvas,
-  Description,
-  Meta,
-  Story
-} from '@storybook/addon-docs'
+import { Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import Spinner from '@/components/spinner/Spinner.vue'
 
 <Meta
   title="Elements/Spinner"
-  component={Spinner}/>
+  component={Spinner}
+  decorators={[
+    withThemes,
+  ]}/>
 
 # Spinner
 

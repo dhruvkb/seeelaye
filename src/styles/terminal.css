@@ -3,12 +3,20 @@
   --default-font-size: 14px;
   --default-line-height: 1.4;
 
+  --default-height: 100%;
+
+  --default-padding: 2ex 1ch;
+
   background: var(--color-normal-bg);
   color: var(--color-normal-fg);
 
   font-family: var(--font-family, var(--default-font-family));
   font-size: var(--font-size, var(--default-font-size));
   line-height: var(--line-height, var(--default-line-height));
+
+  height: var(--height, var(--default-height));
+
+  padding: var(--padding, var(--default-padding));
 }
 
 .terminal-content {

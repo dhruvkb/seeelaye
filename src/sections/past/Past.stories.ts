@@ -1,6 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 import type { Story } from '@storybook/vue3'
 
-import { terminalContent } from '@/../.storybook/terminal_content'
 import { terminalHistory } from '@/../.storybook/terminal_history'
 
 import Past from '@/sections/past/Past.vue'
@@ -10,7 +11,7 @@ export default {
   component: Past,
   decorators: [
     terminalHistory,
-    terminalContent,
+    withThemes,
   ],
 }
 

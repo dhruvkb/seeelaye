@@ -1,12 +1,5 @@
-import {
-  ArgsTable,
-  Canvas,
-  Description,
-  Meta,
-  Story
-} from '@storybook/addon-docs'
-
-import { terminalContent } from '@/../.storybook/terminal_content'
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import ChangeDir, { binaryFn as cdBinaryFn } from '@/bins/ChangeDir.vue'
 import Clear from '@/bins/Clear.vue'
@@ -28,7 +21,7 @@ export const whoamiBinary = whoamiBinaryFn()
 <Meta
   title="Bins/Callable"
   decorators={[
-    terminalContent,
+    withThemes,
   ]}/>
 
 # Callable binaries

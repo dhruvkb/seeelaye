@@ -1,12 +1,5 @@
-import {
-  ArgsTable,
-  Canvas,
-  Description,
-  Meta,
-  Story
-} from '@storybook/addon-docs'
-
-import { terminalContent } from '@/../.storybook/terminal_content'
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import Bad from '@/bins/Bad.vue'
 import Nop from '@/bins/Nop.vue'
@@ -14,7 +7,7 @@ import Nop from '@/bins/Nop.vue'
 <Meta
   title="Bins/Non-callable"
   decorators={[
-    terminalContent,
+    withThemes,
   ]}/>
 
 # Non-callable binaries

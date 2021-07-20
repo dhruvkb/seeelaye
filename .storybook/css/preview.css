@@ -1,7 +1,14 @@
-.docs-story { /* Shown in 'Docs' tab */
-  /* Styles copied from the class `.terminal` */
-  background: var(--color-normal-bg);
-  color: var(--color-normal-fg);
+.docs-story > div:first-child {
+  padding: 0;
+  margin: 0;
+}
+
+.docs-story .innerZoomElementWrapper > div:first-child {
+  border-width: 0 !important;
+}
+
+html, body, #root { /* for terminal to take full height in canvas */
+  height: 100%;
 }
 
 kbd {

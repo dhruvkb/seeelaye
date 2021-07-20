@@ -1,8 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { markRaw } from 'vue'
 import { app } from '@storybook/vue3'
 
 import store from './store'
 import seeelaye from './seeelaye'
+
+import Terminal from '../src/containers/terminal/Terminal.vue'
 
 import '@/styles/terminal.css'
 import '@/styles/solarized.css'
@@ -23,6 +25,7 @@ app
   .use(seeelaye)
 
 export const parameters = {
+  layout: 'fullscreen',
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -36,15 +39,23 @@ export const parameters = {
     list: [
       {
         name: 'Solarized dark',
-        class: ['terminal', 'solarized', 'dark'],
+        class: ['solarized', 'dark'],
         color: '#002b36',
       },
       {
         name: 'Solarized light',
-        class: ['terminal', 'solarized', 'light'],
+        class: ['solarized', 'light'],
         color: '#fdf6e3',
       },
     ],
+    Decorator: markRaw({
+      template: `<Terminal :class="themeClasses"><slot/></Terminal>`,
+      inheritAttrs: false,
+      components: { Terminal },
+      props: {
+        themeClasses: { type: String },
+      },
+    }),
   },
   options: {
     storySort: {

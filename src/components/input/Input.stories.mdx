@@ -1,10 +1,5 @@
-import {
-  ArgsTable,
-  Canvas,
-  Description,
-  Meta,
-  Story
-} from '@storybook/addon-docs'
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import { useSeeelaye } from '@/base/injection'
 
@@ -13,7 +8,10 @@ import Input from '@/components/input/Input.vue'
 
 <Meta
   title="Elements/Input"
-  component={Input_}/>
+  component={Input_}
+  decorators={[
+    withThemes,
+  ]}/>
 
 # Input
 

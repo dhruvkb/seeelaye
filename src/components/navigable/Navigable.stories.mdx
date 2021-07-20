@@ -1,16 +1,14 @@
-import {
-  ArgsTable,
-  Canvas,
-  Description,
-  Meta,
-  Story
-} from '@storybook/addon-docs'
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import Navigable_ from '@/components/navigable/Navigable_.vue'
 
 <Meta
   title="Elements/Navigable"
-  component={Navigable_}/>
+  component={Navigable_}
+  decorators={[
+    withThemes,
+  ]}/>
 
 # Navigable
 
