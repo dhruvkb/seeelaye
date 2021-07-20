@@ -4,7 +4,7 @@ import { onBeforeUnmount } from 'vue'
 
 import { useSeeelaye } from '../src'
 
-export const terminalHistory = (): Component => ({
+export const terminalHistory = (runCommands = true) => (): Component => ({
   setup() {
     const seeelaye = useSeeelaye()
 
@@ -16,20 +16,22 @@ export const terminalHistory = (): Component => ({
     ]
 
     // Sequentially issue commands to the CLI based on the ready state of the terminal
-    const unsubscribe = seeelaye.store.subscribe((mutation) => {
-      if (mutation.type.includes('/setIsReady') && mutation.payload.isReady) {
-        const command = commands[index]
-        if (command) {
-          index += 1
-          seeelaye.dispatch('executeCmd', { rawInput: command })
+    if (runCommands) {
+      const unsubscribe = seeelaye.store.subscribe((mutation) => {
+        if (mutation.type.includes('/setIsReady') && mutation.payload.isReady) {
+          const command = commands[index]
+          if (command) {
+            index += 1
+            seeelaye.dispatch('executeCmd', { rawInput: command })
+          }
         }
-      }
-    })
-    onBeforeUnmount(() => {
-      if (unsubscribe) {
-        unsubscribe()
-      }
-    })
+      })
+      onBeforeUnmount(() => {
+        if (unsubscribe) {
+          unsubscribe()
+        }
+      })
+    }
 
     seeelaye.commit('deleteInteractions') // Clean slate on reload
     seeelaye.commit('setIsReady', { isReady: true })

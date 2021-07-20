@@ -23,6 +23,9 @@
 
   import Prompt from '@/components/prompt/Prompt.vue'
 
+  /**
+   * Shows all past interactions of the terminal that have not been hidden.
+   */
   export default defineComponent({
     name: 'Past',
     components: {

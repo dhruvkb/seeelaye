@@ -37,6 +37,9 @@
   import Navigable from '@/components/navigable/Navigable.vue'
   import Executable from '@/components/executable/Executable.vue'
 
+  /**
+   * Shows the presently underway interaction before it has been submitted.
+   */
   export default defineComponent({
     name: 'Present',
     components: {

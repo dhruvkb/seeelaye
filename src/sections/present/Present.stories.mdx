@@ -1,0 +1,31 @@
+import { Meta, Canvas, Story, Description } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
+
+import { terminalHistory } from '@/../.storybook/terminal_history'
+
+import Present from '@/sections/present/Present.vue'
+
+<Meta
+  title="Sections/Present"
+  component={Present}
+  decorators={[
+    terminalHistory(false),
+    withThemes,
+  ]}/>
+
+# Present
+
+<Description of={Present}/>
+
+export const Template = () => ({
+  components: { Present },
+  template: `
+    <Present/>
+  `,
+})
+
+<Canvas>
+  <Story name="Default">
+    {Template.bind({})}
+  </Story>
+</Canvas>
