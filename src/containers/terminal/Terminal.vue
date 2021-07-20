@@ -1,8 +1,10 @@
 <template>
   <div class="terminal">
     <div class="terminal-content">
-      <Past/>
-      <Present ref="present"/>
+      <slot>
+        <Past/>
+        <Present ref="present"/>
+      </slot>
     </div>
   </div>
 </template>
