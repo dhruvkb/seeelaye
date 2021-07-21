@@ -2,7 +2,9 @@
   <div class="present" :class="[{ 'is-hidden': !isReady }]">
     <label class="input-area">
       <Prompt/>
-      <Input @autocomplete="handleAutocomplete"/>
+      <Input
+        placeholder="command"
+        @autocomplete="handleAutocomplete"/>
     </label>
     <ul>
       <li
