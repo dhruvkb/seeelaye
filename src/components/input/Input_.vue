@@ -67,11 +67,11 @@
     min-width: 32ch;
     padding: 0;
     border: none;
-    border-bottom: 1px dashed transparent;
+    border-bottom: 1px solid transparent;
   }
 
   .input:focus {
     outline: none;
-    border-bottom-color: var(--color-secondary-fg);
+    border-bottom-color: var(--color-highlight-bg);
   }
 </style>
