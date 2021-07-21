@@ -1,0 +1,125 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="Guide/Quickstart"/>
+
+# Quickstart
+
+## Installation
+
+see·el·aye has a peer dependency on [Vuex](https://vuex.vuejs.org). Make sure to
+install and configure Vuex before proceeding. Since see·el·aye only works with
+Vue 3, you will need version 4 of Vuex.
+
+see·el·aye is served from the npm registry as
+[`seeelaye`](https://www.npmjs.com/package/seeelaye).
+
+```
+npm install --save seeelaye
+```
+
+see·el·aye is written in and completely supports TypeScript. Type definitions
+are included in the package.
+
+## Setup
+
+Add the Vuex module for see·el·aye in your store. You can use any name for the
+module (`'terminal'` in this case). You can also use register and unregister
+the module dynamically if you are so inclined.
+
+```js
+// @/store/index.js
+import { createStore } from 'vuex'
+import { getVuexModule } from 'seeelaye'
+
+const store = createStore({
+  modules: {
+    terminal: getVuexModule(), // remember the name you use here
+  },
+})
+
+export default store
+```
+
+see·el·aye needs some configuration, it absolutely does **not** work out of the
+box. Create a new directory `terminal/` in your `src/` directory with an index
+file in it.
+
+```
+mkdir src/terminal/
+touch src/terminal/index.js
+```
+
+This is the file where see·el·aye's functionality can be tweaked. Pass your Vuex
+store and see·el·aye's module name as the first two arguments to the `Seeelaye`
+constructor. Optionally, you can
+- deactivate [built-in binaries](?path=/docs/bins-callable--hello) by passing a list of commands to turn off as the 3<sup>rd</sup> argument
+- define [custom binaries](?path=/docs/guide-custom-binaries--page) and register them as the 4<sup>th</sup> argument
+
+```js
+// @/terminal/index.js
+import { Seeelaye } from 'seeelaye'
+
+import store from '@/store'
+
+const seeelaye = new Seeelaye({
+  store,      // the application's Vuex store
+  'terminal', // the name of the store module from the previous step
+  ['hello'],  // the built-in binaries to exclude (optional)
+  {},         // additional custom binaries to include (optional)
+})
+
+export default seeelaye
+```
+
+see·el·aye should be installed like a Vue plugin. In your `main.js` file, you
+should install see·el·aye using the `.use` API.
+
+```js
+import { createApp } from 'vue'
+
+import store from '@/store'
+import seeelaye from '@/terminal'
+
+import App from '@/App.vue'
+
+const app = createApp(App)
+
+app
+  .use(store)    // this should come before see·el·aye
+  .use(seeelaye) // this should come after the store
+
+app.mount('#app')
+```
+
+## Render
+
+In the component where you'd like to show a terminal, place the `Terminal`
+component. Note that it is not automatically registered globally.
+
+By default, the terminal will not have any associated styles. You can
+[apply a theme](?path=/docs/containers-terminal--solarized-dark#theming) of your
+choice by setting the `class` attribute. If you prefer a
+[custom theme](?path=/docs/guide-custom-themes--page) just change the class.
+
+You will need to include the corresponding theme stylesheet.
+
+```html
+<template>
+  <Terminal class="solarized dark"/>
+</template>
+
+<script>
+  import { Terminal } from 'seeelaye'
+
+  export default {
+    components: { Terminal },
+  }
+</script>
+
+<style scoped lang="css" src="seeelaye/dist/themes/solarized.css"></style>
+<style scoped lang="css">
+  ::v-deep(.terminal) {
+    /* all CSS custom properties for customization */
+  }
+</style>
+```
