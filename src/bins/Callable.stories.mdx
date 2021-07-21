@@ -249,6 +249,12 @@ export const pwdTemplate = () => ({
 
 <Description of={Tree}/>
 
+The output of tree can be styled by setting the following CSS custom properties.
+
+| Property              | Description                          | Default                |
+|-----------------------|--------------------------------------|------------------------|
+| `--tree-shapes-color` | Color of the line-drawing characters | `--color-secondary-fg` |
+
 export const treeTemplate = (args) => ({
   components: { Tree },
   setup() {
@@ -285,6 +291,9 @@ export const treeTemplate = (args) => ({
         '--verbose',
         '~',
       ],
+      style: {
+        '--tree-shapes-color': 'var(--color-normal-fg)',
+      },
     }}>
     {treeTemplate.bind({})}
   </Story>

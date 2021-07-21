@@ -2,7 +2,7 @@
   <div class="tree">
     <template v-if="isNodeOk">
       <slot/>
-      {{ shape }}
+      <span class="shape">{{ shape }}</span>
       <Navigable
         :node="node"
         :show-aliases="verbose"/>
@@ -16,7 +16,7 @@
         allow-files
         is-subtree>
         <slot/>
-        {{ childShape }}
+        <span class="shape">{{ childShape }}</span>
       </Tree>
     </template>
     <template v-else>
@@ -127,18 +127,18 @@
           return ''
         }
         if (isLastChild.value) {
-          return `${shapes.bend}${shapes.dash.repeat(2)}`
+          return `${shapes.bend}${shapes.dash.repeat(2)}${shapes.space}`
         }
-        return `${shapes.tee}${shapes.dash.repeat(2)}`
+        return `${shapes.tee}${shapes.dash.repeat(2)}${shapes.space}`
       })
       const childShape = computed(() => {
         if (isRoot.value) {
           return ''
         }
         if (isLastChild.value) {
-          return `${shapes.space.repeat(3)}`
+          return `${shapes.space.repeat(3)}${shapes.space}`
         }
-        return `${shapes.pipe}${shapes.space.repeat(2)}`
+        return `${shapes.pipe}${shapes.space.repeat(2)}${shapes.space}`
       })
 
       return {
@@ -153,3 +153,10 @@
     },
   })
 </script>
+
+<style scoped lang="css">
+  .shape {
+    --default-tree-shapes-color: var(--color-secondary-fg);
+    color: var(--tree-shapes-color, var(--default-tree-shapes-color));
+  }
+</style>
