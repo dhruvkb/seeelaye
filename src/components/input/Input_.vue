@@ -74,4 +74,10 @@
     outline: none;
     border-bottom-color: var(--color-highlight-bg);
   }
+
+  .input::placeholder {
+    color: inherit;
+
+    opacity: 0.5;
+  }
 </style>
