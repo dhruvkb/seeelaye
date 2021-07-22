@@ -14,6 +14,7 @@ export enum FsNodeType {
  * defined as the substring of the name after the last dot/full stop/period.
  *
  * @param fullName - then name of the node
+ * @return the name and extension from the given combined name
  */
 export const nameExtSplit = (fullName: string): [string, string | null] => {
   if (!fullName.includes('.')) {
@@ -23,6 +24,43 @@ export const nameExtSplit = (fullName: string): [string, string | null] => {
   const name = fullName.substring(0, lastDot)
   const extension = fullName.substring(lastDot + 1)
   return [name, extension]
+}
+
+/**
+ * Split the given path into its constituent parts.
+ *
+ * Once support for positive lookbehind is added to all browsers, this can be
+ * simplified.
+ * ```
+ * return path
+ *    .replace(/\/+/g, '/')
+ *    .split(/(?<=\/)/)
+ * ```
+ *
+ * @param path - the path to split
+ * @returns the path split into parts separated by a slash
+ */
+export const pathSplit = (path: string): string[] => {
+  const pathParts = path
+    .replace(/\/+/g, '/') // Replace double slashes
+    .split(/(\/)/) // Split around slashes
+
+  let parts: string[] = []
+  for (let i = 0; i < pathParts.length; i += 1) {
+    if (pathParts[i] === '/') {
+      // Merge slash with the preceding part
+      parts[parts.length - 1] = `${parts[parts.length - 1]}/`
+    } else {
+      parts.push(pathParts[i])
+    }
+  }
+
+  // Splitting around trailing slash leaves a blank string at the end
+  if (parts[parts.length - 1] === '') {
+    parts = parts.slice(0, parts.length - 1)
+  }
+
+  return parts
 }
 
 /**

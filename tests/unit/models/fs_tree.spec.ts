@@ -1,6 +1,11 @@
 import type { IFsNode } from '@/models/fs_tree'
 
-import { FsNode, FsNodeType, nameExtSplit } from '@/models/fs_tree'
+import {
+  FsNode,
+  FsNodeType,
+  nameExtSplit,
+  pathSplit,
+} from '@/models/fs_tree'
 import { getTree } from '../../fixtures/fs_tree.fix'
 
 describe('nameExtensionSplit', () => {
@@ -32,6 +37,23 @@ describe('nameExtensionSplit', () => {
     const [name, ext] = nameExtSplit('.ext')
     expect(name).toEqual('')
     expect(ext).toEqual('ext')
+  })
+})
+
+describe('pathSplit', () => {
+  it('cleans multiple slashes', () => {
+    const path = 'a//b//c'
+    expect(pathSplit(path)).toEqual(['a/', 'b/', 'c'])
+  })
+
+  it('keeps slash with preceding part', () => {
+    const path = 'a/b/c/'
+    expect(pathSplit(path)).toEqual(['a/', 'b/', 'c/'])
+  })
+
+  it('creates blank node for paths starting with slash', () => {
+    const path = '/a/b/c'
+    expect(pathSplit(path)).toEqual(['/', 'a/', 'b/', 'c'])
   })
 })
 

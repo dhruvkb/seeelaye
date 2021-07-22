@@ -2,7 +2,7 @@ import type { GetterTree } from 'vuex'
 
 import type { FsNode } from '@/models/fs_tree'
 
-import { specialNames } from '@/models/fs_tree'
+import { specialNames, pathSplit } from '@/models/fs_tree'
 import { TerminalState } from '@/store/state'
 
 export interface TerminalGetterTree<S, RS> extends GetterTree<S, RS> {
@@ -15,9 +15,7 @@ export const getGetters = <RS>(): TerminalGetterTree<TerminalState, RS> => ({
       const { path } = payload
       let node = state.currentNode
 
-      const parts = path
-        .replace(/\/+/g, '/')
-        .split(/(?<=\/)/)
+      const parts = pathSplit(path)
       for (let i = 0; i < parts.length; i += 1) {
         const part = parts[i]
 

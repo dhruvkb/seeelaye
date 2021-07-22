@@ -8,7 +8,7 @@ import { computed, ref } from 'vue'
 
 import { useSeeelaye } from '@/base/injection'
 
-import { specialNames } from '@/models/fs_tree'
+import { specialNames, pathSplit } from '@/models/fs_tree'
 import { EntityType } from '@/models/suggestion'
 
 export interface IAutocompleteComposition {
@@ -41,10 +41,7 @@ export const autocompleteComposition = (): IAutocompleteComposition => {
 
     const suggestion: string[] = []
 
-    const pathParts = partialPath
-      .replace(/\/+/g, '/')
-      .split(/(?<=\/)/)
-
+    const pathParts = pathSplit(partialPath)
     let i = 0
     let isCompleted = true
     for (; i < pathParts.length; i += 1) {
