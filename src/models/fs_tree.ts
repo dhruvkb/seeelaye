@@ -75,7 +75,8 @@ export const extLang: Record<string, string | string[] | undefined> = Object.fre
   rb: 'ruby',
   rst: 'markdown', // TODO: Use a proper language parser
   tex: 'latex',
-  vue: ['xml', 'javascript'],
+  ts: 'typescript',
+  vue: ['xml', 'javascript', 'typescript'],
   yml: 'yaml',
 })
 

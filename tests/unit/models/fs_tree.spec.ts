@@ -130,7 +130,7 @@ describe('FsNode', () => {
 
     it('returns array of languages', () => {
       const node = new FsNode(FsNodeType.FILE, 'Name.vue')
-      expect(node.language).toEqual(['xml', 'javascript'])
+      expect(node.language).toEqual(['xml', 'javascript', 'typescript'])
     })
   })
 
