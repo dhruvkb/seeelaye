@@ -28,6 +28,7 @@
   "browser": "dist/seeelaye.esm-browser.js",
   "types": "dist/seeelaye.d.ts",
   "scripts": {
+    "prepare": "husky install",
     "serve": "start-storybook -p 6006 -s ./src/assets --ci",
     "unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
@@ -67,7 +68,8 @@
     "eslint": "^7.26.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.2.0",
-    "husky": "^4.3.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
     "rollup": "^2.52.2",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-postcss": "^4.0.0",
