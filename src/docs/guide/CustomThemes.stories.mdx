@@ -1,0 +1,118 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs'
+
+<Meta title="Guide/Custom themes"/>
+
+# Custom themes
+
+see·el·aye ships with three built-in themes:
+- [Solarized dark](?path=/docs/containers-terminal--solarized-dark#solarized-dark)
+- [Solarized light](?path=/docs/containers-terminal--solarized-light#solarized-light)
+- [One dark](?path=/docs/containers-terminal--one-dark#one-dark)
+
+While these are all very beautiful and functional themes, your tastes
+[may be different](https://iterm2colorschemes.com), in which case see·el·aye
+allows you to define your own themes.
+
+## Guide
+
+see·el·aye's color system is based on the standard 16-color ANSI system, albeit
+with a few modifications.
+
+### Color palette
+
+To create a theme for see·el·aye, you need to define 21 colors.
+
+- 8 normal colors
+  - `--color-normal-black`
+  - `--color-normal-red`
+  - `--color-normal-green`
+  - `--color-normal-yellow`
+  - `--color-normal-blue`
+  - `--color-normal-magenta`
+  - `--color-normal-cyan`
+  - `--color-normal-white`
+- 8 bright colors
+  - `--color-bright-black`
+  - `--color-bright-red`
+  - `--color-bright-green`
+  - `--color-bright-yellow`
+  - `--color-bright-blue`
+  - `--color-bright-magenta`
+  - `--color-bright-cyan`
+  - `--color-bright-white`
+- 5 content colors
+  - `--color-normal-bg`
+  - `--color-highlight-bg`
+  - `--color-normal-fg`
+  - `--color-highlight-fg`
+  - `--color-secondary-fg`
+
+Any CSS file that exposes a class defining these 21 CSS variables is a valid
+theme file. A theme file can export more than one theme, such as that of
+Solarized, which provides both a dark and a light theme from the same CSS file.
+
+### Registration
+
+Follow instructions upto the
+[Render](?path=/story/guide-quickstart--page#render) section of the quickstart.
+
+```html
+<template>
+  <Terminal class="my custom theme classes"/>
+</template>
+
+<!-- everything else remains the same -->
+
+<style scoped lang="css" src="<path/to/my/theme>.css"></style>
+```
+
+## Example
+
+Here are the colors from Solarized dark for example. Solarized very smartly
+utilises the underused bright variants to ship the 'orange' and 'violet' colours
+which don't have official positions in the ANSI system. It also ships most of
+its base greyscale colors in the slots for the bright variants.
+
+<ColorPalette>
+  <ColorItem
+    title="Normal colors"
+    subtitle="--color-normal-<name>"
+    colors={{
+      black: '#073642',
+      red: '#dc322f',
+      green: '#859900',
+      yellow: '#b58900',
+      blue: '#268bd2',
+      magenta: '#d33682',
+      cyan: '#2aa198',
+      white: '#eee8d5',
+    }}/>
+  <ColorItem
+    title="Bright colors"
+    subtitle="--color-bright-<name>"
+    colors={{
+      black: '#002b36',
+      red: '#cb4b16',
+      green: '#586e75',
+      yellow: '#657b83',
+      blue: '#839496',
+      magenta: '#6c71c4',
+      cyan: '#93a1a1',
+      white: '#fdf6e3',
+    }}/>
+  <ColorItem
+    title="Content colors"
+    subtitle="--color-<name>"
+    colors={{
+      'normal-bg': '#002b36',
+      'highlight-bg': '#073642',
+      'normal-fg': '#839496',
+      'highlight-fg': '#93a1a1',
+      'secondary-fg': '#586e75',
+    }}/>
+</ColorPalette>
+
+## References
+
+- [Solarized stylesheet](https://github.com/dhruvkb/seeelaye/blob/master/src/themes/solarized.css)
+- [One dark stylesheet](https://github.com/dhruvkb/seeelaye/blob/master/src/themes/one_dark.css)
