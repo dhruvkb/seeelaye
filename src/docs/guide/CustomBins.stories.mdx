@@ -1,0 +1,133 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="Guide/Custom binaries"/>
+
+# Custom binaries
+
+<p style={{
+    backgroundColor: 'rgba(220, 50, 47, 0.1)',
+    border: '1px solid #dc322f',
+    borderRadius: '0.25em',
+    padding: '0.5em',
+  }}>
+  🚧 This documentation is not yet stable as the API is in flux.
+</p>
+
+see·el·aye ships with a bunch of built-in binaries. A comprehensive list of
+pre-baked binaries can be found in the
+[docs](?path=/docs/bins-callable--hello#callable-binaries).
+
+While these cover many operations, it is not exhaustive. see·el·aye allows you
+to define your own and inject them into the terminal. A good place to define the
+components is in a `bin/` directory inside the `src/terminal` directory that
+contains the see·el·aye configuration.
+
+## Guide
+
+A component is just a Vue component that conforms to certain specifications
+that make it invokable from the CLI engine. Here are the requirements to define
+a custom binary. When defining binaries as SFCs, the file must export the
+following two items.
+
+- a function that returns a `Binary` instance, conventionally named `binaryFn`
+- a Vue component as its default export
+
+### Binary and arguments
+
+The exported `binaryFn` provides the metadata that see·el·aye needs to map input
+commands to binaries and their arguments.
+
+1. Create the arguments for the binary. You can skip this step if your binary
+is not supposed to take any arguments. Arguments must be functions that return
+either an `Arg` or `NodeArg` instance. `NodeArgs` are subclassed from
+`Arg<string>`.
+
+2. Define your `binaryFn`. The `Binary` class accepts two arrays of types as
+generics.
+
+**E.g.,** a binary with no positional arguments and no keyword arguments. In such
+cases, pass two empty arrays as generics for `Binary`.
+```ts
+import { Binary } from 'seeelaye'
+
+export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
+  'Intro',
+  'intro',
+  'Show my handle as ASCII art.',
+  [], // no positional arguments
+  [], // no keyword arguments
+)
+```
+
+**E.g.,** a binary with a node path as the positional argument and no keyword
+arguments. A `NodeArg` maps to a `string` as the generic for `Binary`.
+```ts
+import { ArgType, NodeArg } from 'seelaye'
+import { Binary } from 'seeelaye'
+import { FsNodeType} from 'seeelaye'
+
+const dirpathFn = () => new NodeArg(
+  ArgType.POSITIONAL,
+  'dirpath',
+  'the path or name of the directory to switch to',
+  FsNodeType.FOLDER,
+  '~',
+)
+export const binaryFn = (): Binary<[string], []> => {
+  const dirpath = dirpathFn()
+  return new Binary<[string], []>(
+    'ChangeDir',
+    'cd',
+    'Switch to the given directory as the working directory.',
+    [dirpath],
+    [],
+  )
+}
+```
+
+**E.g.,** a binary with a flag (boolean) as the keyword argument and no
+positional arguments. The generic for `Arg` should also be passed to `Binary`.
+```ts
+import { ArgType, Arg } from 'seelaye'
+import { Binary } from 'seeelaye'
+
+const grootFn = () => new Arg<boolean>(
+  ArgType.KEYWORD,
+  'groot',
+  'whether to run command as Groot',
+  Boolean,
+  false,
+  ['g'],
+)
+export const binaryFn = (): Binary<[], [boolean]> => {
+  const groot = grootFn()
+  return new Binary<[], [boolean]>(
+    'WhoAmI',
+    'whoami',
+    'Display the name of the current active user.',
+    [],
+    [groot],
+  )
+}
+```
+
+### Vue component
+
+🚧
+
+### Registration
+
+🚧
+
+## Examples
+
+Refer to the
+[source code of built-in binaries](https://github.com/dhruvkb/seeelaye/tree/master/src/bins)
+for reference.
+
+You can also refer to the two custom binaries from my portfolio.
+
+| Command | Vue component     | Source code |
+|---------|-------------------|-------------|
+| `intro` | `Intro.vue`       | [source](https://github.com/dhruvkb/portfolio-brut/blob/master/src/terminal/bin/Intro.vue) |
+| `cat`   | `Concatenate.vue` | [source](https://github.com/dhruvkb/portfolio-brut/blob/master/src/terminal/bin/Concatenate.vue) |
