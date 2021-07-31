@@ -15,3 +15,5 @@
 
 [see·el·aye](https://seeelaye.vercel.app), _as in CLI_, is a terminal-emulator-emulator for the browser,
 written in Vue.
+
+[See it in action!](https://brut.dhruvkb.dev)
