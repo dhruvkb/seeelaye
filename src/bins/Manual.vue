@@ -55,9 +55,9 @@
     'the name of the binary to get help about',
     String,
   )
-  export const binaryFn = (): Binary<[string], []> => {
+  export const binaryFn = (): Binary<[Arg<string>], []> => {
     const binname = binnameFn()
-    return new Binary<[string], []>(
+    return new Binary<[Arg<string>], []>(
       'Manual',
       'man',
       'Display information about the given command.',

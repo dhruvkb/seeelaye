@@ -1,13 +1,11 @@
-import type { Arg, Handler } from '@/models/arg'
+import type { AArg, Handler } from '@/models/arg'
 
 import argLib from 'arg'
 
-/**
- * Wraps all elements of the given tuple/array of types with `Arg`.
- */
-type Argify<T> = { [I in keyof T]: Arg<T[I]> }
-
-export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unknown[]> {
+export class Binary<
+  A extends AArg<unknown>[] = AArg<unknown>[],
+  K extends AArg<unknown>[] = AArg<unknown>[]
+> {
   /**
    * the name of the Vue component to render for this binary
    */
@@ -24,11 +22,11 @@ export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unkno
   /**
    * array of argument specifications accepted by the binary
    */
-  args: Argify<A>
+  args: A
   /**
    * array of keyword argument specifications accepted by the binary
    */
-  kwargs: Argify<K>
+  kwargs: K
 
   /**
    * Create a new object of class `Binary`.
@@ -42,8 +40,8 @@ export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unkno
     name: string,
     command: string,
     description: string,
-    args: Argify<A>,
-    kwargs: Argify<K>,
+    args: A,
+    kwargs: K,
   ) {
     this.name = name
     this.command = command
@@ -58,8 +56,8 @@ export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unkno
    */
   get allArgs(): string[] {
     return [
-      ...this.kwargs.map((kwarg: Arg<unknown>) => kwarg.repr),
-      ...this.args.map((arg: Arg<unknown>) => arg.repr),
+      ...this.kwargs.map((kwarg: AArg<unknown>) => kwarg.repr),
+      ...this.args.map((arg: AArg<unknown>) => arg.repr),
     ]
   }
 
@@ -88,12 +86,12 @@ export class Binary<A extends unknown[] = unknown[], K extends unknown[] = unkno
 
     // Extract keyword and positional arguments from the parsed result
     this.kwargs.forEach((arg) => {
-      arg.setValue(processed[`--${arg.name}`])
+      arg.setHandlerValue(processed[`--${arg.name}`])
     })
     this.args.forEach((arg) => {
       const value = processed._.shift()
       if (value) {
-        arg.setValue(value)
+        arg.setHandlerValue(value)
       } else if (arg.isRequired) {
         throw new Error('A required argument was not provided to the binary')
       }

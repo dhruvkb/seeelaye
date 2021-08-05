@@ -23,9 +23,9 @@
     undefined,
     ['b'],
   )
-  export const binaryFn = (): Binary<[string], []> => {
+  export const binaryFn = (): Binary<[Arg<string>], []> => {
     const binname = binnameFn()
-    return new Binary<[string], []>(
+    return new Binary<[Arg<string>], []>(
       'Bad',
       'bad',
       'Display the invalidity of the input and suggest alternatives.',

@@ -46,10 +46,10 @@
     false,
     ['a'],
   )
-  export const binaryFn = (): Binary<[string], [boolean]> => {
+  export const binaryFn = (): Binary<[NodeArg], [Arg<boolean>]> => {
     const dirpath = dirpathFn()
     const all = allFn()
-    return new Binary<[string], [boolean]>(
+    return new Binary<[NodeArg], [Arg<boolean>]>(
       'List',
       'ls',
       'List the contents of the given directory.',

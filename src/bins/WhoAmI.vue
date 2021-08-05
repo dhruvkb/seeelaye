@@ -21,9 +21,9 @@
     false,
     ['g'],
   )
-  export const binaryFn = (): Binary<[], [boolean]> => {
+  export const binaryFn = (): Binary<[], [Arg<boolean>]> => {
     const groot = grootFn()
-    return new Binary<[], [boolean]>(
+    return new Binary<[], [Arg<boolean>]>(
       'WhoAmI',
       'whoami',
       'Display the name of the current active user.',

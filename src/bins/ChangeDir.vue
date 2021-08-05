@@ -35,10 +35,10 @@
     false,
     ['v'],
   )
-  export const binaryFn = (): Binary<[string], [boolean]> => {
+  export const binaryFn = (): Binary<[NodeArg], [Arg<boolean>]> => {
     const dirpath = dirpathFn()
     const verbose = verboseFn()
-    return new Binary<[string], [boolean]>(
+    return new Binary<[NodeArg], [Arg<boolean>]>(
       'ChangeDir',
       'cd',
       'Switch to the given directory as the working directory.',
