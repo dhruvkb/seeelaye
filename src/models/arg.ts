@@ -1,5 +1,7 @@
 import type { FsNodeType, FsNode } from '@/models/fs_tree'
 
+import { useSeeelaye } from '@/base/injection'
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Handler<T = any> = (value: string) => T extends unknown ? any : T;
 
@@ -147,19 +149,30 @@ export abstract class AArg<T, VT = T> {
 }
 
 /**
- * Represents an argument that refers to the name or path of a file-system node.
+ * Represents an argument that contains a primitive value and needs no
+ * post-processing.
  */
-export class NodeArg extends Arg<string> {
+export class Arg<T> extends AArg<T, T> {
+  /**
+   * Get the target output value of the argument.
+   * @returns the same value as the output of the `handler`
+   */
+  get value(): T {
+    return this.handlerValue
+  }
+}
+
+/**
+ * Represents an argument that accepts a string that, during post-processing,
+ * maps to the name or path of a file-system node.
+ */
+export class NodeArg extends AArg<string, FsNode | null> {
   /**
    * the type of file-system node whose path counts as a valid value for this
    * argument; Not setting this value treats paths to both files and folders as
    * equally valid.
    */
   fsNodeType?: FsNodeType
-  /**
-   * the node associated with the path given in the argument
-   */
-  node?: FsNode
 
   /**
    * Create a new object of class `NodeArg`.
@@ -180,7 +193,20 @@ export class NodeArg extends Arg<string> {
     aliases?: string[],
   ) {
     super(type, name, description, String, defaultValue, aliases)
+
     this.fsNodeType = fsNodeType
+  }
+
+  /**
+   * Get the file-system node at the path referenced by the argument value.
+   * @returns the file-system node at the given path
+   */
+  get value(): FsNode | null {
+    const seeelaye = useSeeelaye()
+
+    return seeelaye.compute<FsNode | null>('nodeLocatedAt', {
+      path: this.handlerValue,
+    })
   }
 
   /**
@@ -188,7 +214,7 @@ export class NodeArg extends Arg<string> {
    * @returns whether a node exists at the path given as the argument value
    */
   get isNodeFound(): boolean {
-    return this.node !== null
+    return this.value !== null
   }
 
   /**
@@ -196,17 +222,9 @@ export class NodeArg extends Arg<string> {
    * @returns whether the node is of the correct type
    */
   get isNodeValidType(): boolean {
-    if (!this.node) return false
+    if (!this.value) return false
     if (!this.fsNodeType) return true
 
-    return this.node.isType(this.fsNodeType)
-  }
-
-  /**
-   * Set the file-system node at the path referenced by the argument value.
-   * @param node - the file-system node at the given path
-   */
-  setNode(node: FsNode): void {
-    this.node = node
+    return this.value.isType(this.fsNodeType)
   }
 }
