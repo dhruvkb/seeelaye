@@ -33,8 +33,7 @@
   import { computed, defineComponent } from 'vue'
 
   import { binComposition, binProps } from '@/compositions/bin'
-  import { pathComposition } from '@/compositions/path'
-  import Navigable from '../components/navigable/Navigable.vue'
+  import Navigable from '@/components/navigable/Navigable.vue'
 
   const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,

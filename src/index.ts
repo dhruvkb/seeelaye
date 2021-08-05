@@ -21,7 +21,6 @@ export { TerminalState } from '@/store/state'
 
 // Compositions
 export { binProps, binComposition } from '@/compositions/bin'
-export { pathComposition } from '@/compositions/path'
 
 // Components
 export { default as Executable } from '@/components/executable/Executable.vue'
