@@ -40,13 +40,13 @@ commands to binaries and their arguments.
 1. Create the arguments for the binary. You can skip this step if your binary
 is not supposed to take any arguments. Arguments must be functions that return
 either an `Arg` or `NodeArg` instance. `NodeArgs` are subclassed from
-`Arg<string>`.
+`AArg<string, FSNode | null>`.
 
 2. Define your `binaryFn`. The `Binary` class accepts two arrays of types as
 generics.
 
-**E.g.,** a binary with no positional arguments and no keyword arguments. In such
-cases, pass two empty arrays as generics for `Binary`.
+**E.g.,** a binary with no positional arguments and no keyword arguments. In
+such cases, pass two empty arrays as generics for `Binary`.
 ```ts
 import { Binary } from 'seeelaye'
 
@@ -73,9 +73,9 @@ const dirpathFn = () => new NodeArg(
   FsNodeType.FOLDER,
   '~',
 )
-export const binaryFn = (): Binary<[string], []> => {
+export const binaryFn = (): Binary<[NodeArg], []> => {
   const dirpath = dirpathFn()
-  return new Binary<[string], []>(
+  return new Binary<[NodeArg], []>(
     'ChangeDir',
     'cd',
     'Switch to the given directory as the working directory.',
@@ -99,9 +99,9 @@ const grootFn = () => new Arg<boolean>(
   false,
   ['g'],
 )
-export const binaryFn = (): Binary<[], [boolean]> => {
+export const binaryFn = (): Binary<[], [Arg<boolean>]> => {
   const groot = grootFn()
-  return new Binary<[], [boolean]>(
+  return new Binary<[], [Arg<boolean>]>(
     'WhoAmI',
     'whoami',
     'Display the name of the current active user.',
