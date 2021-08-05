@@ -19,7 +19,7 @@ export enum ArgType {
 /**
  * Represents an argument accepted by a binary.
  */
-export class Arg<T> {
+export abstract class AArg<T, VT = T> {
   /**
    * whether the argument is a positional or keyword argument
    */
@@ -49,9 +49,10 @@ export class Arg<T> {
    */
   defaultValue?: T
   /**
-   * the value of this argument after parsing the argument vector
+   * the value for the argument after parsing the argument vector with `arg`
+   * using the provided handler
    */
-  value!: T
+  handlerValue!: T
 
   /**
    * a list of alternative names of this argument; This only makes sense for
@@ -60,7 +61,7 @@ export class Arg<T> {
   aliases: string[]
 
   /**
-   * Create a new object of class `Arg`.
+   * Create a new object of class `AArg`.
    *
    * @param type - whether the argument is a positional or keyword argument
    * @param name - the name of the argument
@@ -85,7 +86,7 @@ export class Arg<T> {
 
     if (defaultValue !== undefined) {
       this.defaultValue = defaultValue
-      this.value = defaultValue
+      this.setHandlerValue(defaultValue)
     }
 
     this.aliases = aliases
@@ -132,12 +133,17 @@ export class Arg<T> {
   }
 
   /**
-   * Set the parsed value of the argument after parsing the argument vector.
-   * @param value - the value of the argument after parsing the argument vector
+   * Set the value of the argument parsed by `arg` using the handler function.
+   * @param value - the value of the argument parsed by `arg`
    */
-  setValue(value: T): void {
-    this.value = value
+  setHandlerValue(value: T): void {
+    this.handlerValue = value
   }
+
+  /**
+   * This method must be implemented by all concrete derived classes.
+   */
+  abstract get value(): VT
 }
 
 /**
