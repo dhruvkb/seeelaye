@@ -69,19 +69,16 @@
     props: binProps,
     setup(props) {
       const binary = binaryFn()
-      const dirpath = binary.args[0] as NodeArg
+      const dirpath = binary.args[0]
       const all = binary.kwargs[0]
 
       binComposition()
       binary.processArgs(props.argv)
 
-      const dirpathValue = dirpath.value
       const allValue = all.value
 
-      const { processNode } = pathComposition(dirpath)
-      processNode()
-
-      const { node } = dirpath
+      const dirpathValue = dirpath.value
+      const node = dirpath.value
       const isNodeOk = dirpath.isNodeFound && dirpath.isNodeValidType
 
       return {

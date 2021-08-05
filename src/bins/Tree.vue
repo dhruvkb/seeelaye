@@ -93,19 +93,16 @@
       const isRoot = computed(() => !slots.default)
 
       const binary = binaryFn()
-      const dirpath = binary.args[0] as NodeArg
+      const dirpath = binary.args[0]
       const verbose = binary.kwargs[0]
 
       binComposition(isRoot.value)
       binary.processArgs(props.argv)
 
-      const dirpathValue = dirpath.value
       const verboseValue = verbose.value
 
-      const { processNode } = pathComposition(dirpath)
-      processNode()
-
-      const { node } = dirpath
+      const dirpathValue = dirpath.handlerValue
+      const node = dirpath.value
       const isNodeValidType = props.allowFiles || node?.isFolder
       const isNodeOk = dirpath.isNodeFound && isNodeValidType
 
