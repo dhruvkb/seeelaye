@@ -36,7 +36,7 @@ export const autocompleteComposition = (): IAutocompleteComposition => {
     if (seeelaye.state.currentNode) {
       node = seeelaye.state.currentNode
     } else {
-      throw new Error('Cannot determine working directory')
+      throw new Error('Cannot determine working directory.')
     }
 
     const suggestion: string[] = []
