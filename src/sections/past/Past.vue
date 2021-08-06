@@ -7,9 +7,11 @@
       <Prompt :working-directory="interaction.context.wd"/>
       {{ interaction.rawInput }}
       <br/>
-      <component
-        :is="interaction.output.component"
-        :argv="interaction.output.argv"/>
+      <ErrorBoundary>
+        <component
+          :is="interaction.output.component"
+          :argv="interaction.output.argv"/>
+      </ErrorBoundary>
     </div>
   </div>
 </template>
@@ -22,6 +24,7 @@
   import { binaryComponents } from '@/bins'
 
   import Prompt from '@/components/prompt/Prompt.vue'
+  import ErrorBoundary from '@/components/error_boundary/ErrorBoundary.vue'
 
   /**
    * Shows all past interactions of the terminal that have not been hidden.
@@ -29,6 +32,7 @@
   export default defineComponent({
     name: 'Past',
     components: {
+      ErrorBoundary,
       Prompt,
       ...binaryComponents,
     },

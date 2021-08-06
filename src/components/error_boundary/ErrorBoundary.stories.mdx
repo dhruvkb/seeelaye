@@ -1,0 +1,80 @@
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
+
+import ErrorBoundary from '@/components/error_boundary/ErrorBoundary.vue'
+
+<Meta
+  title="Elements/Error boundary"
+  component={ErrorBoundary}
+  decorators={[
+    withThemes,
+  ]}/>
+
+# Error boundary
+
+<Description of={ErrorBoundary}/>
+
+<ArgsTable of={ErrorBoundary}/>
+
+export const Err = {
+  name: 'Err',
+  props: {
+    raiseError: {
+      type: Boolean,
+      default: false,
+    }
+  },
+  setup(props) {
+    if (props.raiseError) {
+      throw new Error('This is an error message!')
+    }
+  },
+  template: `
+    <div class="err">Hello, World!</div>
+  `,
+}
+
+export const Template = (args) => ({
+  components: {
+    ErrorBoundary,
+    Err,
+  },
+  setup() {
+    return { args }
+  },
+  template: `
+    <ErrorBoundary>
+      <Err v-bind="args"/>
+    </ErrorBoundary>
+  `,
+})
+
+## Without error
+
+When the child component does not throw any errors, it is rendered as if there
+was no wrapper at all.
+
+<Canvas>
+  <Story
+    name="Without error"
+    args={{
+      raiseError: false,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## With error
+
+When the child component throws an error, the error message is displayed instead
+of the component.
+
+<Canvas>
+  <Story
+    name="With error"
+    args={{
+      raiseError: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
