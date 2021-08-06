@@ -1,8 +1,9 @@
 <template>
   <div class="error-boundary">
-    <span class="error" v-if="errorMessage">
-      {{ errorMessage }}
-    </span>
+    <span
+      v-if="errorMessage"
+      class="error"
+      v-html="errorMessage"/>
     <template v-else>
       <!-- @slot Any component goes here -->
       <slot/>

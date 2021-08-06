@@ -93,7 +93,7 @@ export class Binary<
       if (value) {
         arg.setHandlerValue(value)
       } else if (arg.isRequired) {
-        throw new Error('A required argument was not provided to the binary')
+        throw new Error(`Required argument <strong>${arg.name}</strong> was not provided to <strong>${this.command}</strong>.`)
       }
     })
   }
