@@ -16,7 +16,7 @@
 <script lang="ts">
   import type { PropType } from 'vue'
 
-  import type { StaticBinary } from '@/models/bin'
+  import type { Binary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
@@ -32,7 +32,7 @@
        * the binary for which to render the interactive link
        */
       bin: {
-        type: Object as PropType<StaticBinary>,
+        type: Object as PropType<Binary>,
         required: true,
       },
       /**

@@ -7,7 +7,7 @@
 <script lang="ts">
   import type { PropType } from 'vue'
 
-  import type { StaticFsNode } from '@/models/fs_tree'
+  import type { FsNode } from '@/models/fs_tree'
 
   import { computed, defineComponent } from 'vue'
 
@@ -26,7 +26,7 @@
        * node to override as the current working directory
        */
       workingDirectory: {
-        type: Object as PropType<StaticFsNode>,
+        type: Object as PropType<FsNode>,
       },
     },
     setup(props) {

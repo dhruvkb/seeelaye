@@ -17,7 +17,7 @@
 <script lang="ts">
   import type { PropType } from 'vue'
 
-  import type { StaticFsNode } from '@/models/fs_tree'
+  import type { FsNode } from '@/models/fs_tree'
 
   import { computed, defineComponent } from 'vue'
 
@@ -33,7 +33,7 @@
        * the node for which to render the interactive link
        */
       node: {
-        type: Object as PropType<StaticFsNode>,
+        type: Object as PropType<FsNode>,
         required: true,
       },
       /**

@@ -259,17 +259,17 @@ export class FsNode implements IFsNode {
     return `${this.parent.absolutePath}/${this.name}`
   }
 
-
   /**
    * Convert the object to a POJO for serializing to JSON.
    * @returns a simplified POJO representation of the `Binary` instance
    */
-  toJSON(): StaticFsNode {
+  toJSON(): Pick<FsNode, 'name' | 'aliases' | 'isFile' | 'isFolder' | 'absolutePath'> {
     return {
       name: this.name,
       aliases: this.aliases,
       isFile: this.isFile,
       isFolder: this.isFolder,
+      absolutePath: this.absolutePath,
     }
   }
 
@@ -357,5 +357,3 @@ export class FsNode implements IFsNode {
     return node
   }
 }
-
-export type StaticFsNode = Pick<FsNode, 'name' | 'aliases' | 'isFile' | 'isFolder'>
