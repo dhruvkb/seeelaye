@@ -24,6 +24,10 @@ export const Template = (args) => ({
   `,
 })
 
+## Default
+
+In the absence of styling, the `Spinner` component looks like this.
+
 <Canvas>
   <Story name="Default">
     {Template.bind({})}
@@ -38,6 +42,15 @@ The component can be styled by setting the following CSS custom properties.
 |------------------------|----------------------------------|------------------------|
 | `--spinner-edge-color` | Color of the end brackets        | `--color-secondary-fg` |
 | `--spinner-char-color` | Color of the moving progress bar | `--color-normal-fg`    |
+
+Here is `Spinner` with some custom styling applied.
+
+```css
+.spinner {
+  --spinner-edge-color: var(--color-normal-blue);
+  --spinner-char-color: var(--color-normal-yellow);
+}
+```
 
 <Canvas>
   <Story
