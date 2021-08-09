@@ -6,14 +6,15 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'
+
   import { Binary } from '@/models/bin'
   import { Arg, ArgType } from '@/models/arg'
 
-  import { defineComponent } from 'vue'
-
-  import Executable from '@/components/executable/Executable.vue'
   import { binComposition, binProps } from '@/compositions/bin'
-  import { binaryFn as helpBinaryFn } from './Help.vue'
+
+  import { binaryFn as helpBinaryFn } from '@/bins/Help.vue'
+  import Executable from '@/components/executable/Executable.vue'
 
   const binnameFn = () => new Arg<string>(
     ArgType.POSITIONAL,

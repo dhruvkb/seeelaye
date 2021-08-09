@@ -1,6 +1,6 @@
-import type { AArg, Handler } from '@/models/arg'
-
 import argLib from 'arg'
+
+import type { AArg, Handler } from '@/models/arg'
 
 export class Binary<
   A extends AArg<unknown>[] = AArg<unknown>[],

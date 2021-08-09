@@ -38,16 +38,16 @@
 </template>
 
 <script lang="ts">
-  import { Binary } from '@/models/bin'
-  import { Arg, ArgType } from '@/models/arg'
-
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
 
-  import Executable from '@/components/executable/Executable.vue'
+  import { Binary } from '@/models/bin'
+  import { Arg, ArgType } from '@/models/arg'
 
   import { binComposition, binProps } from '@/compositions/bin'
+
+  import Executable from '@/components/executable/Executable.vue'
 
   const binnameFn = () => new Arg<string>(
     ArgType.POSITIONAL,

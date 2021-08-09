@@ -10,15 +10,17 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'
+
+  import { useSeeelaye } from '@/base/injection'
+
   import { Binary } from '@/models/bin'
   import { Arg, ArgType, NodeArg } from '@/models/arg'
   import { FsNodeType, specialNames } from '@/models/fs_tree'
 
-  import { defineComponent } from 'vue'
-
-  import { useSeeelaye } from '@/base/injection'
-  import Navigable from '@/components/navigable/Navigable.vue'
   import { binComposition, binProps } from '@/compositions/bin'
+
+  import Navigable from '@/components/navigable/Navigable.vue'
 
   const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,

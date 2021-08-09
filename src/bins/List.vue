@@ -22,14 +22,15 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'
+
   import { Binary } from '@/models/bin'
   import { Arg, ArgType, NodeArg } from '@/models/arg'
   import { FsNodeType, specialNames } from '@/models/fs_tree'
 
-  import { defineComponent } from 'vue'
+  import { binComposition, binProps } from '@/compositions/bin'
 
   import Navigable from '@/components/navigable/Navigable.vue'
-  import { binComposition, binProps } from '@/compositions/bin'
 
   const dirpathFn = () => new NodeArg(
     ArgType.POSITIONAL,

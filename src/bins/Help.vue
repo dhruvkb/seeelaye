@@ -14,13 +14,15 @@
 </template>
 
 <script lang="ts">
-  import { Binary } from '@/models/bin'
-
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
-  import Executable from '@/components/executable/Executable.vue'
+
+  import { Binary } from '@/models/bin'
+
   import { binComposition } from '@/compositions/bin'
+
+  import Executable from '@/components/executable/Executable.vue'
 
   export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
     'Help',

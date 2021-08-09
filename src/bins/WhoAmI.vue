@@ -5,12 +5,13 @@
 </template>
 
 <script lang="ts">
-  import { Binary } from '@/models/bin'
-  import { Arg, ArgType } from '@/models/arg'
-
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
+
+  import { Binary } from '@/models/bin'
+  import { Arg, ArgType } from '@/models/arg'
+
   import { binComposition, binProps } from '@/compositions/bin'
 
   const grootFn = () => new Arg<boolean>(

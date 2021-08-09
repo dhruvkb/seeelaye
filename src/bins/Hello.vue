@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-  import { Binary } from '@/models/bin'
-
   import { defineComponent } from 'vue'
+
+  import { Binary } from '@/models/bin'
 
   import { binComposition } from '@/compositions/bin'
 

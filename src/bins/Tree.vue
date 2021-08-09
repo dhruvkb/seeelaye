@@ -26,13 +26,14 @@
 </template>
 
 <script lang="ts">
+  import { computed, defineComponent } from 'vue'
+
   import { Binary } from '@/models/bin'
   import { Arg, ArgType, NodeArg } from '@/models/arg'
   import { FsNodeType, specialNames } from '@/models/fs_tree'
 
-  import { computed, defineComponent } from 'vue'
-
   import { binComposition, binProps } from '@/compositions/bin'
+
   import Navigable from '@/components/navigable/Navigable.vue'
 
   const dirpathFn = () => new NodeArg(

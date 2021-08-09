@@ -3,11 +3,12 @@
 </template>
 
 <script lang="ts">
-  import { Binary } from '@/models/bin'
-
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
+
+  import { Binary } from '@/models/bin'
+
   import { binComposition } from '@/compositions/bin'
 
   export const binaryFn = (): Binary<[], []> => new Binary<[], []>(
