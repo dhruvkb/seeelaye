@@ -1,5 +1,8 @@
+import type { TerminalState } from '../src/store/state'
+
 import { createStore, createLogger } from 'vuex'
-import { getVuexModule, TerminalState } from '../src'
+
+import { getVuexModule } from '../src'
 
 interface RootState {
   terminal: TerminalState

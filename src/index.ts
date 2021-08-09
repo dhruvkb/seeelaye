@@ -17,7 +17,7 @@ export { Interaction } from '@/models/interaction'
 
 // Vuex
 export { getVuexModule } from '@/store'
-export { TerminalState } from '@/store/state'
+export type { TerminalState } from '@/store/state'
 
 // Compositions
 export { binProps, binComposition } from '@/compositions/bin'
