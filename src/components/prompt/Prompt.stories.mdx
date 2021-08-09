@@ -1,62 +1,51 @@
 import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
 import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
-import Prompt_ from '@/components/prompt/Prompt_.vue'
+import { ab } from 'tests/fixtures/fs_tree.fix'
+
 import Prompt from '@/components/prompt/Prompt.vue'
 
 <Meta
-  title="Elements/Prompt"
-  component={Prompt_}
+  title="Internal/Prompt"
+  component={Prompt}
   decorators={[
     withThemes,
   ]}/>
 
 # Prompt
 
-## Presentational
+<Description of={Prompt}/>
 
-<Description of={Prompt_}/>
+<ArgsTable of={Prompt}/>
 
-export const DefaultTemplate = (args) => ({
-  components: { Prompt_ },
+The `Prompt` component automatically fetches data from the underlying Vuex store
+module.
+
+export const Template = (args) => ({
+  components: { Prompt },
   setup() {
     return { args }
   },
   template: `
-    <Prompt_ v-bind="args"/>
+    <Prompt v-bind="args"/>
   `,
 })
+
+<Canvas>
+  <Story name="Default">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+The working directory can be overridden, which is useful when showing past
+interactions in a different working directory.
 
 <Canvas>
   <Story
-    name="Default"
+    name="Overridden"
     args={{
-      username: 'dhruvkb',
-      hostname: 'seeelaye',
-      workingDirectoryName: '~',
+      workingDirectory: ab.toJSON()
     }}>
-    {DefaultTemplate.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
-
-<ArgsTable story="Default"/>
-
-## With store
-
-Using the smart component `Prompt`, the values of props can be automatically
-fetched from the underlying Vuex store module.
-
-export const WithStoreTemplate = () => ({
-  components: { Prompt },
-  template: `
-    <Prompt/>
-  `,
-})
-
-<Canvas>
-  <Story name="With Store">
-    {WithStoreTemplate.bind({})}
-  </Story>
-</Canvas>
-
-<ArgsTable of={Prompt}/>

@@ -1,28 +1,32 @@
 <template>
-  <Prompt_
-    :username="username"
-    :hostname="hostname"
-    :working-directory-name="workingDirectoryName"/>
+  <span class="prompt">
+    [{{ username }}@{{ hostname }} {{ workingDirectoryName }}]$
+  </span>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType } from 'vue'
+  import type { PropType } from 'vue'
+
+  import type { StaticFsNode } from '@/models/fs_tree'
+
+  import { computed, defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
 
-  import type { FsNode } from '@/models/fs_tree'
-
-  import Prompt_ from '@/components/prompt/Prompt_.vue'
-
+  /**
+   * Displays the status of the terminal during an interaction.
+   *
+   * The information displayed typically contains the username, hostname and
+   * working directory.
+   */
   export default defineComponent({
     name: 'Prompt',
-    components: { Prompt_ },
     props: {
       /**
        * node to override as the current working directory
        */
       workingDirectory: {
-        type: Object as PropType<FsNode>,
+        type: Object as PropType<StaticFsNode>,
       },
     },
     setup(props) {
@@ -44,3 +48,9 @@
     },
   })
 </script>
+
+<style scoped lang="css">
+  .prompt {
+    border-bottom: 1px solid transparent; /* to vertically align with input field */
+  }
+</style>
