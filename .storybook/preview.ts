@@ -72,6 +72,8 @@ export const parameters = {
         'Demo',
         'Elements',
         ['Navigable', 'Executable', 'Spinner'],
+        'Internal',
+        ['Prompt', 'Input', 'Error boundary'],
         'Sections',
         'Bins',
       ],
