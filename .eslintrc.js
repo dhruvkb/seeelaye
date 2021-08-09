@@ -1,37 +1,90 @@
 module.exports = {
-  root: true,
   env: {
     node: true,
   },
-  extends: [
-    'plugin:vue/vue3-essential',
-    '@vue/airbnb',
+  plugins: [
+    'vue',
+    // region @vue/eslint-config-typescript
+    '@typescript-eslint',
+    // endregion
   ],
+  extends: [
+    // region @vue/eslint-config-airbnb
+    'airbnb-base',
+    // endregion
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    // region @vue/eslint-config-typescript
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    // endregion
+  ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    // region @vue/eslint-config-typescript
+    parser: '@typescript-eslint/parser',
+    extraFileExtensions: ['.vue'],
+    // endregion
     ecmaVersion: 2020,
   },
+  settings: {
+    // region @vue/eslint-config-airbnb
+    'import/resolver': {
+      // https://github.com/benmosher/eslint-plugin-import/issues/1396
+      [require.resolve('eslint-import-resolver-node')]: {},
+      [require.resolve('eslint-import-resolver-alias')]: { // modified based on Vite aliases
+        map: [
+          ['@', './src'],
+          ['tests', './tests'],
+        ],
+        extensions: ['.js', '.ts', '.vue'],
+      },
+    },
+    'import/extensions': ['.js', '.ts'],
+    // endregion
+  },
   rules: {
-    // TODO: Restore severity to 'error'
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    // region @vue/eslint-config-airbnb
+    'import/extensions': [
+      'error', 'always', {
+        js: 'never',
+        ts: 'never',
+      },
+    ],
+    'no-param-reassign': [
+      'error', {
+        props: true,
+        ignorePropertyModificationsFor: [
+          'state', // for Vuex state
+          'acc', // for reduce accumulators
+          'config', // for changing bundler configs
+          'e', // for e.returnvalue
+        ],
+      },
+    ],
+    // endregion
+
+    semi: ['warn', 'never'], // Semicolons are bad
+    'no-console': 'off', // Consoles outputs are easter eggs
+    'import/prefer-default-export': 'off',
+    'import/order': 'off',
+    'lines-between-class-members': [
+      'warn',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
   },
   overrides: [
+    // region @vue/eslint-config-typescript
     {
-      files: ['*.vue', '*.ts'],
-      extends: [
-        '@vue/typescript/recommended',
-      ],
+      files: ['*.ts', '*.tsx'],
       rules: {
-        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
-        'no-underscore-dangle': 'off',
+        // The core 'no-unused-vars' rules (in the eslint:recommended ruleset)
+        // does not work with type definitions.
+        'no-unused-vars': 'off',
       },
     },
-    {
-      files: ['*.html'],
-      rules: {
-        'max-len': 'off',
-      },
-    },
+    // endregion
     {
       files: ['*.vue'],
       rules: {
@@ -39,22 +92,11 @@ module.exports = {
       },
     },
     {
-      files: ['*.vue', '*.js', '*.ts'],
+      files: ['*.ts', '*.tsx'],
       rules: {
-        semi: ['warn', 'never'],
-        'import/prefer-default-export': 'off',
-        'no-multi-spaces': ['warn', { ignoreEOLComments: true }],
         'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
         'max-classes-per-file': 'off',
-      },
-    },
-    {
-      files: [
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
       },
     },
   ],

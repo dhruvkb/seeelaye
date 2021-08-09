@@ -1,4 +1,4 @@
-const path = require('path')
+import path from 'path'
 
 module.exports = {
   stories: [
@@ -15,12 +15,12 @@ module.exports = {
     },
     '@dhruvkb/storybook-addon-themes',
   ],
-  webpackFinal: (config) => {
-    // eslint-disable-next-line no-param-reassign
-    config.resolve.alias['@'] = path.resolve(__dirname, '..', 'src')
-    return config
-  },
   core: {
-    builder: 'webpack5',
+    builder: 'storybook-builder-vite',
+  },
+  async viteFinal(config: { resolve: { alias: Record<string, string> } }) {
+    config.resolve.alias['@'] = path.resolve(__dirname, '../src')
+    config.resolve.alias.tests = path.resolve(__dirname, '../tests')
+    return config
   },
 }

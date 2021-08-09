@@ -14,14 +14,18 @@
     "baseUrl": ".",
     "outDir": "dist",
     "noEmit": true,
+    "declaration": true,
     "types": [
-      "webpack-env",
-      "jest"
+      "node",
+      "vite/client"
     ],
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
+      "tests/*": [
+        "tests/*"
+      ],
     },
     "plugins": [
       {
@@ -33,9 +37,7 @@
     ],
     "lib": [
       "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+      "dom"
     ]
   },
   "include": [
