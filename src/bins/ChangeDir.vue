@@ -1,6 +1,6 @@
 <template>
   <div class="cd">
-    <template v-if="!isNodeOk">
+    <template v-if="!node || !isNodeOk">
       <strong class="error">{{ dirpath }}</strong> is not a valid directory.
     </template>
     <template v-else-if="verbose">

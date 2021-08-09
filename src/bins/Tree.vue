@@ -1,13 +1,13 @@
 <template>
   <div class="tree">
-    <template v-if="isNodeOk">
+    <template v-if="node && isNodeOk">
       <slot/>
       <span class="shape">{{ shape }}</span>
       <Navigable
         :node="node"
         :show-aliases="verbose"/>
       <Tree
-        v-for="(child, index) in node.children"
+        v-for="(child, index) in node.children ?? []"
         :key="index"
         :argv="[
           ...verbose ? ['--verbose']: [],
