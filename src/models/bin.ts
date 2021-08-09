@@ -62,6 +62,18 @@ export class Binary<
   }
 
   /**
+   * Convert the object to a POJO for serializing to JSON.
+   * @returns a simplified POJO representation of the `Binary` instance
+   */
+  toJSON(): Pick<Binary, 'name' | 'command' | 'allArgs'> {
+    return {
+      name: this.name,
+      command: this.command,
+      allArgs: this.allArgs,
+    }
+  }
+
+  /**
    * Process the given argument vector to assign values to all arguments.
    * @param argv - the argument vector passed to the given binary
    */

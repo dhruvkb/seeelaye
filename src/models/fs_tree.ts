@@ -259,6 +259,20 @@ export class FsNode implements IFsNode {
     return `${this.parent.absolutePath}/${this.name}`
   }
 
+
+  /**
+   * Convert the object to a POJO for serializing to JSON.
+   * @returns a simplified POJO representation of the `Binary` instance
+   */
+  toJSON(): Pick<FsNode, 'name' | 'aliases' | 'isFile' | 'isFolder'> {
+    return {
+      name: this.name,
+      aliases: this.aliases,
+      isFile: this.isFile,
+      isFolder: this.isFolder,
+    }
+  }
+
   /**
    * Determine whether this node represents a file system file or folder.
    * @param type - the type of the node to compare this node with
