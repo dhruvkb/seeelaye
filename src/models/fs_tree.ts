@@ -14,7 +14,7 @@ export enum FsNodeType {
  * defined as the substring of the name after the last dot/full stop/period.
  *
  * @param fullName - then name of the node
- * @return the name and extension from the given combined name
+ * @returns the name and extension from the given combined name
  */
 export const nameExtSplit = (fullName: string): [string, string | null] => {
   if (!fullName.includes('.')) {
