@@ -90,7 +90,7 @@
       const hasArgs = bin?.args?.length > 0
       const hasParams = hasKwargs || hasArgs
 
-      const argTypes = ['kwargs', 'args']
+      const argTypes: ('kwargs' | 'args')[] = ['kwargs', 'args']
 
       return {
         binname: binnameValue,
