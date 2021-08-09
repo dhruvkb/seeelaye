@@ -3,6 +3,11 @@
   margin: 0;
 }
 
+.docs-story > div:first-child > div {
+  /* Storybook adds 50px to the height for some unknown reason */
+  height: unset;
+}
+
 .docs-story .innerZoomElementWrapper > div:first-child {
   border-width: 0 !important;
 }
