@@ -1,35 +1,36 @@
 import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
 import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
-import Navigable_ from '@/components/navigable/Navigable_.vue'
+import { a } from 'tests/fixtures/fs_tree.fix.ts'
+
+import Navigable from '@/components/navigable/Navigable.vue'
 
 <Meta
   title="Elements/Navigable"
-  component={Navigable_}
+  component={Navigable}
   decorators={[
     withThemes,
   ]}/>
 
 # Navigable
 
-<Description of={Navigable_}/>
+<Description of={Navigable}/>
+
+<ArgsTable of={Navigable}/>
 
 export const Template = (args) => ({
-  components: { Navigable_ },
+  components: { Navigable },
   setup() {
     return { args }
   },
   template: `
-    <Navigable_
-      v-bind="args"
-      v-on="args"/>
+    <Navigable v-bind="args"/>
   `,
 })
 
 export const defaultArgs = {
-  name: 'name',
-  aliases: ['alias', 'nickname'],
-  isFolder: true,
+  node: a.toJSON(),
+  showAliases: true,
   isClickable: true,
 }
 
@@ -41,8 +42,6 @@ export const defaultArgs = {
   </Story>
 </Canvas>
 
-<ArgsTable story="Default"/>
-
 ## Styling
 
 The component can be styled by setting the following CSS custom properties.
@@ -53,9 +52,19 @@ The component can be styled by setting the following CSS custom properties.
 | `--file-color`   | Text color for file links   | `--color-normal-magenta` |
 | `--alias-color`  | Text color for node aliases | `--color-secondary-fg`   |
 
+Here is `Navigable` with some custom styling applied.
+
+```css
+.navigable {
+  --folder-color: var(--color-normal-green);
+  --file-color: var(--color-normal-blue);
+  --alias-color: var(--color-normal-fg);
+}
+```
+
 <Canvas>
   <Story
-    name="With Style"
+    name="Styled"
     args={{
       ...defaultArgs,
       style: {

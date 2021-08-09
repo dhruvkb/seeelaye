@@ -1,34 +1,36 @@
 import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
 import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
-import Executable_ from '@/components/executable/Executable_.vue'
+import { binaryFn } from '@/bins/Tree.vue'
+
+import Executable from '@/components/executable/Executable.vue'
 
 <Meta
   title="Elements/Executable"
-  component={Executable_}
+  component={Executable}
   decorators={[
     withThemes,
   ]}/>
 
 # Executable
 
-<Description of={Executable_}/>
+<Description of={Executable}/>
+
+<ArgsTable of={Executable}/>
 
 export const Template = (args) => ({
-  components: { Executable_ },
+  components: { Executable },
   setup() {
     return { args }
   },
   template: `
-    <Executable_
-      v-bind="args"
-      v-on="args"/>
+    <Executable v-bind="args"/>
   `,
 })
 
 export const defaultArgs = {
-  name: 'name',
-  args: ['argument', 'parameter'],
+  bin: binaryFn().toJSON(),
+  showArgs: true,
   isClickable: true,
 }
 
@@ -40,8 +42,6 @@ export const defaultArgs = {
   </Story>
 </Canvas>
 
-<ArgsTable story="Default"/>
-
 ## Styling
 
 The component can be styled by setting the following CSS custom properties.
@@ -51,10 +51,18 @@ The component can be styled by setting the following CSS custom properties.
 | `--binary-color`   | Text color for binary name | `--color-normal-green` |
 | `--argument-color` | Text color for arguments   | `--color-normal-blue`  |
 
+Here is `Executable` with some custom styling applied.
+
+```css
+.executable {
+  --binary-color: var(--color-normal-cyan);
+  --argument-color: var(--color-normal-magenta);
+}
+```
 
 <Canvas>
   <Story
-    name="With Style"
+    name="Styled"
     args={{
       ...defaultArgs,
       style: {

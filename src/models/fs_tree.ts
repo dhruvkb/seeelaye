@@ -264,7 +264,7 @@ export class FsNode implements IFsNode {
    * Convert the object to a POJO for serializing to JSON.
    * @returns a simplified POJO representation of the `Binary` instance
    */
-  toJSON(): Pick<FsNode, 'name' | 'aliases' | 'isFile' | 'isFolder'> {
+  toJSON(): StaticFsNode {
     return {
       name: this.name,
       aliases: this.aliases,
@@ -357,3 +357,5 @@ export class FsNode implements IFsNode {
     return node
   }
 }
+
+export type StaticFsNode = Pick<FsNode, 'name' | 'aliases' | 'isFile' | 'isFolder'>

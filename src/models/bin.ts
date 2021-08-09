@@ -65,7 +65,7 @@ export class Binary<
    * Convert the object to a POJO for serializing to JSON.
    * @returns a simplified POJO representation of the `Binary` instance
    */
-  toJSON(): Pick<Binary, 'name' | 'command' | 'allArgs'> {
+  toJSON(): StaticBinary {
     return {
       name: this.name,
       command: this.command,
@@ -110,3 +110,5 @@ export class Binary<
     })
   }
 }
+
+export type StaticBinary = Pick<Binary, 'name' | 'command' | 'allArgs'>

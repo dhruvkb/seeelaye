@@ -1,42 +1,38 @@
 <template>
-  <Executable_
-    :name="bin.command"
-    :args="showArgs ? bin.allArgs : []"
-    :is-clickable="isClickable"
+  <component
+    class="executable"
+    :is="isClickable ? 'button' : 'span'"
     @click="handleClick">
-    <template
-      v-for="(_, name) in $slots"
-      v-slot:[name]="scope">
-      <!-- @slot All slots will be passed down to `Executable_`. -->
-      <slot
-        :name="name"
-        v-bind="scope"/>
-    </template>
-  </Executable_>
+    <!-- @slot Alternative display text goes here. -->
+    <slot>
+      <span>{{ bin.command }}</span>
+      <span
+        v-if="showArgs && bin.allArgs.length"
+        class="args">&nbsp;{{ bin.allArgs.join(' ') }}</span>
+    </slot>
+  </component>
 </template>
 
 <script lang="ts">
   import type { PropType } from 'vue'
 
-  import type { Binary } from '@/models/bin'
+  import type { StaticBinary } from '@/models/bin'
 
   import { defineComponent } from 'vue'
 
   import { useSeeelaye } from '@/base/injection'
 
-  import Executable_ from '@/components/executable/Executable_.vue'
-
+  /**
+   * Interactively links to a given binary.
+   */
   export default defineComponent({
     name: 'Executable',
-    components: {
-      Executable_,
-    },
     props: {
       /**
        * the binary for which to render the interactive link
        */
       bin: {
-        type: Object as PropType<Binary>,
+        type: Object as PropType<StaticBinary>,
         required: true,
       },
       /**
@@ -59,6 +55,8 @@
       const seeelaye = useSeeelaye()
 
       const execute = () => {
+        if (!props.isClickable) return
+
         seeelaye.dispatch('executeCmd', {
           rawInput: props.bin.command,
         })
@@ -70,3 +68,30 @@
     },
   })
 </script>
+
+<style scoped lang="css">
+  button.executable { /* Reset UA button */
+    appearance: none;
+
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+
+    padding: 0;
+    border: none;
+  }
+
+  button.executable {
+    cursor: pointer;
+  }
+
+  .executable {
+    color: var(--binary-color, var(--color-normal-green));
+    font-weight: bold;
+  }
+
+  .executable ::v-slotted(.args) {
+    color: var(--argument-color, var(--color-normal-blue));
+    font-weight: normal;
+  }
+</style>
