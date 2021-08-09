@@ -1,5 +1,5 @@
 import { markRaw } from 'vue'
-import { app } from '@storybook/vue3'
+import { app } from '@storybook/vue3' // eslint-disable-line import/no-extraneous-dependencies
 
 import store from './store'
 import seeelaye from './seeelaye'
@@ -55,7 +55,7 @@ export const parameters = {
       },
     ],
     Decorator: markRaw({
-      template: `<Terminal :class="themeClasses"><slot/></Terminal>`,
+      template: '<Terminal :class="themeClasses"><slot/></Terminal>',
       inheritAttrs: false,
       components: { Terminal },
       props: {
