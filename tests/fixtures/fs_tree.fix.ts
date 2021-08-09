@@ -1,6 +1,6 @@
 import { FsNode, FsNodeType } from '@/models/fs_tree'
 
-/**
+/*
  * Get a simple tree of nodes to use as a test of the tree capabilities.
  * Provides a tuple of 4 `FsNode` instances, named `~`, `a`, `ab` and `c`
  * respectively.
@@ -12,20 +12,17 @@ import { FsNode, FsNodeType } from '@/models/fs_tree'
  * └── c/
  * ```
  */
-export const getTree = (): [FsNode, FsNode, FsNode, FsNode] => {
-  const root = new FsNode(FsNodeType.FOLDER, '~')
-  const a = new FsNode(FsNodeType.FOLDER, 'a', ['ax'])
-  const ab = new FsNode(FsNodeType.FILE, 'ab')
-  const c = new FsNode(FsNodeType.FOLDER, 'c')
 
-  a.parent = root
-  root.children.push(a)
+export const root = new FsNode(FsNodeType.FOLDER, '~')
+export const a = new FsNode(FsNodeType.FOLDER, 'a', ['ax'])
+export const ab = new FsNode(FsNodeType.FILE, 'ab')
+export const c = new FsNode(FsNodeType.FOLDER, 'c')
 
-  ab.parent = a
-  a.children.push(ab)
+a.parent = root
+root.children.push(a)
 
-  c.parent = root
-  root.children.push(c)
+ab.parent = a
+a.children.push(ab)
 
-  return [root, a, ab, c]
-}
+c.parent = root
+root.children.push(c)
