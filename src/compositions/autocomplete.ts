@@ -9,7 +9,6 @@ import { computed, ref } from 'vue'
 import { useSeeelaye } from '@/base/injection'
 
 import { specialNames, pathSplit } from '@/models/fs_tree'
-import { EntityType } from '@/models/suggestion'
 
 export interface IAutocompleteComposition {
   suggestions: Ref<ISuggestion[]>
@@ -25,8 +24,7 @@ export const autocompleteComposition = (): IAutocompleteComposition => {
     return allBinCmds
       .filter((name) => name.startsWith(partialBinCmd))
       .map((name: string): ISuggestion<Binary> => ({
-        entityType: EntityType.BINARY,
-        value: seeelaye.allBins[name],
+        entity: seeelaye.allBins[name],
         text: `${name} `,
       }))
   }
@@ -67,8 +65,7 @@ export const autocompleteComposition = (): IAutocompleteComposition => {
           [node] = children
         } else { // Multiple matches, stop gobbling and return choices
           return children.map((child): ISuggestion<FsNode> => ({
-            entityType: EntityType.NODE,
-            value: child,
+            entity: child,
             text: [...suggestion, suggestionPart ?? child.autocompleteName].join(''),
           }))
         }
@@ -84,15 +81,13 @@ export const autocompleteComposition = (): IAutocompleteComposition => {
 
     if (partialPath === suggestion.join('') && node?.isFolder) {
       return node.children.map((item) => ({
-        entityType: EntityType.NODE,
-        value: item,
+        entity: item,
         text: [...suggestion, item.autocompleteName].join(''),
       }))
     }
 
     return [{
-      entityType: EntityType.NODE,
-      value: node,
+      entity: node,
       text: suggestion.join(''),
     }]
   }

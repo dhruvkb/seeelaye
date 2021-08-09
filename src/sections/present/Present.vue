@@ -12,13 +12,13 @@
         :key="index"
         @click="populateInput(suggestion.text)">
         <Navigable
-          v-if="suggestion.entityType === EntityType.NODE"
-          :node="suggestion.value"
+          v-if="suggestion.entity instanceof FsNode"
+          :node="suggestion.entity"
           :is-clickable="false"
           show-aliases/>
         <Executable
-          v-if="suggestion.entityType === EntityType.BINARY"
-          :bin="suggestion.value"
+          v-if="suggestion.entity instanceof Binary"
+          :bin="suggestion.entity"
           :is-clickable="false"
           show-args/>
       </li>
@@ -31,7 +31,8 @@
 
   import { useSeeelaye } from '@/base/injection'
 
-  import { EntityType } from '@/models/suggestion'
+  import { FsNode } from '@/models/fs_tree'
+  import { Binary } from '@/models/bin'
   import { autocompleteComposition } from '@/compositions/autocomplete'
 
   import Prompt from '@/components/prompt/Prompt.vue'
@@ -66,7 +67,8 @@
       const isReady = computed(() => seeelaye.state.isReady)
 
       return {
-        EntityType,
+        FsNode,
+        Binary,
 
         isReady,
         suggestions,
