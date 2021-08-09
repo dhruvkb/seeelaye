@@ -1,80 +1,37 @@
-import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs'
+import { Canvas, Description, Meta, Story } from '@storybook/addon-docs'
 import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import { useSeeelaye } from '@/base/injection'
 
-import Input_ from '@/components/input/Input_.vue'
 import Input from '@/components/input/Input.vue'
 
 <Meta
-  title="Elements/Input"
-  component={Input_}
+  title="Internal/Input"
+  component={Input}
   decorators={[
     withThemes,
   ]}/>
 
 # Input
 
-## Presentational
+<Description of={Input}/>
 
-<Description of={Input_}/>
+The following attributes are preset on the wrapped `<input>` tag.
 
-export const DefaultTemplate = (args) => ({
-  components: { Input_ },
-  setup() {
-    return { args }
-  },
-  template: `
-    <Input_
-      v-bind="args"
-      v-on="args"/>
-  `,
-})
+| Attribute      | Preset value |
+|----------------|--------------|
+| type           | `"text"`     |
+| autocomplete   | `"off"`      |
+| autocapitalize | `"off"`      |
+| spellcheck     | `"false"`    |
 
-<Canvas>
-  <Story
-    name="Default"
-    argTypes={{
-      'update:modelValue': {
-        description: 'emitted when the `modelValue` prop changes; This is useful for `v-model` bindings.',
-        table: { type: { summary: 'string' } },
-        action: 'update:modelValue',
-      },
-      enter: {
-        description: 'emitted when Enter is pressed',
-        action: 'enter',
-      },
-      arrowUp: {
-        description: 'emitted when Arrow Up is pressed',
-        action: 'arrowUp',
-      },
-      arrowDown: {
-        description: 'emitted when Arrow Down is pressed',
-        action: 'arrowDown',
-      },
-      tab: {
-        description: 'emitted when Tab is pressed',
-        action: 'tab',
-      }
-    }}
-    args={{
-      modelValue: 'type something here'
-    }}>
-    {DefaultTemplate.bind({})}
-  </Story>
-</Canvas>
+Any other attributes set on the component will be placed on the tag.
 
-<ArgsTable story="Default"/>
-
-## With store
-
-Using the smart component `Input`, the events associated with input such as
-submit (<kbd>Enter ⏎</kbd>) and history traversal (<kbd>↑</kbd> and <kbd>↓</kbd>) are automatically
-handled.
-
+The events associated with input such as submit (<kbd>Enter ⏎</kbd>) and
+history traversal (<kbd>↑</kbd> and <kbd>↓</kbd>) are automatically handled.
 Autocomplete (<kbd>Tab ↹</kbd>) events are emitted to the parent.
 
-export const WithStoreTemplate = (args) => ({
+export const DefaultTemplate = (args) => ({
   components: { Input },
   setup() {
     const seeelaye = useSeeelaye()
@@ -85,11 +42,11 @@ export const WithStoreTemplate = (args) => ({
       // Commit mutation manually as components are not mounted
       seeelaye.commit('setIsReady', { isReady: true })
     })
-    seeelaye.commit('setInput', { input: 'type something here' })
     return { args }
   },
   template: `
     <Input
+      placeholder="enter command"
       v-bind="args"
       v-on="args"/>
   `
@@ -97,17 +54,17 @@ export const WithStoreTemplate = (args) => ({
 
 <Canvas>
   <Story
-    name="With Store"
+    name="Default"
     argTypes={{
-      autocomplete: {
+      complete: {
         description: 'emitted when Tab is pressed to autocomplete the command',
-        action: 'autocomplete',
+        action: 'complete',
       },
       error: {
         description: 'emitted when either end of history traversal is reached',
         action: 'error',
       }
     }}>
-    {WithStoreTemplate.bind({})}
+    {DefaultTemplate.bind({})}
   </Story>
 </Canvas>

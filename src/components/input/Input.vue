@@ -1,10 +1,18 @@
 <template>
-  <Input_
+  <!-- For best results wrap inside a `label` -->
+  <input
+    class="input"
     v-model="command"
-    @enter="handleEnter"
-    @arrow-up="handleArrowUp"
-    @arrow-down="handleArrowDown"
-    @tab="handleTab"/>
+
+    type="text"
+    autocomplete="off"
+    autocapitalize="off"
+    spellcheck="false"
+
+    @keydown.enter.exact="handleEnter"
+    @keydown.arrow-up.exact.prevent="handleArrowUp"
+    @keydown.arrow-down.exact.prevent="handleArrowDown"
+    @keydown.tab.exact.prevent="handleTab"/>
 </template>
 
 <script lang="ts">
@@ -12,11 +20,14 @@
 
   import { useSeeelaye } from '@/base/injection'
 
-  import Input_ from '@/components/input/Input_.vue'
-
+  /**
+   * Accepts typed commands from the user.
+   *
+   * Renders an `<input>` element so should be coupled with a `<label>` element
+   * for accessibility.
+   */
   export default defineComponent({
     name: 'Input',
-    components: { Input_ },
     setup(props, { emit }) {
       const seeelaye = useSeeelaye()
 
@@ -68,7 +79,7 @@
         }
       }
 
-      const fireAutocomplete = () => { emit('autocomplete') }
+      const fireComplete = () => { emit('complete') }
 
       return {
         command,
@@ -76,8 +87,36 @@
         handleEnter: submit,
         handleArrowUp: traversePrev,
         handleArrowDown: traverseNext,
-        handleTab: fireAutocomplete,
+        handleTab: fireComplete,
       }
     },
   })
 </script>
+
+<style scoped lang="css">
+  .input {
+    appearance: none;
+
+    color: inherit;
+    font: inherit;
+    caret-color: currentColor;
+
+    background: none;
+
+    min-width: 32ch;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .input:focus {
+    outline: none;
+    border-bottom-color: var(--color-highlight-bg);
+  }
+
+  ::placeholder {
+    color: inherit;
+
+    opacity: 0.5;
+  }
+</style>

@@ -4,7 +4,7 @@
       <Prompt/>
       <Input
         placeholder="command"
-        @autocomplete="handleAutocomplete"/>
+        @complete="handleAutocomplete"/>
     </label>
     <ul>
       <li
