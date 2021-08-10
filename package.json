@@ -22,6 +22,14 @@
     "dist/**/*.css",
     "src/themes/*.css"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/seeelaye.es.js",
+      "require": "./dist/seeelaye.umd.js"
+    },
+    "./style/*": "./dist/*",
+    "./themes/*": "./src/themes/*"
+  },
   "main": "dist/seeelaye.umd.js",
   "unpkg": "dist/seeelaye.umd.js",
   "jsdelivr": "dist/seeelaye.umd.js",
