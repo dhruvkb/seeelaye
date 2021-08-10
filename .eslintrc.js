@@ -3,18 +3,18 @@ module.exports = {
     node: true,
   },
   extends: [
-    // region @vue/eslint-config-airbnb
+    'plugin:vue/vue3-essential',
+    // region @vue/airbnb
     'airbnb-base',
     // endregion
-    'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/typescript/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2020,
   },
+  // region @vue/airbnb
   settings: {
-    // region @vue/eslint-config-airbnb
     'import/resolver': {
       // https://github.com/benmosher/eslint-plugin-import/issues/1396
       [require.resolve('eslint-import-resolver-node')]: {},
@@ -27,10 +27,8 @@ module.exports = {
       },
     },
     'import/extensions': ['.js', '.ts'],
-    // endregion
   },
   rules: {
-    // region @vue/eslint-config-airbnb
     'import/extensions': [
       'error', 'always', {
         js: 'never',
@@ -48,18 +46,8 @@ module.exports = {
         ],
       },
     ],
-    // endregion
-
-    semi: ['warn', 'never'], // Semicolons are bad
-    'no-console': 'off', // Consoles outputs are easter eggs
-    'import/prefer-default-export': 'off',
-    'import/order': 'off',
-    'lines-between-class-members': [
-      'warn',
-      'always',
-      { exceptAfterSingleLine: true },
-    ],
   },
+  // endregion
   overrides: [
     {
       files: ['*.vue'],
@@ -72,7 +60,17 @@ module.exports = {
       rules: {
         'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
         '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
+      },
+    },
+    {
+      files: ['*.vue', '*.js', '*.ts'],
+      rules: {
+        semi: ['warn', 'never'],
+        'no-console': 'off',
         'max-classes-per-file': 'off',
+        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
+        'import/prefer-default-export': 'off',
+        'import/order': 'off',
       },
     },
   ],
