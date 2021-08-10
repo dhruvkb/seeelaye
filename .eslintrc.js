@@ -2,29 +2,15 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: [
-    'vue',
-    // region @vue/eslint-config-typescript
-    '@typescript-eslint',
-    // endregion
-  ],
   extends: [
     // region @vue/eslint-config-airbnb
     'airbnb-base',
     // endregion
     'plugin:vue/vue3-essential',
     'eslint:recommended',
-    // region @vue/eslint-config-typescript
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    // endregion
+    '@vue/typescript/recommended',
   ],
-  parser: 'vue-eslint-parser',
   parserOptions: {
-    // region @vue/eslint-config-typescript
-    parser: '@typescript-eslint/parser',
-    extraFileExtensions: ['.vue'],
-    // endregion
     ecmaVersion: 2020,
   },
   settings: {
@@ -75,16 +61,6 @@ module.exports = {
     ],
   },
   overrides: [
-    // region @vue/eslint-config-typescript
-    {
-      files: ['*.ts', '*.tsx'],
-      rules: {
-        // The core 'no-unused-vars' rules (in the eslint:recommended ruleset)
-        // does not work with type definitions.
-        'no-unused-vars': 'off',
-      },
-    },
-    // endregion
     {
       files: ['*.vue'],
       rules: {
