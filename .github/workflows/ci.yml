@@ -33,30 +33,6 @@ jobs:
     - name: Lint the codebase
       run: npm run lint
 
-  unit:
-    name: Unit
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14'
-
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: npm-${{ hashFiles('**/package-lock.json') }}
-
-    - name: Install dependencies
-      run: npm install --prefer-offline --no-audit
-
-    - name: Run unit tests
-      run: npm run unit
-
   build:
     name: Build
     runs-on: ubuntu-latest
