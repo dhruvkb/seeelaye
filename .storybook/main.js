@@ -1,4 +1,5 @@
-// Storybook break when using `import` syntax.
+// Storybook requires this file to be JavaScript, not TypeScript.
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
@@ -20,7 +21,7 @@ module.exports = {
   core: {
     builder: 'storybook-builder-vite',
   },
-  async viteFinal(config: { resolve: { alias: Record<string, string> } }) {
+  async viteFinal(config) {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src')
     config.resolve.alias.tests = path.resolve(__dirname, '../tests')
     return config
