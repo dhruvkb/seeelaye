@@ -9,6 +9,7 @@ module.exports = {
     // endregion
     'eslint:recommended',
     '@vue/typescript/recommended',
+    'plugin:storybook/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2020,
