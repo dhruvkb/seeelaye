@@ -42,7 +42,7 @@
    * The links include the following:
    *
    * - the [GitHub repo](https://github.com/dhruvkb/seeelaye)
-   * - the [docs in Storybook](https://seeelaye.vercel.app)
+   * - the [docs in Storybook](https://dhruvkb.github.io/seeelaye/)
    * - the [`npm` package](https://www.npmjs.com/package/seeelaye)
    */
   export default defineComponent({
@@ -59,7 +59,7 @@
         },
         {
           text: '📕 Docs',
-          href: 'https://seeelaye.vercel.app',
+          href: 'https://dhruvkb.github.io/seeelaye/',
         },
         {
           text: '📦 npm',
