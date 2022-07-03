@@ -3,7 +3,7 @@ import type { GetterTree } from 'vuex'
 import type { FsNode } from '@/models/fs_tree'
 
 import { specialNames, pathSplit } from '@/models/fs_tree'
-import { TerminalState } from '@/store/state'
+import type { TerminalState } from '@/store/state'
 
 export interface TerminalGetterTree<S, RS> extends GetterTree<S, RS> {
   nodeLocatedAt(state: S): (payload: { path: string }) => FsNode | null

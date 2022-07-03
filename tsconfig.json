@@ -1,53 +1,18 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "rootDir": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
-    "outDir": "dist",
-    "noEmit": true,
-    "declaration": true,
-    "types": [
-      "node",
-      "vite/client"
-    ],
+    "outDir": "./dist",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "tests/*": [
-        "tests/*"
-      ],
+      "@/*": ["./src/*"],
+      "tests/*": ["./tests/*"]
     },
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths",
-        "exclude": [
-          "*",
-        ]
-      }
-    ],
-    "lib": [
-      "esnext",
-      "dom"
-    ]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
   ]
 }
