@@ -5,8 +5,8 @@
 </a>
 
 <p align="center">
-  <a href="https://github.com/dhruvkb/seeelaye/actions/workflows/ci.yml">
-    <img src="https://github.com/dhruvkb/seeelaye/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"/>
+  <a href="https://github.com/dhruvkb/seeelaye/actions/workflows/docs.yml">
+    <img src="https://github.com/dhruvkb/seeelaye/actions/workflows/docs.yml/badge.svg?branch=main" alt="Docs"/>
   </a>
   <a href="https://www.npmjs.com/package/seeelaye">
     <img src="https://img.shields.io/npm/v/seeelaye" alt="npm"/>
