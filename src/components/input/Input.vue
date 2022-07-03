@@ -1,8 +1,8 @@
 <template>
   <!-- For best results wrap inside a `label` -->
   <input
-    class="input"
     v-model="command"
+    class="input"
 
     type="text"
     autocomplete="off"
@@ -12,7 +12,7 @@
     @keydown.enter.exact="handleEnter"
     @keydown.arrow-up.exact.prevent="handleArrowUp"
     @keydown.arrow-down.exact.prevent="handleArrowDown"
-    @keydown.tab.exact.prevent="handleTab"/>
+    @keydown.tab.exact.prevent="handleTab">
 </template>
 
 <script lang="ts">
@@ -28,6 +28,10 @@
    */
   export default defineComponent({
     name: 'Input',
+    emits: [
+      'error',
+      'complete',
+    ],
     setup(props, { emit }) {
       const seeelaye = useSeeelaye()
 

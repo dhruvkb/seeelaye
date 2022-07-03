@@ -1,11 +1,11 @@
 <template>
   <div class="tree">
     <template v-if="node && isNodeOk">
-      <slot/>
+      <slot />
       <span class="shape">{{ shape }}</span>
       <Navigable
         :node="node"
-        :show-aliases="verbose"/>
+        :show-aliases="verbose" />
       <Tree
         v-for="(child, index) in node.children ?? []"
         :key="index"
@@ -15,7 +15,7 @@
         ]"
         allow-files
         is-subtree>
-        <slot/>
+        <slot />
         <span class="shape">{{ childShape }}</span>
       </Tree>
     </template>

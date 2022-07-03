@@ -4,13 +4,13 @@
       v-for="(interaction, index) in visibleHistory"
       :key="index"
       class="interaction">
-      <Prompt :working-directory="interaction.context.wd"/>
+      <Prompt :working-directory="interaction.context.wd" />
       {{ interaction.rawInput }}
-      <br/>
+      <br>
       <ErrorBoundary>
         <component
           :is="interaction.output.component"
-          :argv="interaction.output.argv"/>
+          :argv="interaction.output.argv" />
       </ErrorBoundary>
     </div>
   </div>

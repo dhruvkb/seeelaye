@@ -1,12 +1,14 @@
 <template>
   <div class="error-boundary">
+    <!-- eslint-disable vue/no-v-html HTML generated from trusted sources -->
     <span
       v-if="errorMessage"
       class="error"
-      v-html="errorMessage"/>
+      v-html="errorMessage" />
+    <!-- eslint-enable vue/no-v-html -->
     <template v-else>
       <!-- @slot Any component goes here -->
-      <slot/>
+      <slot />
     </template>
   </div>
 </template>

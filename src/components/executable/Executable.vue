@@ -1,7 +1,7 @@
 <template>
   <component
-    class="executable"
     :is="isClickable ? 'button' : 'span'"
+    class="executable"
     @click="handleClick">
     <!-- @slot Alternative display text goes here. -->
     <slot>

@@ -3,16 +3,20 @@
     <ul v-if="node && isNodeOk">
       <template v-if="all">
         <li>
-          <Navigable :node="node">{{ specialNames.CURRENT_DIR[0] }}</Navigable>
+          <Navigable :node="node">
+            {{ specialNames.CURRENT_DIR[0] }}
+          </Navigable>
         </li>
         <li>
-          <Navigable :node="node.parent">{{ specialNames.PARENT_DIR[0] }}</Navigable>
+          <Navigable :node="node.parent">
+            {{ specialNames.PARENT_DIR[0] }}
+          </Navigable>
         </li>
       </template>
       <li
         v-for="(child, index) in node.children"
         :key="index">
-        <Navigable :node="child"/>
+        <Navigable :node="child" />
       </li>
     </ul>
     <template v-else>

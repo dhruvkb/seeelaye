@@ -1,8 +1,8 @@
 <template>
   <component
+    :is="isClickable ? 'button' : 'span'"
     class="navigable"
     :class="[ node.isFolder ? 'is-folder' : 'is-file' ]"
-    :is="isClickable ? 'button' : 'span'"
     @click="handleClick">
     <!-- @slot Alternative display text goes here. -->
     <slot>

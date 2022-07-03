@@ -1,7 +1,7 @@
 <template>
   <div class="bad">
     Command <strong class="error">{{ binname }}</strong> does not exist in the
-    CLI. Try <Executable :bin="helpBinary"/>.
+    CLI. Try <Executable :bin="helpBinary" />.
   </div>
 </template>
 

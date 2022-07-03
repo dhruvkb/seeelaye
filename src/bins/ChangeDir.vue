@@ -4,7 +4,10 @@
       <strong class="error">{{ dirpath }}</strong> is not a valid directory.
     </template>
     <template v-else-if="verbose">
-      Changed to <Navigable :node="node" :is-clickable="false"/>.
+      Changed to
+      <Navigable
+        :node="node"
+        :is-clickable="false" />.
     </template>
   </div>
 </template>
@@ -54,10 +57,10 @@
    */
   export default defineComponent({
     name: 'ChangeDir',
-    props: binProps,
     components: {
       Navigable,
     },
+    props: binProps,
     setup(props) {
       const binary = binaryFn()
       const dirpath = binary.args[0]

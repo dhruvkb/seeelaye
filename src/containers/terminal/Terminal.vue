@@ -2,8 +2,8 @@
   <div class="terminal">
     <div class="terminal-content">
       <slot>
-        <Past/>
-        <Present ref="present"/>
+        <Past />
+        <Present ref="present" />
       </slot>
     </div>
   </div>

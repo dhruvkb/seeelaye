@@ -1,10 +1,12 @@
 <template>
-  <div class="present" :class="[{ 'is-hidden': !isReady }]">
+  <div
+    class="present"
+    :class="[{ 'is-hidden': !isReady }]">
     <label class="input-area">
-      <Prompt/>
+      <Prompt />
       <Input
         placeholder="command"
-        @complete="handleAutocomplete"/>
+        @complete="handleAutocomplete" />
     </label>
     <ul>
       <li
@@ -15,12 +17,12 @@
           v-if="suggestion.entity instanceof FsNode"
           :node="suggestion.entity"
           :is-clickable="false"
-          show-aliases/>
+          show-aliases />
         <Executable
           v-if="suggestion.entity instanceof Binary"
           :bin="suggestion.entity"
           :is-clickable="false"
-          show-args/>
+          show-args />
       </li>
     </ul>
   </div>

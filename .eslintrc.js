@@ -1,41 +1,22 @@
+require('@rushstack/eslint-patch/modern-module-resolution')
+
 module.exports = {
+  root: true,
   env: {
     node: true,
+    browser: true,
   },
   extends: [
-    'plugin:vue/vue3-essential',
-    // region @vue/airbnb
-    'airbnb-base',
-    // endregion
     'eslint:recommended',
-    '@vue/typescript/recommended',
+    'airbnb-base', // includes plugin:import
+    'plugin:vue/vue3-recommended',
+    '@vue/eslint-config-typescript/recommended',
+    'plugin:import/typescript',
     'plugin:storybook/recommended',
   ],
-  parserOptions: {
-    ecmaVersion: 2020,
-  },
-  // region @vue/airbnb
-  settings: {
-    'import/resolver': {
-      // https://github.com/benmosher/eslint-plugin-import/issues/1396
-      [require.resolve('eslint-import-resolver-node')]: {},
-      [require.resolve('eslint-import-resolver-alias')]: { // modified based on Vite aliases
-        map: [
-          ['@', './src'],
-          ['tests', './tests'],
-        ],
-        extensions: ['.js', '.ts', '.vue'],
-      },
-    },
-    'import/extensions': ['.js', '.ts'],
-  },
   rules: {
-    'import/extensions': [
-      'error', 'always', {
-        js: 'never',
-        ts: 'never',
-      },
-    ],
+    semi: ['error', 'never', { beforeStatementContinuationChars: 'always' }],
+    'no-console': 'off', // Easter eggs are printed to console
     'no-param-reassign': [
       'error', {
         props: true,
@@ -47,32 +28,43 @@ module.exports = {
         ],
       },
     ],
+
+    'import/extensions': ['error', 'ignorePackages', { js: 'never', ts: 'never' }], // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/imports.js#L139
+    // TODO: 'import/order'
+    'import/prefer-default-export': 'off',
   },
-  // endregion
   overrides: [
     {
       files: ['*.vue'],
       rules: {
-        indent: 'off', // Replaced by vue/script-indent
+        indent: 'off', // superseded by vue/script-indent
+
+        'vue/block-lang': ['error', { script: { lang: 'ts' } }],
+        'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
+        'vue/multi-word-component-names': 'off',
+        'vue/script-indent': ['error', 2, { baseIndent: 1, switchCase: 1 }],
       },
     },
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['src/base/seeelaye.ts'],
       rules: {
-        'no-shadow': 'off', // Replaced typescript-eslint/no-shadow
-        '@typescript-eslint/no-shadow': ['warn'], // Fixes a problem with enums
+        'vue/multi-word-component-names': 'off',
       },
     },
     {
-      files: ['*.vue', '*.js', '*.ts'],
+      files: ['*.ts'],
       rules: {
-        semi: ['warn', 'never'],
-        'no-console': 'off',
-        'max-classes-per-file': 'off',
-        'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
-        'import/prefer-default-export': 'off',
-        'import/order': 'off',
+        'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+        'max-classes-per-file': ['error', 3],
+        'no-shadow': 'off',
+        'no-use-before-define': 'off',
+
+        '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/no-use-before-define': ['error'],
       },
     },
   ],
+  settings: {
+    'import/resolver': { typescript: {} },
+  },
 }

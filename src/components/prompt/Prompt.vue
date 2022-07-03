@@ -27,6 +27,7 @@
        */
       workingDirectory: {
         type: Object as PropType<FsNode>,
+        default: undefined,
       },
     },
     setup(props) {

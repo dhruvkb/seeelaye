@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-  <!-- eslint-disable max-len --><pre class="ascii red">
+    <!-- eslint-disable max-len vue/html-self-closing --><pre class="ascii red">
 <span class="grey">    __ </span>             <span class="grey">   </span>       _  <span class="grey">   </span>                      <span class="grey">__ </span>
 <span class="grey">   / /</span>__  ___  ___  <span class="grey">   </span>   ___| | <span class="grey">   </span>   __ _ _   _  ___   <span class="grey">/ /</span>
 <span class="grey">  / /</span> __|/ _ \/ _ \ <span class="grey"> _ </span>  / _ \ | <span class="grey"> _ </span>  / _` | | | |/ _ \ <span class="grey">/ /</span>

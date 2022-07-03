@@ -7,7 +7,7 @@
         :key="index">
         <Executable
           :bin="bin"
-          show-args/>
+          show-args />
       </li>
     </ul>
   </div>

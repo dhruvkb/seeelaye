@@ -1,19 +1,19 @@
 <template>
   <div class="manual">
     <template v-if="bin">
-      <strong>NAME:</strong><br/>
+      <strong>NAME:</strong><br>
       <div class="indent blank-line">
         <span class="bin">{{ bin.command }}</span> -- {{ bin.description }}
       </div>
 
-      <strong>SYNOPSIS:</strong><br/>
+      <strong>SYNOPSIS:</strong><br>
       <div class="indent blank-line">
         <Executable
           :bin="bin"
-          show-args/>
+          show-args />
       </div>
 
-      <strong>DESCRIPTION:</strong><br/>
+      <strong>DESCRIPTION:</strong><br>
       <template v-if="hasParams">
         The following options are available:
         <table class="indent">
@@ -21,7 +21,9 @@
             <tr
               v-for="(arg, argIndex) in bin[key]"
               :key="`${typeIndex}-${argIndex}`">
-              <td class="arg">{{ arg.repr }}</td>
+              <td class="arg">
+                {{ arg.repr }}
+              </td>
               <td>-- {{ arg.description }}</td>
             </tr>
           </template>
@@ -71,10 +73,10 @@
    */
   export default defineComponent({
     name: 'Manual',
-    props: binProps,
     components: {
       Executable,
     },
+    props: binProps,
     setup(props) {
       const binary = binaryFn()
       const binname = binary.args[0]
