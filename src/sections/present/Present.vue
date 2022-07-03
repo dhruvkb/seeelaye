@@ -4,7 +4,7 @@
     :class="[{ 'is-hidden': !isReady }]">
     <label class="input-area">
       <Prompt />
-      <Input
+      <InputField
         placeholder="command"
         @complete="handleAutocomplete" />
     </label>
@@ -38,7 +38,7 @@
   import { autocompleteComposition } from '@/compositions/autocomplete'
 
   import Prompt from '@/components/prompt/Prompt.vue'
-  import Input from '@/components/input/Input.vue'
+  import InputField from '@/components/input_field/InputField.vue'
   import Navigable from '@/components/navigable/Navigable.vue'
   import Executable from '@/components/executable/Executable.vue'
 
@@ -49,7 +49,7 @@
     name: 'Present',
     components: {
       Prompt,
-      Input,
+      InputField,
       Executable,
       Navigable,
     },

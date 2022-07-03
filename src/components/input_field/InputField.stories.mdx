@@ -3,18 +3,18 @@ import { withThemes } from '@dhruvkb/storybook-addon-themes/dist/vue'
 
 import { useSeeelaye } from '@/base/injection'
 
-import Input from '@/components/input/Input.vue'
+import InputField from '@/components/input_field/InputField.vue'
 
 <Meta
-  title="Internal/Input"
-  component={Input}
+  title="Internal/InputField"
+  component={InputField}
   decorators={[
     withThemes,
   ]}/>
 
-# Input
+# InputField
 
-<Description of={Input}/>
+<Description of={InputField}/>
 
 The following attributes are preset on the wrapped `<input>` tag.
 
@@ -32,7 +32,7 @@ history traversal (<kbd>↑</kbd> and <kbd>↓</kbd>) are automatically handled.
 Autocomplete (<kbd>Tab ↹</kbd>) events are emitted to the parent.
 
 export const DefaultTemplate = (args) => ({
-  components: { Input },
+  components: { InputField },
   setup() {
     const seeelaye = useSeeelaye()
     seeelaye.commit('deleteInteractions')
@@ -45,7 +45,7 @@ export const DefaultTemplate = (args) => ({
     return { args }
   },
   template: `
-    <Input
+    <InputField
       placeholder="enter command"
       v-bind="args"
       v-on="args"/>

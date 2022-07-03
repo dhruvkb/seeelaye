@@ -27,7 +27,7 @@
    * for accessibility.
    */
   export default defineComponent({
-    name: 'Input',
+    name: 'InputField',
     emits: [
       'error',
       'complete',
