@@ -68,7 +68,7 @@ jobs:
         run: npm install --prefer-offline --no-audit
 
       - name: Build the docs
-        run: npm run build:storybook
+        run: npm run docs:build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@bbdfb200618d235585ad98e965f4aafc39b4c501 # v3.7.3
